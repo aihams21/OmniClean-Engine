@@ -1,0 +1,708 @@
+{
+  "@@locale": "en",
+  "appTitle": "OmniClean Engine",
+  "navDashboard": "Dashboard",
+  "navCleaner": "Cleaner",
+  "navDuplicates": "Duplicates",
+  "navQuarantine": "Quarantine",
+  "navSettings": "Settings",
+  "actionCancel": "Cancel",
+  "actionClose": "Close",
+  "actionConfirm": "Confirm",
+  "actionContinue": "Continue",
+  "actionRestore": "Restore",
+  "actionPurge": "Delete forever",
+  "actionOk": "OK",
+  "dashboardTitle": "Command centre",
+  "dashboardSubtitle": "Live health of this machine and everything it can reclaim.",
+  "dashboardReclaimable": "Reclaimable now",
+  "dashboardHeldBack": "Held back by running apps",
+  "dashboardScanAll": "Scan everything",
+  "dashboardCleanSelected": "Clean selected",
+  "dashboardNothingScanned": "No scan yet. Start one to see what this machine can reclaim.",
+  "dashboardScanDuration": "Scan finished in {seconds}s",
+  "dashboardCancelled": "Scan cancelled — results are incomplete",
+  "dashboardFilesCount": "{count, plural, =0{No files} =1{1 file} other{{count} files}}",
+  "@dashboardFilesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardActivityLog": "Activity log",
+  "dashboardLogEmpty": "Nothing logged yet.",
+  "dashboardLoadAverage": "Load average",
+  "dashboardUptime": "Uptime",
+  "dashboardCores": "{count, plural, =1{1 core} other{{count} cores}}",
+  "@dashboardCores": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardStorage": "Storage",
+  "dashboardStorageFree": "{bytes} free of {total}",
+  "@dashboardStorageFree": {
+    "placeholders": {
+      "bytes": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "dashboardMoreDisks": "+{count} more",
+  "@dashboardMoreDisks": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "gaugeCpu": "CPU",
+  "gaugeMemory": "Memory",
+  "gaugeSwap": "Swap",
+  "unavailable": "unavailable",
+  "cleanerTitle": "Cleaner",
+  "cleanerSubtitle": "Nothing is deleted here. Everything moves to quarantine and stays restorable.",
+  "cleanerScanAll": "Scan all modules",
+  "cleanerRescan": "Rescan",
+  "cleanerCleanSelected": "Clean selected",
+  "cleanerSelectAll": "Select all",
+  "cleanerSelectNone": "Clear selection",
+  "cleanerNothingFound": "Nothing to clean in this module.",
+  "cleanerNothingScanned": "Run a scan to measure every module first.",
+  "cleanerRequiresRoot": "Administrator rights required",
+  "cleanerRootPrompt": "OmniClean needs administrator rights to clean system caches.",
+  "cleanerIdling": "Idle",
+  "cleanerScanning": "Scanning…",
+  "cleanerCleaning": "Cleaning…",
+  "cleanerDone": "Done",
+  "cleanerFailed": "Failed",
+  "riskSafe": "Safe",
+  "riskModerate": "Moderate",
+  "riskElevated": "Elevated",
+  "cleanerConfirmTitle": "Move to quarantine?",
+  "cleanerConfirmBody": "{files, plural, =1{1 file} other{{files} files}} · {bytes} will be moved to quarantine. You can restore every item from the Quarantine screen.",
+  "@cleanerConfirmBody": {
+    "placeholders": {
+      "files": {
+        "type": "int"
+      },
+      "bytes": {
+        "type": "String"
+      }
+    }
+  },
+  "cleanerConfirmProceed": "Move to quarantine",
+  "cleanerResultBody": "Reclaimed {bytes} from {files, plural, =1{1 file} other{{files} files}}.",
+  "@cleanerResultBody": {
+    "placeholders": {
+      "bytes": {
+        "type": "String"
+      },
+      "files": {
+        "type": "int"
+      }
+    }
+  },
+  "cleanerSkippedNote": "{count, plural, =1{1 item was held back} other{{count} items were held back}} by the safety gate.",
+  "@cleanerSkippedNote": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cleanerProgress": "{done} of {total}",
+  "@cleanerProgress": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "cleanerHeldBack": "{bytes} held back (still in use)",
+  "@cleanerHeldBack": {
+    "placeholders": {
+      "bytes": {
+        "type": "String"
+      }
+    }
+  },
+  "duplicatesTitle": "Duplicate finder",
+  "duplicatesSubtitle": "Content-based, never name-based. Every file is verified with SHA-256.",
+  "duplicatesRoots": "Folders to scan",
+  "duplicatesRootHint": "/home/you/Downloads",
+  "duplicatesAddRoot": "Add folder",
+  "duplicatesRemoveRoot": "Remove",
+  "duplicatesNoRoots": "Add at least one folder to scan.",
+  "duplicatesFind": "Find duplicates",
+  "duplicatesCancelScan": "Stop scan",
+  "duplicatesPhaseWalking": "Walking folders…",
+  "duplicatesPhasePreFiltering": "Comparing sizes…",
+  "duplicatesPhaseHashing": "Hashing contents…",
+  "duplicatesPhaseDone": "Done",
+  "duplicatesSummary": "{groups, plural, =0{No duplicate groups} =1{1 group} other{{groups} groups}} · {bytes} wasted",
+  "@duplicatesSummary": {
+    "placeholders": {
+      "groups": {
+        "type": "int"
+      },
+      "bytes": {
+        "type": "String"
+      }
+    }
+  },
+  "duplicatesCopies": "{count, plural, =1{1 copy} other{{count} copies}}",
+  "@duplicatesCopies": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "duplicatesKeep": "Keep",
+  "duplicatesCopiesLabel": "Copies to keep",
+  "duplicatesDeleteDuplicates": "Delete the rest",
+  "duplicatesSelectedCount": "{count, plural, =0{Nothing selected} =1{1 file selected} other{{count} files selected}}",
+  "@duplicatesSelectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "duplicatesConfirmTitle": "Delete {count, plural, =1{1 copy} other{{count} copies}}?",
+  "@duplicatesConfirmTitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "duplicatesConfirmBody": "The copy you kept stays untouched. The rest moves to quarantine and can be restored at any time.",
+  "duplicatesSuggested": "Suggested keeper",
+  "duplicatesHashPrefix": "SHA-256 {prefix}…",
+  "@duplicatesHashPrefix": {
+    "placeholders": {
+      "prefix": {
+        "type": "String"
+      }
+    }
+  },
+  "quarantineTitle": "Quarantine",
+  "quarantineSubtitle": "Nothing OmniClean removes is ever destroyed. It waits here until you restore or purge it.",
+  "quarantineEmpty": "The quarantine is empty.",
+  "quarantineHolding": "Holding {bytes}",
+  "@quarantineHolding": {
+    "placeholders": {
+      "bytes": {
+        "type": "String"
+      }
+    }
+  },
+  "quarantineItemCount": "{count, plural, =0{No items} =1{1 item} other{{count} items}}",
+  "@quarantineItemCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quarantineFrom": "From {module}",
+  "@quarantineFrom": {
+    "placeholders": {
+      "module": {
+        "type": "String"
+      }
+    }
+  },
+  "quarantineWhen": "Quarantined {when}",
+  "@quarantineWhen": {
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "quarantineRestoreOne": "Item restored.",
+  "quarantinePurgeOne": "Item deleted forever.",
+  "quarantinePurgeTitle": "Delete forever?",
+  "quarantinePurgeBody": "{count, plural, =1{1 quarantined item} other{{count} quarantined items}} will be permanently deleted. This cannot be undone.",
+  "@quarantinePurgeBody": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quarantinePurgeAll": "Purge everything",
+  "quarantineExpiredNote": "{count, plural, =0{Nothing past its restore window} =1{1 item is past its restore window} other{{count} items are past their restore window}}",
+  "@quarantineExpiredNote": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quarantineRetention": "Restore window: {days, plural, =1{1 day} other{{days} days}}",
+  "@quarantineRetention": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsTitle": "Settings",
+  "settingsAppearance": "Appearance",
+  "settingsAccent": "Accent theme",
+  "themeCyber": "Cyber Green",
+  "themeCrimson": "Deep Crimson",
+  "themeCyberHint": "Green signal. The classic terminal.",
+  "themeCrimsonHint": "Red alert. For the loud ones.",
+  "settingsLanguageSection": "Language",
+  "settingsLanguage": "App language",
+  "langSystem": "Follow the system",
+  "langEnglish": "English",
+  "langArabic": "العربية",
+  "settingsSafety": "Safety",
+  "settingsMinAge": "Minimum file age",
+  "settingsMinAgeValue": "{hours, plural, =1{1 hour} other{{hours} hours}}",
+  "@settingsMinAgeValue": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsMinAgeHint": "Files touched more recently than this are never touched — a running app may still need them.",
+  "settingsRetention": "Restore window",
+  "settingsRetentionHint": "Quarantined items older than this are offered for permanent deletion.",
+  "settingsQuarantinePath": "Quarantine location",
+  "settingsDiagnostics": "Diagnostics",
+  "settingsRootAccess": "Administrator access",
+  "rootAvailable": "Available",
+  "rootUnavailable": "Not available",
+  "rootUnavailableHint": "System modules will report that they need elevation.",
+  "settingsOpenLog": "Activity log",
+  "settingsAbout": "About",
+  "aboutHeadline": "A cross-platform cleaner that refuses to lie.",
+  "aboutBody": "OmniClean never unlinks a file. Everything it collects moves into a quarantine you control, and a hard deny-list blocks system paths, credentials and databases before a single byte is read.",
+  "versionLabel": "Version {version} ({build})",
+  "@versionLabel": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      },
+      "build": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsReset": "Reset to defaults",
+  "settingsResetDone": "Settings reset.",
+  "platformLabel": "Detected platform: {platform}",
+  "@platformLabel": {
+    "placeholders": {
+      "platform": {
+        "type": "String"
+      }
+    }
+  },
+  "riskWhyElevated": "Touches system-owned files. Run as administrator.",
+  "riskWhyModerate": "Removes files that a running app may still recreate.",
+  "riskWhySafe": "Only regenerable caches and temporary data.",
+  "errorGeneric": "Something went wrong: {message}",
+  "@errorGeneric": {
+    "placeholders": {
+      "message": {
+        "type": "String"
+      }
+    }
+  },
+  "targetAptArchiveTitle": "APT package archive",
+  "@targetAptArchiveTitle": {
+    "description": "targetAptArchiveTitle"
+  },
+  "@target.aptArchive.title": {
+    "description": "target.aptArchive.title"
+  },
+  "targetAptArchiveDescription": "Downloaded .deb files kept for reinstall",
+  "@targetAptArchiveDescription": {
+    "description": "targetAptArchiveDescription"
+  },
+  "@target.aptArchive.description": {
+    "description": "target.aptArchive.description"
+  },
+  "targetAptListsTitle": "APT package lists",
+  "@targetAptListsTitle": {
+    "description": "targetAptListsTitle"
+  },
+  "@target.aptLists.title": {
+    "description": "target.aptLists.title"
+  },
+  "targetAptListsDescription": "Indexes apt refreshes from the network",
+  "@targetAptListsDescription": {
+    "description": "targetAptListsDescription"
+  },
+  "@target.aptLists.description": {
+    "description": "target.aptLists.description"
+  },
+  "targetJournalTitle": "System journal",
+  "@targetJournalTitle": {
+    "description": "targetJournalTitle"
+  },
+  "@target.journal.title": {
+    "description": "target.journal.title"
+  },
+  "targetJournalDescription": "systemd logs for the whole machine",
+  "@targetJournalDescription": {
+    "description": "targetJournalDescription"
+  },
+  "@target.journal.description": {
+    "description": "target.journal.description"
+  },
+  "targetCrashReportsTitle": "Crash reports",
+  "@targetCrashReportsTitle": {
+    "description": "targetCrashReportsTitle"
+  },
+  "@target.crashReports.title": {
+    "description": "target.crashReports.title"
+  },
+  "targetCrashReportsDescription": "Saved kernel panic and crash dumps",
+  "@targetCrashReportsDescription": {
+    "description": "targetCrashReportsDescription"
+  },
+  "@target.crashReports.description": {
+    "description": "target.crashReports.description"
+  },
+  "targetTmpTitle": "Temporary files",
+  "@targetTmpTitle": {
+    "description": "targetTmpTitle"
+  },
+  "@target.tmp.title": {
+    "description": "target.tmp.title"
+  },
+  "targetTmpDescription": "Leftovers in /tmp and /var/tmp",
+  "@targetTmpDescription": {
+    "description": "targetTmpDescription"
+  },
+  "@target.tmp.description": {
+    "description": "target.tmp.description"
+  },
+  "targetHomeCacheTitle": "User cache",
+  "@targetHomeCacheTitle": {
+    "description": "targetHomeCacheTitle"
+  },
+  "@target.homeCache.title": {
+    "description": "target.homeCache.title"
+  },
+  "targetHomeCacheDescription": "The cache folder of this account",
+  "@targetHomeCacheDescription": {
+    "description": "targetHomeCacheDescription"
+  },
+  "@target.homeCache.description": {
+    "description": "target.homeCache.description"
+  },
+  "targetUserJournalTitle": "Personal journal",
+  "@targetUserJournalTitle": {
+    "description": "targetUserJournalTitle"
+  },
+  "@target.userJournal.title": {
+    "description": "target.userJournal.title"
+  },
+  "targetUserJournalDescription": "Logs owned by this account only",
+  "@targetUserJournalDescription": {
+    "description": "targetUserJournalDescription"
+  },
+  "@target.userJournal.description": {
+    "description": "target.userJournal.description"
+  },
+  "targetTrashTitle": "Trash",
+  "@targetTrashTitle": {
+    "description": "targetTrashTitle"
+  },
+  "@target.trash.title": {
+    "description": "target.trash.title"
+  },
+  "targetTrashDescription": "Deleted files still waiting in the bin",
+  "@targetTrashDescription": {
+    "description": "targetTrashDescription"
+  },
+  "@target.trash.description": {
+    "description": "target.trash.description"
+  },
+  "targetFlatpakCacheTitle": "Flatpak cache",
+  "@targetFlatpakCacheTitle": {
+    "description": "targetFlatpakCacheTitle"
+  },
+  "@target.flatpakCache.title": {
+    "description": "target.flatpakCache.title"
+  },
+  "targetFlatpakCacheDescription": "Downloaded bundles and build leftovers",
+  "@targetFlatpakCacheDescription": {
+    "description": "targetFlatpakCacheDescription"
+  },
+  "@target.flatpakCache.description": {
+    "description": "target.flatpakCache.description"
+  },
+  "targetThumbnailsTitle": "Thumbnails",
+  "@targetThumbnailsTitle": {
+    "description": "targetThumbnailsTitle"
+  },
+  "@target.thumbnails.title": {
+    "description": "target.thumbnails.title"
+  },
+  "targetThumbnailsDescription": "Preview images for files you already have",
+  "@targetThumbnailsDescription": {
+    "description": "targetThumbnailsDescription"
+  },
+  "@target.thumbnails.description": {
+    "description": "target.thumbnails.description"
+  },
+  "targetUserTempTitle": "User temporary files",
+  "@targetUserTempTitle": {
+    "description": "targetUserTempTitle"
+  },
+  "@target.userTemp.title": {
+    "description": "target.userTemp.title"
+  },
+  "targetUserTempDescription": "The Temp folder of your profile",
+  "@targetUserTempDescription": {
+    "description": "targetUserTempDescription"
+  },
+  "@target.userTemp.description": {
+    "description": "target.userTemp.description"
+  },
+  "targetWindowsTempTitle": "Windows temporary files",
+  "@targetWindowsTempTitle": {
+    "description": "targetWindowsTempTitle"
+  },
+  "@target.windowsTemp.title": {
+    "description": "target.windowsTemp.title"
+  },
+  "targetWindowsTempDescription": "C:\\Windows\\Temp",
+  "@targetWindowsTempDescription": {
+    "description": "targetWindowsTempDescription"
+  },
+  "@target.windowsTemp.description": {
+    "description": "target.windowsTemp.description"
+  },
+  "targetEdgeCacheTitle": "Microsoft Edge cache",
+  "@targetEdgeCacheTitle": {
+    "description": "targetEdgeCacheTitle"
+  },
+  "@target.edgeCache.title": {
+    "description": "target.edgeCache.title"
+  },
+  "targetEdgeCacheDescription": "Browsing data that can be rebuilt",
+  "@targetEdgeCacheDescription": {
+    "description": "targetEdgeCacheDescription"
+  },
+  "@target.edgeCache.description": {
+    "description": "target.edgeCache.description"
+  },
+  "targetChromeCacheTitle": "Google Chrome cache",
+  "@targetChromeCacheTitle": {
+    "description": "targetChromeCacheTitle"
+  },
+  "@target.chromeCache.title": {
+    "description": "target.chromeCache.title"
+  },
+  "targetChromeCacheDescription": "Browsing data that can be rebuilt",
+  "@targetChromeCacheDescription": {
+    "description": "targetChromeCacheDescription"
+  },
+  "@target.chromeCache.description": {
+    "description": "target.chromeCache.description"
+  },
+  "targetFirefoxCacheTitle": "Firefox cache",
+  "@targetFirefoxCacheTitle": {
+    "description": "targetFirefoxCacheTitle"
+  },
+  "@target.firefoxCache.title": {
+    "description": "target.firefoxCache.title"
+  },
+  "targetFirefoxCacheDescription": "Disk cache of the installed profiles",
+  "@targetFirefoxCacheDescription": {
+    "description": "targetFirefoxCacheDescription"
+  },
+  "@target.firefoxCache.description": {
+    "description": "target.firefoxCache.description"
+  },
+  "targetEventLogsTitle": "Event logs",
+  "@targetEventLogsTitle": {
+    "description": "targetEventLogsTitle"
+  },
+  "@target.eventLogs.title": {
+    "description": "target.eventLogs.title"
+  },
+  "targetEventLogsDescription": "Archived Windows event log records",
+  "@targetEventLogsDescription": {
+    "description": "targetEventLogsDescription"
+  },
+  "@target.eventLogs.description": {
+    "description": "target.eventLogs.description"
+  },
+  "targetErrorReportingTitle": "Error reports",
+  "@targetErrorReportingTitle": {
+    "description": "targetErrorReportingTitle"
+  },
+  "@target.errorReporting.title": {
+    "description": "target.errorReporting.title"
+  },
+  "targetErrorReportingDescription": "Files queued for Windows Error Reporting",
+  "@targetErrorReportingDescription": {
+    "description": "targetErrorReportingDescription"
+  },
+  "@target.errorReporting.description": {
+    "description": "target.errorReporting.description"
+  },
+  "targetMinidumpsTitle": "Small memory dumps",
+  "@targetMinidumpsTitle": {
+    "description": "targetMinidumpsTitle"
+  },
+  "@target.minidumps.title": {
+    "description": "target.minidumps.title"
+  },
+  "targetMinidumpsDescription": "Minidumps written after a blue screen",
+  "@targetMinidumpsDescription": {
+    "description": "targetMinidumpsDescription"
+  },
+  "@target.minidumps.description": {
+    "description": "target.minidumps.description"
+  },
+  "targetUpdateDownloadTitle": "Windows Update downloads",
+  "@targetUpdateDownloadTitle": {
+    "description": "targetUpdateDownloadTitle"
+  },
+  "@target.updateDownload.title": {
+    "description": "target.updateDownload.title"
+  },
+  "targetUpdateDownloadDescription": "Package downloads waiting to install",
+  "@targetUpdateDownloadDescription": {
+    "description": "targetUpdateDownloadDescription"
+  },
+  "@target.updateDownload.description": {
+    "description": "target.updateDownload.description"
+  },
+  "targetDeliveryOptimizationTitle": "Delivery Optimization",
+  "@targetDeliveryOptimizationTitle": {
+    "description": "targetDeliveryOptimizationTitle"
+  },
+  "@target.deliveryOptimization.title": {
+    "description": "target.deliveryOptimization.title"
+  },
+  "targetDeliveryOptimizationDescription": "Peer-to-peer update cache",
+  "@targetDeliveryOptimizationDescription": {
+    "description": "targetDeliveryOptimizationDescription"
+  },
+  "@target.deliveryOptimization.description": {
+    "description": "target.deliveryOptimization.description"
+  },
+  "targetInstallerPendingTitle": "Pending installs",
+  "@targetInstallerPendingTitle": {
+    "description": "targetInstallerPendingTitle"
+  },
+  "@target.installerPending.title": {
+    "description": "target.installerPending.title"
+  },
+  "targetInstallerPendingDescription": "Installer work queued for a reboot",
+  "@targetInstallerPendingDescription": {
+    "description": "targetInstallerPendingDescription"
+  },
+  "@target.installerPending.description": {
+    "description": "target.installerPending.description"
+  },
+  "targetSetupLogsTitle": "Setup logs",
+  "@targetSetupLogsTitle": {
+    "description": "targetSetupLogsTitle"
+  },
+  "@target.setupLogs.title": {
+    "description": "target.setupLogs.title"
+  },
+  "targetSetupLogsDescription": "Logs from the last Windows installation",
+  "@targetSetupLogsDescription": {
+    "description": "targetSetupLogsDescription"
+  },
+  "@target.setupLogs.description": {
+    "description": "target.setupLogs.description"
+  },
+  "targetAppCacheRootTitle": "All app caches",
+  "@targetAppCacheRootTitle": {
+    "description": "targetAppCacheRootTitle"
+  },
+  "@target.appCacheRoot.title": {
+    "description": "target.appCacheRoot.title"
+  },
+  "targetAppCacheRootDescription": "Caches of every installed app",
+  "@targetAppCacheRootDescription": {
+    "description": "targetAppCacheRootDescription"
+  },
+  "@target.appCacheRoot.description": {
+    "description": "target.appCacheRoot.description"
+  },
+  "targetAppCacheSelfTitle": "OmniClean cache",
+  "@targetAppCacheSelfTitle": {
+    "description": "targetAppCacheSelfTitle"
+  },
+  "@target.appCacheSelf.title": {
+    "description": "target.appCacheSelf.title"
+  },
+  "targetAppCacheSelfDescription": "This application working files",
+  "@targetAppCacheSelfDescription": {
+    "description": "targetAppCacheSelfDescription"
+  },
+  "@target.appCacheSelf.description": {
+    "description": "target.appCacheSelf.description"
+  },
+  "targetDownloadsJunkTitle": "Downloads junk",
+  "@targetDownloadsJunkTitle": {
+    "description": "targetDownloadsJunkTitle"
+  },
+  "@target.downloadsJunk.title": {
+    "description": "target.downloadsJunk.title"
+  },
+  "targetDownloadsJunkDescription": "Interrupted and obsolete installers",
+  "@targetDownloadsJunkDescription": {
+    "description": "targetDownloadsJunkDescription"
+  },
+  "@target.downloadsJunk.description": {
+    "description": "target.downloadsJunk.description"
+  },
+  "targetObbLeftoversTitle": "Expansion leftovers",
+  "@targetObbLeftoversTitle": {
+    "description": "targetObbLeftoversTitle"
+  },
+  "@target.obbLeftovers.title": {
+    "description": "target.obbLeftovers.title"
+  },
+  "targetObbLeftoversDescription": "Data packs of apps you uninstalled",
+  "@targetObbLeftoversDescription": {
+    "description": "targetObbLeftoversDescription"
+  },
+  "@target.obbLeftovers.description": {
+    "description": "target.obbLeftovers.description"
+  },
+  "targetMediaThumbnailsTitle": "Media thumbnails",
+  "@targetMediaThumbnailsTitle": {
+    "description": "targetMediaThumbnailsTitle"
+  },
+  "@target.mediaThumbnails.title": {
+    "description": "target.mediaThumbnails.title"
+  },
+  "targetMediaThumbnailsDescription": "Thumbnails for photos and videos",
+  "@targetMediaThumbnailsDescription": {
+    "description": "targetMediaThumbnailsDescription"
+  },
+  "@target.mediaThumbnails.description": {
+    "description": "target.mediaThumbnails.description"
+  }
+}

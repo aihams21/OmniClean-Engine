@@ -1,0 +1,107 @@
+{
+  "width": 1280,
+  "height": 820,
+  "scenes": [
+    {
+      "image": "docs/walkthrough/frames/01_dashboard_idle.png",
+      "caption": "",
+      "hold": 26
+    },
+    {
+      "image": "docs/walkthrough/frames/02_dashboard_scanned.png",
+      "caption": "",
+      "hold": 26
+    },
+    {
+      "image": "docs/walkthrough/frames/03_cleaner_list.png",
+      "caption": "",
+      "hold": 26,
+      "click": [
+        104,
+        178
+      ]
+    },
+    {
+      "image": "docs/walkthrough/frames/04_confirm_dialog.png",
+      "caption": "",
+      "hold": 26,
+      "click": [
+        472,
+        105
+      ]
+    },
+    {
+      "image": "docs/walkthrough/frames/05_cleaned.png",
+      "caption": "",
+      "hold": 26,
+      "click": [
+        878,
+        454
+      ]
+    },
+    {
+      "image": "docs/walkthrough/frames/06_quarantine.png",
+      "caption": "",
+      "hold": 26,
+      "click": [
+        104,
+        306
+      ]
+    },
+    {
+      "image": "docs/walkthrough/frames/07_duplicates.png",
+      "caption": "",
+      "hold": 26,
+      "click": [
+        104,
+        242
+      ]
+    },
+    {
+      "image": "docs/walkthrough/frames/08_duplicates_confirm.png",
+      "caption": "",
+      "hold": 26,
+      "click": [
+        1189,
+        784
+      ]
+    },
+    {
+      "image": "docs/walkthrough/frames/09_settings.png",
+      "caption": "",
+      "hold": 26,
+      "click": [
+        104,
+        370
+      ]
+    },
+    {
+      "image": "docs/walkthrough/frames/10_crimson_dashboard.png",
+      "caption": "",
+      "hold": 26,
+      "click": [
+        104,
+        114
+      ]
+    },
+    {
+      "image": "docs/walkthrough/frames/11_arabic_dashboard.png",
+      "caption": "",
+      "hold": 26
+    },
+    {
+      "image": "docs/walkthrough/frames/12_arabic_cleaner.png",
+      "caption": "",
+      "hold": 26,
+      "click": [
+        1176,
+        178
+      ]
+    },
+    {
+      "image": "docs/walkthrough/frames/13_narrow_layout.png",
+      "caption": "",
+      "hold": 26
+    }
+  ]
+}

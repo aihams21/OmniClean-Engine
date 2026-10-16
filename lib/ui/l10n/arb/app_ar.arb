@@ -1,0 +1,708 @@
+{
+  "@@locale": "ar",
+  "appTitle": "أومني كلين إنجن",
+  "navDashboard": "لوحة التحكم",
+  "navCleaner": "المنظّف",
+  "navDuplicates": "المكرّرات",
+  "navQuarantine": "العزل",
+  "navSettings": "الإعدادات",
+  "actionCancel": "إلغاء",
+  "actionClose": "إغلاق",
+  "actionConfirm": "تأكيد",
+  "actionContinue": "متابعة",
+  "actionRestore": "استعادة",
+  "actionPurge": "حذف نهائي",
+  "actionOk": "حسنًا",
+  "dashboardTitle": "مركز القيادة",
+  "dashboardSubtitle": "صحة الجهاز الآن، وكل ما يمكن استرجاعه منه.",
+  "dashboardReclaimable": "قابل للاسترداد الآن",
+  "dashboardHeldBack": "محجوز لتطبيقات قيد التشغيل",
+  "dashboardScanAll": "افحص كل شيء",
+  "dashboardCleanSelected": "نظّف المحدد",
+  "dashboardNothingScanned": "ما في فحص بعد. ابدأ فحص لتعرف شو ممكن يسترجع هذا الجهاز.",
+  "dashboardScanDuration": "خلص الفحص بـ {seconds} ثانية",
+  "dashboardCancelled": "تم إلغاء الفحص — النتائج ناقصة",
+  "dashboardFilesCount": "{count, plural, =0{ما في ملفات} =1{ملف واحد} =2{ملفّين} few{{count} ملفات} many{{count} ملفًا} other{{count} ملف}}",
+  "@dashboardFilesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardActivityLog": "سجل النشاط",
+  "dashboardLogEmpty": "ما في شي مسجّل بعد.",
+  "dashboardLoadAverage": "متوسط الحِمل",
+  "dashboardUptime": "مدة التشغيل",
+  "dashboardCores": "{count, plural, =1{نواة واحدة} =2{نواتين} few{{count} أنوية} many{{count} نواة} other{{count} نواة}}",
+  "@dashboardCores": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardStorage": "التخزين",
+  "dashboardStorageFree": "{bytes} متاح من {total}",
+  "@dashboardStorageFree": {
+    "placeholders": {
+      "bytes": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "dashboardMoreDisks": "و{count} غيرها",
+  "@dashboardMoreDisks": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "gaugeCpu": "المعالج",
+  "gaugeMemory": "الذاكرة",
+  "gaugeSwap": "الذاكرة الافتراضية",
+  "unavailable": "غير متاح",
+  "cleanerTitle": "المنظّف",
+  "cleanerSubtitle": "مافي شي بينحذف هون. كل شي بينتقل إلى العزل ويضل قابل للاسترجاع.",
+  "cleanerScanAll": "افحص كل الوحدات",
+  "cleanerRescan": "إعادة فحص",
+  "cleanerCleanSelected": "نظّف المحدد",
+  "cleanerSelectAll": "تحديد الكل",
+  "cleanerSelectNone": "إلغاء التحديد",
+  "cleanerNothingFound": "ما في شي لتنظيفه بهالوحدة.",
+  "cleanerNothingScanned": "شغّل فحص أول شي عشان تقيس كل وحدة.",
+  "cleanerRequiresRoot": "يحتاج صلاحيات مدير",
+  "cleanerRootPrompt": "أومني كلين يحتاج صلاحيات مدير ينظّف كاش النظام.",
+  "cleanerIdling": "خامل",
+  "cleanerScanning": "عم يفحص…",
+  "cleanerCleaning": "عم ينظّف…",
+  "cleanerDone": "خلص",
+  "cleanerFailed": "فشل",
+  "riskSafe": "آمن",
+  "riskModerate": "متوسط",
+  "riskElevated": "مرتفع",
+  "cleanerConfirmTitle": "ننقل للعزل؟",
+  "cleanerConfirmBody": "{files, plural, =1{ملف واحد} =2{ملفّين} few{{files} ملفات} many{{files} ملفًا} other{{files} ملف}} · {bytes} راح تنتقل للعزل. تقدر ترجّع كل عنصر من شاشة العزل.",
+  "@cleanerConfirmBody": {
+    "placeholders": {
+      "files": {
+        "type": "int"
+      },
+      "bytes": {
+        "type": "String"
+      }
+    }
+  },
+  "cleanerConfirmProceed": "انقل إلى العزل",
+  "cleanerResultBody": "استرجعنا {bytes} من {files, plural, =1{ملف واحد} =2{ملفّين} few{{files} ملفات} many{{files} ملفًا} other{{files} ملف}}.",
+  "@cleanerResultBody": {
+    "placeholders": {
+      "bytes": {
+        "type": "String"
+      },
+      "files": {
+        "type": "int"
+      }
+    }
+  },
+  "cleanerSkippedNote": "{count, plural, =1{عنصر واحد انحجز} =2{عنصرين انحجزوا} few{{count} عناصر انحجزت} many{{count} عنصرًا انحجز} other{{count} عنصر انحجز}} بسبب بوابة الأمان.",
+  "@cleanerSkippedNote": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cleanerProgress": "{done} من {total}",
+  "@cleanerProgress": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "cleanerHeldBack": "{bytes} محجوز (لسا مستخدم)",
+  "@cleanerHeldBack": {
+    "placeholders": {
+      "bytes": {
+        "type": "String"
+      }
+    }
+  },
+  "duplicatesTitle": "باحث المكرّرات",
+  "duplicatesSubtitle": "يقارن المحتوى، مو الأسماء. كل ملف بينتحقّق بخوارزمية SHA-256.",
+  "duplicatesRoots": "المجلدات المراد فحصها",
+  "duplicatesRootHint": "/home/you/Downloads",
+  "duplicatesAddRoot": "أضف مجلد",
+  "duplicatesRemoveRoot": "احذف",
+  "duplicatesNoRoots": "أضف مجلد واحد على الأقل حتى تفحص.",
+  "duplicatesFind": "دوّر على المكرّرات",
+  "duplicatesCancelScan": "أوقف الفحص",
+  "duplicatesPhaseWalking": "عم يمشي على المجلدات…",
+  "duplicatesPhasePreFiltering": "عم يقارن الأحجام…",
+  "duplicatesPhaseHashing": "عم يحسب البصمات…",
+  "duplicatesPhaseDone": "خلص",
+  "duplicatesSummary": "{groups, plural, =0{ما في مجموعات مكرّرة} =1{مجموعة وحدة} =2{مجموعتين} few{{groups} مجموعات} many{{groups} مجموعة} other{{groups} مجموعة}} · {bytes} مهدور",
+  "@duplicatesSummary": {
+    "placeholders": {
+      "groups": {
+        "type": "int"
+      },
+      "bytes": {
+        "type": "String"
+      }
+    }
+  },
+  "duplicatesCopies": "{count, plural, =1{نسخة وحدة} =2{نسختين} few{{count} نسخ} many{{count} نسخة} other{{count} نسخة}}",
+  "@duplicatesCopies": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "duplicatesKeep": "احتفظ",
+  "duplicatesCopiesLabel": "النسخ اللي بدنا نحتفظ فيها",
+  "duplicatesDeleteDuplicates": "احذف الباقي",
+  "duplicatesSelectedCount": "{count, plural, =0{ما حديد شي} =1{ملف واحد محدد} =2{ملفّين محددين} few{{count} ملفات محددة} many{{count} ملفًا محددًا} other{{count} ملف محدد}}",
+  "@duplicatesSelectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "duplicatesConfirmTitle": "نحذف {count, plural, =1{نسخة وحدة} =2{نسختين} few{{count} نسخ} many{{count} نسخة} other{{count} نسخة}}؟",
+  "@duplicatesConfirmTitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "duplicatesConfirmBody": "النسخة اللي حافظت عليها ما بينمسّها شي. الباقي بيننقل للعزل وتقدر ترجّعه بأي وقت.",
+  "duplicatesSuggested": "النسخة المقترحة",
+  "duplicatesHashPrefix": "SHA-256 {prefix}…",
+  "@duplicatesHashPrefix": {
+    "placeholders": {
+      "prefix": {
+        "type": "String"
+      }
+    }
+  },
+  "quarantineTitle": "العزل",
+  "quarantineSubtitle": "ما في شي بيدمّره أومني كلين. كل شي بيستنى هون لحد ما ترجّعه أو تحذفه نهائيًا.",
+  "quarantineEmpty": "العزل فاضي.",
+  "quarantineHolding": "محتار {bytes}",
+  "@quarantineHolding": {
+    "placeholders": {
+      "bytes": {
+        "type": "String"
+      }
+    }
+  },
+  "quarantineItemCount": "{count, plural, =0{ما في عناصر} =1{عنصر واحد} =2{عنصرين} few{{count} عناصر} many{{count} عنصرًا} other{{count} عنصر}}",
+  "@quarantineItemCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quarantineFrom": "من {module}",
+  "@quarantineFrom": {
+    "placeholders": {
+      "module": {
+        "type": "String"
+      }
+    }
+  },
+  "quarantineWhen": "انتقل للعزل {when}",
+  "@quarantineWhen": {
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "quarantineRestoreOne": "تم استرجاع العنصر.",
+  "quarantinePurgeOne": "تم حذف العنصر نهائيًا.",
+  "quarantinePurgeTitle": "حذف نهائي؟",
+  "quarantinePurgeBody": "{count, plural, =1{عنصر واحد بالعزل} =2{عنصرين بالعزل} few{{count} عناصر بالعزل} many{{count} عنصرًا بالعزل} other{{count} عنصر بالعزل}} راح ينحذفوا للأبد. هالشي ما بين颠倒.",
+  "@quarantinePurgeBody": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quarantinePurgeAll": "احذف كل شي",
+  "quarantineExpiredNote": "{count, plural, =0{ما في شي طعّى مدته} =1{عنصر واحد طعّى مدته} =2{عنصرين طعوا مدتهم} few{{count} عناصر طعوا مدتهم} many{{count} عنصرًا طعّى مدته} other{{count} عنصر طعّى مدته}}",
+  "@quarantineExpiredNote": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quarantineRetention": "مدة الاستعادة: {days, plural, =1{يوم} =2{يومين} few{{days} أيام} many{{days} يومًا} other{{days} يوم}}",
+  "@quarantineRetention": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsTitle": "الإعدادات",
+  "settingsAppearance": "المظهر",
+  "settingsAccent": "لون الهوية",
+  "themeCyber": "أخضر سيبراني",
+  "themeCrimson": "قرمزي عميق",
+  "themeCyberHint": "إشارة خضراء. طرفيّة كلاسيكية.",
+  "themeCrimsonHint": "إنذار أحمر. للعناصر الصاخبة.",
+  "settingsLanguageSection": "اللغة",
+  "settingsLanguage": "لغة التطبيق",
+  "langSystem": "حسب نظام الجهاز",
+  "langEnglish": "English",
+  "langArabic": "العربية",
+  "settingsSafety": "الأمان",
+  "settingsMinAge": "أقدم عمر للملف",
+  "settingsMinAgeValue": "{hours, plural, =1{ساعة} =2{ساعتين} few{{hours} ساعات} many{{hours} ساعة} other{{hours} ساعة}}",
+  "@settingsMinAgeValue": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsMinAgeHint": "الملفات اللي انمسكت من قريب ما بينمسّها شي — يمكن تطبيق شغّال لسا محتاجها.",
+  "settingsRetention": "مدة الاستعادة",
+  "settingsRetentionHint": "العناصر اللي عدّت هالمدة بينعرضوا للحذف النهائي.",
+  "settingsQuarantinePath": "مكان العزل",
+  "settingsDiagnostics": "التشخيص",
+  "settingsRootAccess": "صلاحية المدير",
+  "rootAvailable": "متاحة",
+  "rootUnavailable": "غير متاحة",
+  "rootUnavailableHint": "وحدات النظام راح تبلّغ إنها محتاجة صلاحيات.",
+  "settingsOpenLog": "سجل النشاط",
+  "settingsAbout": "عن التطبيق",
+  "aboutHeadline": "منظّف متعدد المنصات ما بيقدر يكذب عليك.",
+  "aboutBody": "أومني كلين ما بيحذف أي ملف بشكل مباشر. كل شي بيجمعه بينتقل لعزل إنت بتحكم فيه، وقائمة منع صارمة بتمنع مسارات النظام والمفاتيح وقواعد البيانات قبل ما حتى تُقرأ أول بايت.",
+  "versionLabel": "الإصدار {version} ({build})",
+  "@versionLabel": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      },
+      "build": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsReset": "رجّع للإعدادات الافتراضية",
+  "settingsResetDone": "رجّعنا الإعدادات.",
+  "platformLabel": "المنصة المكتشفة: {platform}",
+  "@platformLabel": {
+    "placeholders": {
+      "platform": {
+        "type": "String"
+      }
+    }
+  },
+  "riskWhyElevated": "بيلمس ملفات يملكها النظام. لازم تشغّله كمدير.",
+  "riskWhyModerate": "بيحذف ملفات يمكن تطبيق شغّال لسا يعيد إنشاءها.",
+  "riskWhySafe": "كاشات وتخزين مؤقت بيرجعوا لحالهم بس.",
+  "errorGeneric": "صار خطأ: {message}",
+  "@errorGeneric": {
+    "placeholders": {
+      "message": {
+        "type": "String"
+      }
+    }
+  },
+  "targetAptArchiveTitle": "أرشيف حزم APT",
+  "@targetAptArchiveTitle": {
+    "description": "targetAptArchiveTitle"
+  },
+  "@target.aptArchive.title": {
+    "description": "target.aptArchive.title"
+  },
+  "targetAptArchiveDescription": "ملفات .deb المحمّلة للتبثيت من جديد",
+  "@targetAptArchiveDescription": {
+    "description": "targetAptArchiveDescription"
+  },
+  "@target.aptArchive.description": {
+    "description": "target.aptArchive.description"
+  },
+  "targetAptListsTitle": "فهارس حزم APT",
+  "@targetAptListsTitle": {
+    "description": "targetAptListsTitle"
+  },
+  "@target.aptLists.title": {
+    "description": "target.aptLists.title"
+  },
+  "targetAptListsDescription": "القوائم التي يحدّثها apt من الشبكة",
+  "@targetAptListsDescription": {
+    "description": "targetAptListsDescription"
+  },
+  "@target.aptLists.description": {
+    "description": "target.aptLists.description"
+  },
+  "targetJournalTitle": "سجل النظام",
+  "@targetJournalTitle": {
+    "description": "targetJournalTitle"
+  },
+  "@target.journal.title": {
+    "description": "target.journal.title"
+  },
+  "targetJournalDescription": "سجلات systemd لكل الجهاز",
+  "@targetJournalDescription": {
+    "description": "targetJournalDescription"
+  },
+  "@target.journal.description": {
+    "description": "target.journal.description"
+  },
+  "targetCrashReportsTitle": "تقارير الأعطال",
+  "@targetCrashReportsTitle": {
+    "description": "targetCrashReportsTitle"
+  },
+  "@target.crashReports.title": {
+    "description": "target.crashReports.title"
+  },
+  "targetCrashReportsDescription": "تفريغات الأعطال المحفوظة",
+  "@targetCrashReportsDescription": {
+    "description": "targetCrashReportsDescription"
+  },
+  "@target.crashReports.description": {
+    "description": "target.crashReports.description"
+  },
+  "targetTmpTitle": "ملفات مؤقتة",
+  "@targetTmpTitle": {
+    "description": "targetTmpTitle"
+  },
+  "@target.tmp.title": {
+    "description": "target.tmp.title"
+  },
+  "targetTmpDescription": "ما تبقّى في مجلّدات الملفات المؤقتة",
+  "@targetTmpDescription": {
+    "description": "targetTmpDescription"
+  },
+  "@target.tmp.description": {
+    "description": "target.tmp.description"
+  },
+  "targetHomeCacheTitle": "ذاكرة المستخدم المؤقتة",
+  "@targetHomeCacheTitle": {
+    "description": "targetHomeCacheTitle"
+  },
+  "@target.homeCache.title": {
+    "description": "target.homeCache.title"
+  },
+  "targetHomeCacheDescription": "مجلّد الذاكرة المؤقتة لهذا الحساب",
+  "@targetHomeCacheDescription": {
+    "description": "targetHomeCacheDescription"
+  },
+  "@target.homeCache.description": {
+    "description": "target.homeCache.description"
+  },
+  "targetUserJournalTitle": "سجل المستخدم",
+  "@targetUserJournalTitle": {
+    "description": "targetUserJournalTitle"
+  },
+  "@target.userJournal.title": {
+    "description": "target.userJournal.title"
+  },
+  "targetUserJournalDescription": "سجلّات تخصّ حسابك وحده",
+  "@targetUserJournalDescription": {
+    "description": "targetUserJournalDescription"
+  },
+  "@target.userJournal.description": {
+    "description": "target.userJournal.description"
+  },
+  "targetTrashTitle": "سلة المحذوفات",
+  "@targetTrashTitle": {
+    "description": "targetTrashTitle"
+  },
+  "@target.trash.title": {
+    "description": "target.trash.title"
+  },
+  "targetTrashDescription": "ملفات محذوفة ما زالت بالسلة",
+  "@targetTrashDescription": {
+    "description": "targetTrashDescription"
+  },
+  "@target.trash.description": {
+    "description": "target.trash.description"
+  },
+  "targetFlatpakCacheTitle": "ذاكرة فلاتpak",
+  "@targetFlatpakCacheTitle": {
+    "description": "targetFlatpakCacheTitle"
+  },
+  "@target.flatpakCache.title": {
+    "description": "target.flatpakCache.title"
+  },
+  "targetFlatpakCacheDescription": "الحزم المنزّلة والملفات المتبقّية",
+  "@targetFlatpakCacheDescription": {
+    "description": "targetFlatpakCacheDescription"
+  },
+  "@target.flatpakCache.description": {
+    "description": "target.flatpakCache.description"
+  },
+  "targetThumbnailsTitle": "الصور المصغّرة",
+  "@targetThumbnailsTitle": {
+    "description": "targetThumbnailsTitle"
+  },
+  "@target.thumbnails.title": {
+    "description": "target.thumbnails.title"
+  },
+  "targetThumbnailsDescription": "معاينات لصور عندك أصلاً",
+  "@targetThumbnailsDescription": {
+    "description": "targetThumbnailsDescription"
+  },
+  "@target.thumbnails.description": {
+    "description": "target.thumbnails.description"
+  },
+  "targetUserTempTitle": "ملفات المستخدم المؤقتة",
+  "@targetUserTempTitle": {
+    "description": "targetUserTempTitle"
+  },
+  "@target.userTemp.title": {
+    "description": "target.userTemp.title"
+  },
+  "targetUserTempDescription": "مجلّد الملفات المؤقتة لحسابك",
+  "@targetUserTempDescription": {
+    "description": "targetUserTempDescription"
+  },
+  "@target.userTemp.description": {
+    "description": "target.userTemp.description"
+  },
+  "targetWindowsTempTitle": "ملفات ويندوز المؤقتة",
+  "@targetWindowsTempTitle": {
+    "description": "targetWindowsTempTitle"
+  },
+  "@target.windowsTemp.title": {
+    "description": "target.windowsTemp.title"
+  },
+  "targetWindowsTempDescription": "مجلّد ويندوز المؤقت",
+  "@targetWindowsTempDescription": {
+    "description": "targetWindowsTempDescription"
+  },
+  "@target.windowsTemp.description": {
+    "description": "target.windowsTemp.description"
+  },
+  "targetEdgeCacheTitle": "ذاكرة Edge",
+  "@targetEdgeCacheTitle": {
+    "description": "targetEdgeCacheTitle"
+  },
+  "@target.edgeCache.title": {
+    "description": "target.edgeCache.title"
+  },
+  "targetEdgeCacheDescription": "بيانات تصفّح يمكن بناؤها من جديد",
+  "@targetEdgeCacheDescription": {
+    "description": "targetEdgeCacheDescription"
+  },
+  "@target.edgeCache.description": {
+    "description": "target.edgeCache.description"
+  },
+  "targetChromeCacheTitle": "ذاكرة كروم",
+  "@targetChromeCacheTitle": {
+    "description": "targetChromeCacheTitle"
+  },
+  "@target.chromeCache.title": {
+    "description": "target.chromeCache.title"
+  },
+  "targetChromeCacheDescription": "بيانات تصفّح يمكن بناؤها من جديد",
+  "@targetChromeCacheDescription": {
+    "description": "targetChromeCacheDescription"
+  },
+  "@target.chromeCache.description": {
+    "description": "target.chromeCache.description"
+  },
+  "targetFirefoxCacheTitle": "ذاكرة فايرفوكس",
+  "@targetFirefoxCacheTitle": {
+    "description": "targetFirefoxCacheTitle"
+  },
+  "@target.firefoxCache.title": {
+    "description": "target.firefoxCache.title"
+  },
+  "targetFirefoxCacheDescription": "ذاكرة الملفات للملفات الشخصية",
+  "@targetFirefoxCacheDescription": {
+    "description": "targetFirefoxCacheDescription"
+  },
+  "@target.firefoxCache.description": {
+    "description": "target.firefoxCache.description"
+  },
+  "targetEventLogsTitle": "سجلّات الأحداث",
+  "@targetEventLogsTitle": {
+    "description": "targetEventLogsTitle"
+  },
+  "@target.eventLogs.title": {
+    "description": "target.eventLogs.title"
+  },
+  "targetEventLogsDescription": "أرشيف سجلّات أحداث ويندوز",
+  "@targetEventLogsDescription": {
+    "description": "targetEventLogsDescription"
+  },
+  "@target.eventLogs.description": {
+    "description": "target.eventLogs.description"
+  },
+  "targetErrorReportingTitle": "تقارير الأخطاء",
+  "@targetErrorReportingTitle": {
+    "description": "targetErrorReportingTitle"
+  },
+  "@target.errorReporting.title": {
+    "description": "target.errorReporting.title"
+  },
+  "targetErrorReportingDescription": "ملفات بانتظار تقرير أخطاء ويندوز",
+  "@targetErrorReportingDescription": {
+    "description": "targetErrorReportingDescription"
+  },
+  "@target.errorReporting.description": {
+    "description": "target.errorReporting.description"
+  },
+  "targetMinidumpsTitle": "تفريغات الذاكرة الصغيرة",
+  "@targetMinidumpsTitle": {
+    "description": "targetMinidumpsTitle"
+  },
+  "@target.minidumps.title": {
+    "description": "target.minidumps.title"
+  },
+  "targetMinidumpsDescription": "تفريغات ما بعد الشاشة الزرقاء",
+  "@targetMinidumpsDescription": {
+    "description": "targetMinidumpsDescription"
+  },
+  "@target.minidumps.description": {
+    "description": "target.minidumps.description"
+  },
+  "targetUpdateDownloadTitle": "تحميلات تحديث ويندوز",
+  "@targetUpdateDownloadTitle": {
+    "description": "targetUpdateDownloadTitle"
+  },
+  "@target.updateDownload.title": {
+    "description": "target.updateDownload.title"
+  },
+  "targetUpdateDownloadDescription": "حزم تنزيل بانتظار التثبيت",
+  "@targetUpdateDownloadDescription": {
+    "description": "targetUpdateDownloadDescription"
+  },
+  "@target.updateDownload.description": {
+    "description": "target.updateDownload.description"
+  },
+  "targetDeliveryOptimizationTitle": "تحسين التسليم",
+  "@targetDeliveryOptimizationTitle": {
+    "description": "targetDeliveryOptimizationTitle"
+  },
+  "@target.deliveryOptimization.title": {
+    "description": "target.deliveryOptimization.title"
+  },
+  "targetDeliveryOptimizationDescription": "ذاكرة تحديث مشاركة الأقران",
+  "@targetDeliveryOptimizationDescription": {
+    "description": "targetDeliveryOptimizationDescription"
+  },
+  "@target.deliveryOptimization.description": {
+    "description": "target.deliveryOptimization.description"
+  },
+  "targetInstallerPendingTitle": "تثبيتات معلّقة",
+  "@targetInstallerPendingTitle": {
+    "description": "targetInstallerPendingTitle"
+  },
+  "@target.installerPending.title": {
+    "description": "target.installerPending.title"
+  },
+  "targetInstallerPendingDescription": "أعمال تثبيت تنتظر إعادة التشغيل",
+  "@targetInstallerPendingDescription": {
+    "description": "targetInstallerPendingDescription"
+  },
+  "@target.installerPending.description": {
+    "description": "target.installerPending.description"
+  },
+  "targetSetupLogsTitle": "سجلّات التثبيت",
+  "@targetSetupLogsTitle": {
+    "description": "targetSetupLogsTitle"
+  },
+  "@target.setupLogs.title": {
+    "description": "target.setupLogs.title"
+  },
+  "targetSetupLogsDescription": "سجلّات آخر عملية تثبيت لويندوز",
+  "@targetSetupLogsDescription": {
+    "description": "targetSetupLogsDescription"
+  },
+  "@target.setupLogs.description": {
+    "description": "target.setupLogs.description"
+  },
+  "targetAppCacheRootTitle": "ذاكرة كل التطبيقات",
+  "@targetAppCacheRootTitle": {
+    "description": "targetAppCacheRootTitle"
+  },
+  "@target.appCacheRoot.title": {
+    "description": "target.appCacheRoot.title"
+  },
+  "targetAppCacheRootDescription": "ذاكرة كل التطبيقات المثبّتة",
+  "@targetAppCacheRootDescription": {
+    "description": "targetAppCacheRootDescription"
+  },
+  "@target.appCacheRoot.description": {
+    "description": "target.appCacheRoot.description"
+  },
+  "targetAppCacheSelfTitle": "ذاكرة OmniClean",
+  "@targetAppCacheSelfTitle": {
+    "description": "targetAppCacheSelfTitle"
+  },
+  "@target.appCacheSelf.title": {
+    "description": "target.appCacheSelf.title"
+  },
+  "targetAppCacheSelfDescription": "الملفات المؤقتة لهذا التطبيق",
+  "@targetAppCacheSelfDescription": {
+    "description": "targetAppCacheSelfDescription"
+  },
+  "@target.appCacheSelf.description": {
+    "description": "target.appCacheSelf.description"
+  },
+  "targetDownloadsJunkTitle": "ملفات تنزيل فوضوية",
+  "@targetDownloadsJunkTitle": {
+    "description": "targetDownloadsJunkTitle"
+  },
+  "@target.downloadsJunk.title": {
+    "description": "target.downloadsJunk.title"
+  },
+  "targetDownloadsJunkDescription": "تنزيلات متوقّفة ومثبّات قديمة",
+  "@targetDownloadsJunkDescription": {
+    "description": "targetDownloadsJunkDescription"
+  },
+  "@target.downloadsJunk.description": {
+    "description": "target.downloadsJunk.description"
+  },
+  "targetObbLeftoversTitle": "ملفات توسيع قديمة",
+  "@targetObbLeftoversTitle": {
+    "description": "targetObbLeftoversTitle"
+  },
+  "@target.obbLeftovers.title": {
+    "description": "target.obbLeftovers.title"
+  },
+  "targetObbLeftoversDescription": "حزم تطبيق أزلته",
+  "@targetObbLeftoversDescription": {
+    "description": "targetObbLeftoversDescription"
+  },
+  "@target.obbLeftovers.description": {
+    "description": "target.obbLeftovers.description"
+  },
+  "targetMediaThumbnailsTitle": "معاينات الوسائط",
+  "@targetMediaThumbnailsTitle": {
+    "description": "targetMediaThumbnailsTitle"
+  },
+  "@target.mediaThumbnails.title": {
+    "description": "target.mediaThumbnails.title"
+  },
+  "targetMediaThumbnailsDescription": "معاينات الصور والفيديو",
+  "@targetMediaThumbnailsDescription": {
+    "description": "targetMediaThumbnailsDescription"
+  },
+  "@target.mediaThumbnails.description": {
+    "description": "target.mediaThumbnails.description"
+  }
+}

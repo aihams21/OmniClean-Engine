@@ -1,0 +1,33 @@
+name: omni_clean_engine
+description: "OmniClean Engine — cross-platform system accelerator & cleaner for Windows, Linux and Android."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.14.0-183.0.dev
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # Pure-Dart SHA-256 for the duplicate finder (no platform channel needed).
+  crypto: ^3.0.6
+  # Quarantine lives here (Linux/Windows) and mirrors the app cache on Android.
+  path: ^1.9.1
+  path_provider: ^2.1.5
+  # Theme + language persistence.
+  shared_preferences: ^2.5.3
+  # Desktop window chrome / min size.
+  window_manager: ^0.4.3
+  intl: ^0.20.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  generate: true

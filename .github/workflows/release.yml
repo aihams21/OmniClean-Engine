@@ -1,0 +1,139 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to publish, e.g. 1.0.0'
+        required: true
+
+permissions:
+  contents: write
+
+env:
+  FLUTTER_VERSION: '3.50.0'
+
+jobs:
+  linux:
+    name: Linux (.deb, AppImage, portable)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+
+      - run: sudo apt-get update && sudo apt-get install -y clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev libstdc++-12-dev squashfs-tools desktop-file-utils
+
+      - name: Download appimagetool
+        run: |
+          set -e
+          curl -fsSL -o appimagetool.AppImage \
+            https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage
+          chmod +x appimagetool.AppImage
+
+      - run: flutter build linux --release
+
+      - name: Package
+        env:
+          # GitHub runners have no FUSE, so appimagetool must self-extract.
+          APPIMAGE_EXTRACT_AND_RUN: '1'
+        run: |
+          python3 tool/packaging/linux_packaging.py all --appimagetool ./appimagetool.AppImage
+          desktop-file-validate dist/*.deb >/dev/null 2>&1 || true
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/*.deb
+            dist/*.AppImage
+            dist/*.tar.gz
+
+  windows:
+    name: Windows (portable + installer)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+
+      - run: flutter build windows --release
+
+      - name: Zip the portable build
+        shell: pwsh
+        run: Compress-Archive -Path build\windows\x64\runner\Release\* -DestinationPath dist\omniclean-engine-windows-x64.zip
+
+      - name: Compile the Inno Setup installer
+        shell: pwsh
+        run: |
+          $iscc = "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe"
+          if (Test-Path $iscc) {
+            & $iscc /Q windows\runner\installer\omniclean.iss
+          } else {
+            Write-Host "Inno Setup not present; skipping installer build"
+          }
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist\omniclean-engine-windows-x64.zip
+            build\windows\x64\runner\installer\Output\*.exe
+
+  android:
+    name: Android (signed APK)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: zulu
+          java-version: '17'
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+
+      - uses: android-actions/setup-android@v3
+
+      - name: Decode the signing key from repository secrets
+        env:
+          KEYSTORE_B64: ${{ secrets.OMNICLEAN_KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.OMNICLEAN_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.OMNICLEAN_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.OMNICLEAN_KEY_PASSWORD }}
+        run: |
+          set -euo pipefail
+          if [ -z "$KEYSTORE_B64" ]; then
+            echo "::warning::OMNICLEAN_KEYSTORE_BASE64 is not set - building an unsigned APK"
+            exit 0
+          fi
+          printf '%s' "$KEYSTORE_B64" | base64 --decode > android/app/omniclean-release.jks
+          {
+            echo "OMNICLEAN_KEYSTORE_PATH=app/omniclean-release.jks"
+            echo "OMNICLEAN_KEYSTORE_PASSWORD=$KEYSTORE_PASSWORD"
+            echo "OMNICLEAN_KEY_ALIAS=$KEY_ALIAS"
+            echo "OMNICLEAN_KEY_PASSWORD=$KEY_PASSWORD"
+          } > android/key.properties
+
+      - run: flutter pub get
+      - run: flutter build appbundle --release --split-per-abi
+      - run: flutter build apk --release
+      - run: flutter build apk --release --split-per-abi
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            build/app/outputs/bundle/release/*.aab
+            build/app/outputs/flutter-apk/*.apk
