@@ -91,8 +91,9 @@ matches your platform. Every release is signed and checksummed.
 
 ```bash
 # Linux, the easy way
-wget https://github.com/aihams21/OmniClean-Engine/releases/latest/download/omniclean-engine-1.0.0.AppImage
-chmod +x omniclean-engine-1.0.0.AppImage && ./omniclean-engine-1.0.0.AppImage
+wget https://github.com/aihams21/OmniClean-Engine/releases/latest/download/omniclean-engine_1.0.0_amd64.AppImage
+chmod +x omniclean-engine_1.0.0_amd64.AppImage
+./omniclean-engine_1.0.0_amd64.AppImage
 ```
 
 ---

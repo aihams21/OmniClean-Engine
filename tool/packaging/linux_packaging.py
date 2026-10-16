@@ -80,10 +80,10 @@ def desktop_entry(version: str) -> str:
         f"Name={APP_NAME}\n"
         "GenericName=System cleaner\n"
         "Comment=Reclaim disk space and find duplicate files safely.\n"
-        f"Exec={install_prefix()}/{BINARY}\n"
+        f'Exec="{install_prefix()}/{BINARY}" %U\n'
         f"Icon={DESKTOP_ID}\n"
         "Terminal=false\n"
-        "Categories=System;Utility;\n"
+        "Categories=Utility;\n"
         f"X-AppVersion={version}\n"
         "StartupWMClass=omni_clean_engine\n"
     )
@@ -221,7 +221,8 @@ def build_tar(out: Path) -> Path:
 
 
 def appdir_tree(root: Path, version: str) -> Path:
-    appdir = root / f"OmniCleanEngine-{version}-x86_64.AppDir"
+    # appimagetool requires the desktop entry to be named after the AppDir.
+    appdir = root / "OmniCleanEngine.AppDir"
     shutil.copytree(bundle_path(), appdir, symlinks=True)
     (appdir / "AppRun").write_text(
         "#!/bin/sh\n"
@@ -230,9 +231,13 @@ def appdir_tree(root: Path, version: str) -> Path:
         encoding="utf-8",
     )
     (appdir / "AppRun").chmod(0o755)
-    (appdir / f"{DESKTOP_ID}.desktop").write_text(
-        desktop_entry(version).replace(install_prefix(), "$APP"), encoding="utf-8"
+    # The desktop entry inside an AppDir must launch through AppRun: the spec
+    # forbids `$` in Exec unless it is escaped as `\\$`, and appimagetool puts
+    # the AppDir on PATH, so AppRun resolves to this very bundle.
+    entry = desktop_entry(version).replace(
+        f'Exec="{install_prefix()}/{BINARY}" %U\n', "Exec=AppRun %U\n"
     )
+    (appdir / "OmniCleanEngine.desktop").write_text(entry, encoding="utf-8")
     icons = appdir / "usr" / "share" / "icons" / "hicolor"
     stage_icon(icons / "512x512" / "apps" / f"{DESKTOP_ID}.png")
     stage_icon(appdir / f"{DESKTOP_ID}.png")
@@ -267,7 +272,7 @@ def build_appimage(out: Path, tool: Path | None) -> Path:
             "appimagetool not found. Download AppImageKit or set APPIMAGETOOL."
         )
     out.mkdir(parents=True, exist_ok=True)
-    target = out / f"OmniCleanEngine-{version}-x86_64.AppImage"
+    target = out / f"omniclean-engine_{version}_amd64.AppImage"
     with tempfile.TemporaryDirectory() as tmp:
         appdir = appdir_tree(Path(tmp), version)
         env = dict(os.environ, ARCH="x86_64")
