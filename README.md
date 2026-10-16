@@ -10,7 +10,7 @@
 two languages.
 
 [![CI](https://github.com/aihams21/OmniClean-Engine/actions/workflows/ci.yml/badge.svg)](https://github.com/aihams21/OmniClean-Engine/actions/workflows/ci.yml)
-[![Release](https://img.shields.io/badge/release-1.0.0-10B981?style=flat-square)](https://github.com/aihams21/OmniClean-Engine/releases/latest)
+[![Release](https://img.shields.io/badge/release-1.0.1-10B981?style=flat-square)](https://github.com/aihams21/OmniClean-Engine/releases/latest)
 [![License: MIT](https://img.shields.io/badge/License-MIT-10B981?style=flat-square)](LICENSE)
 [![Flutter](https://img.shields.io/badge/Flutter-3.50-02569A?style=flat-square&logo=flutter)](https://flutter.dev)
 [![Dart](https://img.shields.io/badge/Dart-3.14-0175C2?style=flat-square&logo=dart)](https://dart.dev)
@@ -91,9 +91,9 @@ matches your platform.
 
 ```bash
 # Linux, the easy way
-wget https://github.com/aihams21/OmniClean-Engine/releases/latest/download/omniclean-engine_1.0.0_amd64.AppImage
-chmod +x omniclean-engine_1.0.0_amd64.AppImage
-./omniclean-engine_1.0.0_amd64.AppImage
+wget https://github.com/aihams21/OmniClean-Engine/releases/download/v1.0.1/omniclean-engine_1.0.1_amd64.AppImage
+chmod +x omniclean-engine_1.0.1_amd64.AppImage
+./omniclean-engine_1.0.1_amd64.AppImage
 ```
 
 ### Compatibility
@@ -117,10 +117,10 @@ hand-built program runs into. Each one has a one-step answer.
 
 | Symptom | What happened | Fix |
 |---|---|---|
-| **Android: "App not installed" / "The package appears invalid"** | You downloaded the build published before the signing fix (v1.0.0 assets were replaced on 2026-10-16, so a cached copy may still be the old one). | Re-download the APK, open **Settings → Apps → Special app access → Install unknown apps** and allow it for the app you downloaded with (Files, Chrome, or your file manager), then install again. If it still fails, the file is the old one: delete it and download again. |
+| **Android: "App not installed" / "The package appears invalid"** | You downloaded an old build. Every asset on v1.0.1 and later is signed; a cached copy from before the fix will not install. | Re-download the APK, open **Settings → Apps → Special app access → Install unknown apps** and allow it for the app you downloaded with (Files, Chrome, or your file manager), then install again. If it still fails, the file is the old one: delete it and download again. |
 | **Android: nothing happens when I tap the APK** | The system installer is not allowed to start yet on MIUI/HyperOS, Infinix and Tecno. | Allow *Install unknown apps* for your file manager as above, and on Xiaomi also accept the **Security** app's scan prompt. |
 | **Windows: "Windows protected your PC"** | SmartScreen blocks every executable that is not signed by a certificate from a commercial CA. Ours is not, by design. | Click **More info** → **Run anyway**. |
-| **Linux: `Permission denied` after downloading the AppImage** | Browsers download files without the executable bit. | `chmod +x omniclean-engine_1.0.0_amd64.AppImage`, or download the `.deb` and double-click it instead — on Debian, Ubuntu and Kali that opens your software centre and needs no chmod. |
+| **Linux: `Permission denied` after downloading the AppImage** | Browsers download files without the executable bit. | `chmod +x omniclean-engine_1.0.1_amd64.AppImage`, or download the `.deb` and double-click it instead — on Debian, Ubuntu and Kali that opens your software centre and needs no chmod. |
 
 To check an Android APK really is signed before you install it:
 
@@ -219,11 +219,26 @@ download cache · Delivery Optimization · pending driver installs (`inf/pending
 > `C:\Windows` itself is protected. Only the ten temp-and-log paths above it are
 > reachable, and they are listed explicitly in the source.
 
-### Android — 5 modules
+### Android — 8 modules
 
-App cache (root path when a root helper exists, scoped storage otherwise) ·
-self cache · junk in Downloads (`.part`, `.crdownload`, `.opdownload`,
-`.tmp`, obsolete APKs) · leftover OBB directories · MediaStore thumbnails.
+The Android modules are the only ones in the app that do **not** walk the
+filesystem, because on Android 11+ a filesystem walk cannot see any of it. They
+ask the platform instead, through a native bridge:
+
+| Module | What it finds |
+|---|---|
+| Trash | everything in the system recycle bin |
+| Obsolete installers | older copies of an APK you already kept |
+| Partial downloads | `.part`, `.crdownload`, `.opdownload`, `.download` |
+| App residue | `Android/data` and `Android/obb` of apps you removed |
+| Screenshots | screenshots older than 30 days |
+| Duplicate media | byte-identical photos and videos |
+| Empty folders | directories that hold nothing but `.nomedia` |
+| Logs | stale log files under the app trees |
+
+Every figure comes from `MediaStore` and `StatFs`, so it is the real size of the
+real file — not a guess from a directory listing that Android no longer lets
+anyone read.
 
 ---
 
@@ -240,6 +255,54 @@ your core count, so it actually uses the machine. The oldest copy in each group
 is marked as the one to keep, and a review list lets you choose per group before
 anything moves. Progress and cancellation are live.
 
+**On Android you never pick a folder.** The media store hands over the whole
+library, and the same three passes run over it. On the desktop it walks the
+directories you declared.
+
+---
+
+## Library — everything you have, listed
+
+Photos, videos, audio, documents, downloads and all files, newest first, with the
+real path and the real size. On Android this is `MediaStore`; on the desktop it
+is the directory walk. When the platform will not let the app look, the screen
+says so and offers the button that asks for permission — it never pretends you
+have no photos.
+
+---
+
+## Unused apps — on every platform
+
+Pick an idle window (1, 7, 30, 90, 180 or 365 days), scan, and see what you
+genuinely have not opened. Apps you have *never* opened are listed first, because
+those are the ones worth deciding about. Running apps are never offered, and
+system apps are never offered.
+
+The uninstall button does whatever the platform actually supports: on Android it
+opens the system uninstaller, on Linux it goes through `apt` or `flatpak`, on
+Windows it opens Settings. When a platform has no scripted uninstall the app says
+so instead of pretending. The residue left behind is a normal cleaning module,
+so it gets quarantined like everything else.
+
+---
+
+## Boost — one tap, and it tells you the truth
+
+| Platform | What it does |
+|---|---|
+| Linux | pins every CPU core to the `performance` governor, lowers swappiness to 10, drops the page cache, runs `fstrim` |
+| Windows | switches to the high-performance power plan, trims the working sets of heavy processes, suspends the indexer |
+| Android | the platform's own trim, cache wipe and battery-optimisation exemption |
+
+Every step runs through the real shell and **reports the answer the system gave**.
+When a step is refused — `/sys` mounted read-only on a locked-down kernel, a
+service you do not have the rights to stop — the screen prints that refusal
+instead of claiming a speed-up. If nothing changed, it says *nothing changed* and
+lists exactly what the system said no to.
+
+Privileged steps are never even listed when the app is not running as root: a plan
+full of steps that can only fail is not a plan.
+
 ---
 
 ## Interface
@@ -254,7 +317,7 @@ anything moves. Progress and cancellation are live.
   from one list so a screen can never exist in one layout and be missing from
   the other.
 - **Fully localized English and Arabic (RTL)**, hand-written, not machine
-  translated. 188 keys, zero untranslated strings.
+  translated. 260 keys, zero untranslated strings.
 
 ![Arabic RTL dashboard](docs/walkthrough/frames/11_arabic_dashboard.png)
 ![Crimson theme](docs/walkthrough/frames/10_crimson_dashboard.png)
@@ -276,17 +339,25 @@ lib/
 │   ├── cleaners/              clean_target · directory_sweeper · apt_parsers
 │   │                          linux_cleaner · windows_cleaner · android_cleaner
 │   ├── duplicates/            hasher (SHA-256) · duplicate_finder (3-pass)
-│   └── metrics/               parsers (/proc, df) · system_snapshot
-│                              windows_metrics (PowerShell) · collector
+│   ├── metrics/               parsers (/proc, df) · system_snapshot
+│   │                          windows_metrics (PowerShell) · collector
+│   ├── platform/              storage_gateway (the platform seam) ·
+│   │                          method_channel_gateway · desktop_apps ·
+│   │                          desktop_app_gateway
+│   └── boost/                 boost_plan (what each platform can do)
 └── ui/
     ├── theme/                 CyberPalette, both accents, script-aware tracking
     ├── l10n/                  app_en.arb · app_ar.arb → generated
     ├── widgets/               CyberBackground · ArcGauge · StorageBar · ModuleTile
     ├── controllers/           ChangeNotifier: settings · cleaner · duplicates ·
-    │                          quarantine — each fully injectable for tests
-    └── screens/               AppShell + dashboard/cleaner/duplicates/
-                               quarantine/settings
+    │                          quarantine · platform_cleaner · library ·
+    │                          unused_apps · boost — each fully injectable
+    └── screens/               AppShell + dashboard/cleaner/duplicates/quarantine/
+                               library/unused_apps/boost/settings
 ```
+
+`android/app/src/main/kotlin/.../StorageBridge.kt` is the Android half of the
+platform seam: capabilities, junk scan, media, unused apps, uninstall, boost.
 
 Dependencies are deliberately boring: `crypto` for hashing, `path_provider`,
 `shared_preferences`, `window_manager`, `intl`, `flutter_localizations`. No
@@ -294,11 +365,11 @@ telemetry, no analytics, no network client in the shipped app.
 
 | | |
 |---|---|
-| Dart source (excluding generated l10n) | 7 669 lines · 37 files |
-| Dart source + tests | 14 839 lines |
-| Automated tests | **248 passing**, 1 skipped |
-| ARB translation keys | 188 per language |
-| Clean targets | 10 Linux · 12 Windows · 5 Android |
+| Dart source (excluding generated l10n) | 11 376 lines · 49 files |
+| Dart source + tests + tooling | 22 383 lines |
+| Automated tests | **379 passing**, 1 skipped |
+| ARB translation keys | 260 per language |
+| Clean targets | 10 Linux · 12 Windows · 8 Android |
 
 ---
 
