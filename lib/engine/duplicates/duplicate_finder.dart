@@ -99,6 +99,62 @@ class DuplicateFinder {
     }
     if (cancel?.isCancelled ?? false) return const [];
 
+    return _compare(
+      total,
+      minSizeBytes: minSizeBytes,
+      maxFiles: maxFiles,
+      partialWindow: partialWindow,
+      cancel: cancel,
+      onProgress: onProgress,
+      source: '${roots.length} roots',
+    );
+  }
+
+  /// Runs the duplicate comparison over an already-collected file list.
+  ///
+  /// This is the entry point for platforms where a directory walk is the wrong
+  /// tool: on Android the media lives in a content provider that `dart:io`
+  /// cannot see, so the platform hands us the files and this hashes them. The
+  /// three verification passes are identical to [find] — same size bucketing,
+  /// same partial hash, same full SHA-256 — so a group found here is exactly as
+  /// trustworthy as one found by walking a disk.
+  Future<List<DuplicateGroup>> scanFiles(
+    List<DuplicateFile> files, {
+    int minSizeBytes = 4 * 1024,
+    int? maxFiles,
+    int partialWindow = 64 * 1024,
+    CancelToken? cancel,
+    void Function(int done, int total, HashPhase phase)? onProgress,
+  }) async {
+    if (cancel?.isCancelled ?? false) return const [];
+
+    final candidates = <_Candidate>[
+      for (final f in files)
+        if (f.sizeBytes >= minSizeBytes)
+          _Candidate(path: f.path, size: f.sizeBytes, modified: f.modified),
+    ];
+    if (candidates.length < 2) return const [];
+
+    return _compare(
+      candidates,
+      minSizeBytes: minSizeBytes,
+      maxFiles: maxFiles,
+      partialWindow: partialWindow,
+      cancel: cancel,
+      onProgress: onProgress,
+      source: '${files.length} platform files',
+    );
+  }
+
+  Future<List<DuplicateGroup>> _compare(
+    List<_Candidate> total, {
+    required int minSizeBytes,
+    required int? maxFiles,
+    required int partialWindow,
+    required CancelToken? cancel,
+    required void Function(int done, int total, HashPhase phase)? onProgress,
+    required String source,
+  }) async {
     final bySize = <int, List<_Candidate>>{};
     for (final c in total) {
       if (c.size < minSizeBytes) continue;
@@ -169,8 +225,7 @@ class DuplicateFinder {
 
     groups.sort((a, b) => b.wastedBytes.compareTo(a.wastedBytes));
     onProgress?.call(survivors.length, survivors.length, HashPhase.done);
-    log.info(
-        'duplicate scan: ${groups.length} groups from ${roots.length} roots');
+    log.info('duplicate scan: ${groups.length} groups from $source');
     return groups;
   }
 

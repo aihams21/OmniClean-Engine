@@ -704,5 +704,334 @@
   },
   "@target.mediaThumbnails.description": {
     "description": "target.mediaThumbnails.description"
+  },
+  "navLibrary": "Library",
+  "@navLibrary": {
+    "description": "Tab in the navigation bar."
+  },
+  "libraryTitle": "Library",
+  "@libraryTitle": {
+    "description": "Title of the photos and files screen."
+  },
+  "librarySubtitle": "Every photo, video and file the device holds — sorted newest first.",
+  "@librarySubtitle": {
+    "description": "Subtitle of the library screen."
+  },
+  "libraryLoad": "Load",
+  "@libraryLoad": {
+    "description": "Button that reads the device library."
+  },
+  "libraryReloading": "Reloading",
+  "@libraryReloading": {
+    "description": "Button label while the library is loading."
+  },
+  "libraryKindPhotos": "Photos",
+  "@libraryKindPhotos": {
+    "description": "Library tab."
+  },
+  "libraryKindVideos": "Videos",
+  "@libraryKindVideos": {
+    "description": "Library tab."
+  },
+  "libraryKindAudio": "Audio",
+  "@libraryKindAudio": {
+    "description": "Library tab."
+  },
+  "libraryKindDocuments": "Documents",
+  "@libraryKindDocuments": {
+    "description": "Library tab."
+  },
+  "libraryKindDownloads": "Downloads",
+  "@libraryKindDownloads": {
+    "description": "Library tab."
+  },
+  "libraryKindAllFiles": "All files",
+  "@libraryKindAllFiles": {
+    "description": "Library tab that merges documents and downloads."
+  },
+  "libraryEmpty": "Nothing here yet.",
+  "@libraryEmpty": {
+    "description": "Empty state for the library."
+  },
+  "libraryBlind": "Storage access needed",
+  "@libraryBlind": {
+    "description": "Shown when the app cannot read the media library."
+  },
+  "libraryBlindHint": "OmniClean needs permission to read your photos and files. Nothing is uploaded — the scan runs entirely on this device.",
+  "@libraryBlindHint": {
+    "description": "Explanation shown with the permission prompt."
+  },
+  "libraryGrant": "Grant access",
+  "@libraryGrant": {
+    "description": "Button that opens the permission request."
+  },
+  "libraryCount": "{count} items · {size}",
+  "@libraryCount": {
+    "description": "Item count and total size of the library.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "libraryResolution": "{width} x {height}",
+  "@libraryResolution": {
+    "description": "Pixel dimensions of a photo or video.",
+    "placeholders": {
+      "width": {
+        "type": "int"
+      },
+      "height": {
+        "type": "int"
+      }
+    }
+  },
+  "libraryFailed": "The device library could not be read.",
+  "@libraryFailed": {
+    "description": "Error state."
+  },
+  "libraryUseDuplicates": "Find duplicates",
+  "@libraryUseDuplicates": {
+    "description": "Shortcut from the library to the duplicate finder."
+  },
+  "navApps": "Apps",
+  "@navApps": {
+    "description": "Simple name of the unused apps destination"
+  },
+  "unusedAppsTitle": "Unused apps",
+  "@unusedAppsTitle": {
+    "description": "Title of the unused apps screen"
+  },
+  "unusedAppsSubtitle": "Apps you stopped opening, with everything they left behind.",
+  "@unusedAppsSubtitle": {
+    "description": "Subtitle of the unused apps screen"
+  },
+  "unusedAppsLoad": "Scan my apps",
+  "@unusedAppsLoad": {
+    "description": "Button that loads the unused apps list"
+  },
+  "unusedAppsRefreshing": "Reading usage data…",
+  "@unusedAppsRefreshing": {
+    "description": "Button label while the scan runs"
+  },
+  "unusedAppsIdle": "Nothing is scanned yet. Press the button above and OmniClean will ask the system which apps you stopped opening.",
+  "@unusedAppsIdle": {
+    "description": "Placeholder before the first scan"
+  },
+  "unusedAppsEmpty": "No unused apps at this threshold. Raise the threshold to look further back.",
+  "@unusedAppsEmpty": {
+    "description": "Empty state at the current threshold"
+  },
+  "unusedAppsCount": "{count} apps · {size}",
+  "@unusedAppsCount": {
+    "description": "Headline count and total size of the unused apps list",
+    "placeholders": {
+      "count": {},
+      "size": {}
+    }
+  },
+  "unusedAppsNeverOpened": "Never opened",
+  "@unusedAppsNeverOpened": {
+    "description": "Tag for an app with no usage data at all"
+  },
+  "unusedAppsIdleDays": "{days} days idle",
+  "@unusedAppsIdleDays": {
+    "description": "How long an app has been idle",
+    "placeholders": {
+      "days": {}
+    }
+  },
+  "unusedAppsUninstall": "Uninstall",
+  "@unusedAppsUninstall": {
+    "description": "Button that asks the platform to uninstall the app"
+  },
+  "unusedAppsUninstalling": "Opening the system uninstaller…",
+  "@unusedAppsUninstalling": {
+    "description": "Hint while the system uninstaller is launching"
+  },
+  "unusedAppsUninstalled": "{name} was handed to the system uninstaller.",
+  "@unusedAppsUninstalled": {
+    "description": "Confirmation that the platform accepted the uninstall",
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "unusedAppsBlind": "Usage access is required. Android only knows which apps you stopped opening if you let it observe usage stats.",
+  "@unusedAppsBlind": {
+    "description": "State when usage stats access is missing"
+  },
+  "unusedAppsGrant": "Allow usage access",
+  "@unusedAppsGrant": {
+    "description": "Button that opens the usage access settings"
+  },
+  "unusedAppsSystemHidden": "System apps are never suggested for removal.",
+  "@unusedAppsSystemHidden": {
+    "description": "Footnote about system apps"
+  },
+  "unusedAppsCannotUninstall": "This device does not allow apps to uninstall other apps.",
+  "@unusedAppsCannotUninstall": {
+    "description": "State when REQUEST_DELETE_PACKAGES is missing"
+  },
+  "unusedAppsThreshold": "Idle for",
+  "@unusedAppsThreshold": {
+    "description": "Label of the idle threshold selector"
+  },
+  "unusedAppsSelected": "{count} selected · {size}",
+  "@unusedAppsSelected": {
+    "description": "Selection counter of the unused apps screen",
+    "placeholders": {
+      "count": {},
+      "size": {}
+    }
+  },
+  "unusedAppsRemoveSelected": "Uninstall selected",
+  "@unusedAppsRemoveSelected": {
+    "description": "Bulk uninstall button"
+  },
+  "unusedAppsConfirmTitle": "Uninstall {count} apps?",
+  "@unusedAppsConfirmTitle": {
+    "description": "Confirmation dialog title",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "unusedAppsConfirmBody": "The system uninstaller opens one app at a time, and you confirm each removal. OmniClean never deletes app data itself.",
+  "@unusedAppsConfirmBody": {
+    "description": "Confirmation dialog body"
+  },
+  "unusedAppsFailed": "Could not read the app list. Try again.",
+  "@unusedAppsFailed": {
+    "description": "Failure state"
+  },
+  "navBoost": "Boost",
+  "@navBoost": {
+    "description": "Boost"
+  },
+  "boostTitle": "Boost",
+  "@boostTitle": {
+    "description": "Boost"
+  },
+  "boostSubtitle": "One tap. Real system changes, each one reported back with what the machine actually did.",
+  "@boostSubtitle": {
+    "description": "One tap. Real system changes, each one reported back with what the machine actually did."
+  },
+  "boostRun": "Boost now",
+  "@boostRun": {
+    "description": "Boost now"
+  },
+  "boostRunning": "Boosting…",
+  "@boostRunning": {
+    "description": "Boosting…"
+  },
+  "boostRerun": "Boost again",
+  "@boostRerun": {
+    "description": "Boost again"
+  },
+  "boostNothingAvailable": "Boost needs administrator rights on this platform, so there is nothing here it can honestly promise.",
+  "@boostNothingAvailable": {
+    "description": "Boost needs administrator rights on this platform, so there is nothing here it can honestly promise."
+  },
+  "boostResultHeadline": "{done} of {total} steps applied",
+  "@boostResultHeadline": {
+    "description": "{done} of {total} steps applied",
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "boostNothingChanged": "Nothing changed. Every step below is what the system refused.",
+  "@boostNothingChanged": {
+    "description": "Nothing changed. Every step below is what the system refused."
+  },
+  "boostActionAndroidTitle": "Trim and trim the whole system",
+  "@boostActionAndroidTitle": {
+    "description": "Trim and trim the whole system"
+  },
+  "boostActionAndroidDescription": "Asks Android to release app caches, trims this app's memory, and lifts the doze restriction so the launcher stays fast.",
+  "@boostActionAndroidDescription": {
+    "description": "Asks Android to release app caches, trims this app's memory, and lifts the doze restriction so the launcher stays fast."
+  },
+  "boostActionPowerPlanTitle": "Switch to the high performance power plan",
+  "@boostActionPowerPlanTitle": {
+    "description": "Switch to the high performance power plan"
+  },
+  "boostActionPowerPlanDescription": "Stops Windows from down-clocking the CPU and GPU to save power while you are working.",
+  "@boostActionPowerPlanDescription": {
+    "description": "Stops Windows from down-clocking the CPU and GPU to save power while you are working."
+  },
+  "boostActionWorkingSetsTitle": "Release idle memory from every app",
+  "@boostActionWorkingSetsTitle": {
+    "description": "Release idle memory from every app"
+  },
+  "boostActionWorkingSetsDescription": "Asks each process to hand back the pages it is holding but not using, which is what stalls a game.",
+  "@boostActionWorkingSetsDescription": {
+    "description": "Asks each process to hand back the pages it is holding but not using, which is what stalls a game."
+  },
+  "boostActionIndexerTitle": "Pause the search indexer",
+  "@boostActionIndexerTitle": {
+    "description": "Pause the search indexer"
+  },
+  "boostActionIndexerDescription": "The indexer re-scans your files in the background and eats the same disk and CPU a game needs.",
+  "@boostActionIndexerDescription": {
+    "description": "The indexer re-scans your files in the background and eats the same disk and CPU a game needs."
+  },
+  "boostActionGovernorTitle": "Pin the CPU to performance mode",
+  "@boostActionGovernorTitle": {
+    "description": "Pin the CPU to performance mode"
+  },
+  "boostActionGovernorDescription": "Replaces the power-saving governor so the cores stay at full clock instead of dropping and climbing all game long.",
+  "@boostActionGovernorDescription": {
+    "description": "Replaces the power-saving governor so the cores stay at full clock instead of dropping and climbing all game long."
+  },
+  "boostActionSwappinessTitle": "Stop the kernel from swapping",
+  "@boostActionSwappinessTitle": {
+    "description": "Stop the kernel from swapping"
+  },
+  "boostActionSwappinessDescription": "Lower swappiness makes the kernel use your free RAM instead of the slow disk, which is where frame stutter comes from.",
+  "@boostActionSwappinessDescription": {
+    "description": "Lower swappiness makes the kernel use your free RAM instead of the slow disk, which is where frame stutter comes from."
+  },
+  "boostActionDropCachesTitle": "Release the page cache back to the kernel",
+  "@boostActionDropCachesTitle": {
+    "description": "Release the page cache back to the kernel"
+  },
+  "boostActionDropCachesDescription": "Frees the cached file pages so the whole cache is cold and every read after this is a real read.",
+  "@boostActionDropCachesDescription": {
+    "description": "Frees the cached file pages so the whole cache is cold and every read after this is a real read."
+  },
+  "boostActionTrimTitle": "Trim the SSD",
+  "@boostActionTrimTitle": {
+    "description": "Trim the SSD"
+  },
+  "boostActionTrimDescription": "Tells the drive which blocks are already deleted, so it stops queueing writes over them.",
+  "@boostActionTrimDescription": {
+    "description": "Tells the drive which blocks are already deleted, so it stops queueing writes over them."
+  },
+  "boostImpactFrames": "Frame rate",
+  "@boostImpactFrames": {
+    "description": "Frame rate"
+  },
+  "boostImpactMemory": "Memory",
+  "@boostImpactMemory": {
+    "description": "Memory"
+  },
+  "boostImpactLatency": "Disk latency",
+  "@boostImpactLatency": {
+    "description": "Disk latency"
+  },
+  "boostImpactStorage": "Storage",
+  "@boostImpactStorage": {
+    "description": "Storage"
+  },
+  "boostRequiresPrivilege": "Administrator",
+  "@boostRequiresPrivilege": {
+    "description": "Administrator"
   }
 }

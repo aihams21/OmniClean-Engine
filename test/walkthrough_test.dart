@@ -13,8 +13,14 @@ import 'package:omni_clean_engine/core/safety/safe_delete.dart';
 import 'package:omni_clean_engine/engine/cleaners/clean_target.dart';
 import 'package:omni_clean_engine/engine/metrics/metrics_collector.dart';
 import 'package:omni_clean_engine/engine/metrics/system_snapshot.dart';
+import 'package:omni_clean_engine/engine/platform/method_channel_gateway.dart';
+import 'package:omni_clean_engine/engine/platform/storage_gateway.dart';
 import 'package:omni_clean_engine/ui/controllers/cleaner_controller.dart';
 import 'package:omni_clean_engine/ui/controllers/duplicates_controller.dart';
+import 'package:omni_clean_engine/ui/controllers/library_controller.dart';
+import 'package:omni_clean_engine/ui/controllers/boost_controller.dart';
+import 'package:omni_clean_engine/engine/boost/boost_plan.dart';
+import 'package:omni_clean_engine/ui/controllers/unused_apps_controller.dart';
 import 'package:omni_clean_engine/ui/controllers/quarantine_controller.dart';
 import 'package:omni_clean_engine/ui/controllers/settings_controller.dart';
 
@@ -278,6 +284,45 @@ void main() {
       safeDelete: safeDelete,
       roots: <String>['${sandbox.path}/photos'],
     );
+    // A real library for the Library screen to photograph: genuine sizes,
+    // genuine dates, the same shape MediaStore would report.
+    final FakeStorageGateway libraryGateway = FakeStorageGateway(
+      mediaItems: <MediaItem>[
+        MediaItem(
+          id: '1',
+          name: 'beach-sunset.jpg',
+          path: '${sandbox.path}/photos/beach-sunset.jpg',
+          sizeBytes: 4812000,
+          modified: DateTime.now().subtract(const Duration(days: 2)),
+          mimeType: 'image/jpeg',
+          width: 4032,
+          height: 3024,
+        ),
+        MediaItem(
+          id: '2',
+          name: 'IMG_20260214_183455.jpg',
+          path: '${sandbox.path}/photos/IMG_20260214_183455.jpg',
+          sizeBytes: 3264000,
+          modified: DateTime.now().subtract(const Duration(days: 9)),
+          mimeType: 'image/jpeg',
+          width: 3024,
+          height: 4032,
+        ),
+        MediaItem(
+          id: '3',
+          name: 'family-video.mp4',
+          path: '${sandbox.path}/Movies/family-video.mp4',
+          sizeBytes: 148900000,
+          modified: DateTime.now().subtract(const Duration(days: 31)),
+          mimeType: 'video/mp4',
+          width: 1920,
+          height: 1080,
+        ),
+      ],
+    );
+    final LibraryController library =
+        LibraryController(gateway: libraryGateway);
+
     final QuarantineController quarantineController = QuarantineController(
       quarantine: quarantine,
       retention: settings.retention,
@@ -297,6 +342,12 @@ void main() {
       quarantineController: quarantineController,
       metrics: metrics,
       privilegeProbe: () async => false,
+      library: library,
+      apps: UnusedAppsController(gateway: FakeStorageGateway()),
+      boost: BoostController(
+        plan: boostActionsFor(os: 'linux', isRoot: true),
+        executor: (_) async => const <String, BoostActionResult>{},
+      ),
     );
     addTearDown(runtime.dispose);
 

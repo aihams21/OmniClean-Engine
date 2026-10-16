@@ -10,9 +10,16 @@ import 'core/safety/quarantine.dart';
 import 'core/safety/safe_delete.dart';
 import 'core/util/logger.dart';
 import 'engine/metrics/metrics_collector.dart';
+import 'engine/platform/method_channel_gateway.dart';
+import 'engine/platform/desktop_app_gateway.dart';
+import 'engine/platform/storage_gateway.dart';
 import 'engine/shell.dart';
+import 'ui/controllers/boost_controller.dart';
+import 'engine/boost/boost_plan.dart';
 import 'ui/controllers/cleaner_controller.dart';
 import 'ui/controllers/duplicates_controller.dart';
+import 'ui/controllers/library_controller.dart';
+import 'ui/controllers/unused_apps_controller.dart';
 import 'ui/controllers/quarantine_controller.dart';
 import 'ui/controllers/settings_controller.dart';
 import 'ui/l10n/generated/app_localizations.dart';
@@ -48,6 +55,9 @@ class OmniCleanRuntime {
     required this.cleaner,
     required this.duplicates,
     required this.quarantineController,
+    required this.library,
+    required this.apps,
+    required this.boost,
     required this.metrics,
     this.privilegeProbe = Shell.isRoot,
   });
@@ -59,6 +69,9 @@ class OmniCleanRuntime {
   final CleanerController cleaner;
   final DuplicatesController duplicates;
   final QuarantineController quarantineController;
+  final LibraryController library;
+  final UnusedAppsController apps;
+  final BoostController boost;
   final SystemMetricsService metrics;
   final Future<bool> Function() privilegeProbe;
 
@@ -83,6 +96,7 @@ Future<OmniCleanRuntime> bootstrapRuntime({
   Future<bool> Function()? privilegeProbe,
   MetricsSource? metricsSource,
   Duration metricsInterval = const Duration(seconds: 2),
+  StorageGateway? gatewayOverride,
 }) async {
   final root = quarantineRoot ??
       Directory('${(await getApplicationSupportDirectory()).path}/quarantine');
@@ -107,6 +121,14 @@ Future<OmniCleanRuntime> bootstrapRuntime({
     privilegeProbe: privilegeProbe ?? Shell.isRoot,
   );
 
+  // One bridge, shared. On Android it is the only thing that can see the
+  // media library or the recycle bin, so both the cleaner and the duplicate
+  // finder ask the same source of truth instead of guessing from disk.
+  final gateway = gatewayOverride ??
+      (Platform.isAndroid
+          ? MethodChannelStorageGateway()
+          : DesktopAppGateway() as StorageGateway);
+
   final metrics = SystemMetricsService(
     source: metricsSource ?? createMetricsSource(),
     interval: metricsInterval,
@@ -117,11 +139,31 @@ Future<OmniCleanRuntime> bootstrapRuntime({
     quarantine: quarantine,
     safeDelete: safeDelete,
     settings: settings,
-    cleaner: CleanerController.forPlatform(safeDelete: safeDelete),
-    duplicates: DuplicatesController(safeDelete: safeDelete),
+    cleaner:
+        CleanerController.forPlatform(safeDelete: safeDelete, gateway: gateway),
+    duplicates: DuplicatesController(
+      safeDelete: safeDelete,
+      gateway: gateway,
+      // On Android the roots are meaningless: the media store hands over the
+      // whole library, so no folder is demanded of the user at all. On the
+      // desktop the gateway only knows about *apps* - files are still a
+      // directory walk - so the real roots stay in charge.
+      roots: Platform.isAndroid ? const <String>[] : null,
+    ),
+    apps: UnusedAppsController(gateway: gateway),
+    library: LibraryController(gateway: gateway),
     quarantineController: QuarantineController(
       quarantine: quarantine,
       retention: settings.retention,
+    ),
+    boost: BoostController(
+      plan: boostActionsFor(
+        os: Platform.operatingSystem,
+        // Probed, never assumed: a plan built on a privilege the process does
+        // not have would list steps that can only fail.
+        isRoot: await (privilegeProbe ?? Shell.isRoot)(),
+      ),
+      executor: PlatformBoostExecutor(gateway: gateway).run,
     ),
     metrics: metrics,
     privilegeProbe: privilegeProbe ?? Shell.isRoot,
@@ -173,6 +215,9 @@ class _OmniCleanAppState extends State<OmniCleanApp> {
             cleaner: runtime.cleaner,
             duplicates: runtime.duplicates,
             quarantine: runtime.quarantineController,
+            library: runtime.library,
+            apps: runtime.apps,
+            boost: runtime.boost,
             privilegeProbe: runtime.privilegeProbe,
           ),
         );

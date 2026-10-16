@@ -439,7 +439,7 @@ class AppLocalizationsAr extends AppLocalizations {
       two: 'عنصرين بالعزل',
       one: 'عنصر واحد بالعزل',
     );
-    return '$_temp0 راح ينحذفوا للأبد. هالشي ما بين颠倒.';
+    return '$_temp0 راح ينحذفوا للأبد. هالشي ما بيرجع.';
   }
 
   @override
@@ -770,4 +770,256 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get targetMediaThumbnailsDescription => 'معاينات الصور والفيديو';
+
+  @override
+  String get navLibrary => 'المكتبة';
+
+  @override
+  String get libraryTitle => 'المكتبة';
+
+  @override
+  String get librarySubtitle =>
+      'كل صورة وفيديو وملف على الجهاز — مرتّب من الأحدث للأقدم.';
+
+  @override
+  String get libraryLoad => 'حمّل';
+
+  @override
+  String get libraryReloading => 'عم يحمّل…';
+
+  @override
+  String get libraryKindPhotos => 'الصور';
+
+  @override
+  String get libraryKindVideos => 'الفيديوهات';
+
+  @override
+  String get libraryKindAudio => 'الصوتيات';
+
+  @override
+  String get libraryKindDocuments => 'المستندات';
+
+  @override
+  String get libraryKindDownloads => 'التحميلات';
+
+  @override
+  String get libraryKindAllFiles => 'كل الملفات';
+
+  @override
+  String get libraryEmpty => 'ما في شي هون.';
+
+  @override
+  String get libraryBlind => 'لازم صلاحية الوصول للتخزين';
+
+  @override
+  String get libraryBlindHint =>
+      'أومني كلين محتاج صلاحية يقرأ صورك وملفاتك. ما في شي بينرفع عالنت — الفحص كله على الجهاز.';
+
+  @override
+  String get libraryGrant => 'اسمح بالوصول';
+
+  @override
+  String libraryCount(int count, String size) {
+    return '$count عنصر · $size';
+  }
+
+  @override
+  String libraryResolution(int width, int height) {
+    return '$width x $height';
+  }
+
+  @override
+  String get libraryFailed => 'ما قدرنا نقرأ مكتبة الجهاز.';
+
+  @override
+  String get libraryUseDuplicates => 'دور على المكررات';
+
+  @override
+  String get navApps => 'التطبيقات';
+
+  @override
+  String get unusedAppsTitle => 'تطبيقات ما بتستخدمها';
+
+  @override
+  String get unusedAppsSubtitle =>
+      'تطبيقات توقّف تفتحها، ومعها كل شي خلّفته ورا.';
+
+  @override
+  String get unusedAppsLoad => 'افحص تطبيقاتي';
+
+  @override
+  String get unusedAppsRefreshing => 'عم أقرا بيانات الاستخدام…';
+
+  @override
+  String get unusedAppsIdle =>
+      'لسّا ما فحصنا شي. اضغط الزر فوق و OmniClean رح يسأل النظام أي تطبيقات توقّفت تستخدمها.';
+
+  @override
+  String get unusedAppsEmpty =>
+      'ما في تطبيقات مهملة بهالحد. ارفع الحد عشان تبعد أكتر بالماضي.';
+
+  @override
+  String unusedAppsCount(Object count, Object size) {
+    return '$count تطبيق · $size';
+  }
+
+  @override
+  String get unusedAppsNeverOpened => 'ما انفتح أبداً';
+
+  @override
+  String unusedAppsIdleDays(Object days) {
+    return '$days يوم بدون استخدام';
+  }
+
+  @override
+  String get unusedAppsUninstall => 'إلغاء التثبيت';
+
+  @override
+  String get unusedAppsUninstalling => 'عم فتح إلغاء التثبيت بتاع النظام…';
+
+  @override
+  String unusedAppsUninstalled(Object name) {
+    return '$name انبعتت لإلغاء التثبيت بتاع النظام.';
+  }
+
+  @override
+  String get unusedAppsBlind =>
+      'لازم صلاحية الوصول لبيانات الاستخدام. أندرويد ما بيعرف أي تطبيقات توقّفت تستخدمها إلا إذا سمحت له يراقب إحصائيات الاستخدام.';
+
+  @override
+  String get unusedAppsGrant => 'اسمح بالوصول للاستخدام';
+
+  @override
+  String get unusedAppsSystemHidden => 'تطبيقات النظام ما بنقترح حذفها أبداً.';
+
+  @override
+  String get unusedAppsCannotUninstall =>
+      'هذا الجهاز ما يسمح لأي تطبيق يمسح تطبيقات تانية.';
+
+  @override
+  String get unusedAppsThreshold => 'بدون استخدام منذ';
+
+  @override
+  String unusedAppsSelected(Object count, Object size) {
+    return '$count محدد · $size';
+  }
+
+  @override
+  String get unusedAppsRemoveSelected => 'ألغِ المحدد';
+
+  @override
+  String unusedAppsConfirmTitle(Object count) {
+    return 'ألغِ تثبيت $count تطبيق؟';
+  }
+
+  @override
+  String get unusedAppsConfirmBody =>
+      'إلغاء التثبيت بيفتح تطبيق واحد كل مرة وأنت بتأكد. OmniClean ما بيحذف بيانات التطبيق أبداً.';
+
+  @override
+  String get unusedAppsFailed =>
+      'ما قدرنا نقرأ قائمة التطبيقات. جرّب كمان مرّة.';
+
+  @override
+  String get navBoost => 'تسريع';
+
+  @override
+  String get boostTitle => 'تسريع';
+
+  @override
+  String get boostSubtitle =>
+      'كبسة وحدة. تغييرات حقيقية على النظام، وكل خطوة بتقل لك شو عملت بالظبط.';
+
+  @override
+  String get boostRun => 'سرّع الآن';
+
+  @override
+  String get boostRunning => 'عم يسرّع…';
+
+  @override
+  String get boostRerun => 'سرّع كمان مرّة';
+
+  @override
+  String get boostNothingAvailable =>
+      'التسريع بده صلاحيات مدير على هالمنصّة، فما في شي هون يقدر يوعدك فيه.';
+
+  @override
+  String boostResultHeadline(int done, int total) {
+    return 'طبّقت $done من $total خطوة';
+  }
+
+  @override
+  String get boostNothingChanged =>
+      'ما تغيّر شي. كل خطوة تحت هي اللي النظام رفضها.';
+
+  @override
+  String get boostActionAndroidTitle => 'تقليم وتنضيف النظام كله';
+
+  @override
+  String get boostActionAndroidDescription =>
+      'يطلب من أندرويد يحرّر كاشات التطبيقات، ويقلّم ذاكرة هالتطبيق، وبيشيل تقييد doze ليبقى المشغّل سريع.';
+
+  @override
+  String get boostActionPowerPlanTitle => 'تبديل على خطة أداء عالي';
+
+  @override
+  String get boostActionPowerPlanDescription =>
+      'بيمنع ويندوز من نزول تردد المعالج والكرت للتوفير وأنا شغال.';
+
+  @override
+  String get boostActionWorkingSetsTitle => 'تحرير الذاكرة الخاملة من كل تطبيق';
+
+  @override
+  String get boostActionWorkingSetsDescription =>
+      'يطلب من كل عملية ترجّع الصفحات اللي محتجزة وما عم تستعملها، وهي اللي بتربع اللعب.';
+
+  @override
+  String get boostActionIndexerTitle => 'إيقاف مفهرس البحث';
+
+  @override
+  String get boostActionIndexerDescription =>
+      'مفهرس البحث بيعيد الفحص للخلفية وياكل نفس الديسك والمعالج اللي اللعبة بدها.';
+
+  @override
+  String get boostActionGovernorTitle => 'تثبيت المعالج على وضع الأداء';
+
+  @override
+  String get boostActionGovernorDescription =>
+      'بيبدّلGovernor توفير الطاقة لتضل الأنوية على أقوى تردد بدل ما تنزل وتطلع طول اللعب.';
+
+  @override
+  String get boostActionSwappinessTitle => 'منع النواة من التبديل';
+
+  @override
+  String get boostActionSwappinessDescription =>
+      'تخفيض swappiness بيخلي النواة تستعمل الرام الفاضي بدل الديسك البطيء، ومن هناك بييجي تقطيع الإطارات.';
+
+  @override
+  String get boostActionDropCachesTitle => 'تحرير ذاكرة الكاش للنواة';
+
+  @override
+  String get boostActionDropCachesDescription =>
+      'بيحرّر صفحات الملفات المخزّنة، فتصير الكاش فاضية وكل قراءة بعدها قراءة حقيقية.';
+
+  @override
+  String get boostActionTrimTitle => 'تنظيف القرص الصلب SSD';
+
+  @override
+  String get boostActionTrimDescription =>
+      'بيبلّغ القرص إنو بلوكات صارت محذوفة، فبيوقف ترتيب كتابات فوقها.';
+
+  @override
+  String get boostImpactFrames => 'معدّل الإطارات';
+
+  @override
+  String get boostImpactMemory => 'الذاكرة';
+
+  @override
+  String get boostImpactLatency => 'استجابة القرص';
+
+  @override
+  String get boostImpactStorage => 'التخزين';
+
+  @override
+  String get boostRequiresPrivilege => 'صلاحيات مدير';
 }

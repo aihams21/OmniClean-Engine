@@ -10,6 +10,11 @@ import 'package:omni_clean_engine/engine/metrics/metrics_collector.dart';
 import 'package:omni_clean_engine/engine/metrics/system_snapshot.dart';
 import 'package:omni_clean_engine/ui/controllers/cleaner_controller.dart';
 import 'package:omni_clean_engine/ui/controllers/duplicates_controller.dart';
+import 'package:omni_clean_engine/engine/platform/method_channel_gateway.dart';
+import 'package:omni_clean_engine/engine/boost/boost_plan.dart';
+import 'package:omni_clean_engine/ui/controllers/library_controller.dart';
+import 'package:omni_clean_engine/ui/controllers/unused_apps_controller.dart';
+import 'package:omni_clean_engine/ui/controllers/boost_controller.dart';
 import 'package:omni_clean_engine/ui/controllers/quarantine_controller.dart';
 import 'package:omni_clean_engine/ui/controllers/settings_controller.dart';
 import 'package:omni_clean_engine/ui/screens/app_shell.dart';
@@ -24,6 +29,9 @@ void main() {
   late CleanerController cleaner;
   late DuplicatesController duplicates;
   late QuarantineController quarantineController;
+  late LibraryController library;
+  late UnusedAppsController apps;
+  late BoostController boost;
   late SystemMetricsService metrics;
 
   final target = CleanTarget(
@@ -54,6 +62,12 @@ void main() {
     );
     duplicates = DuplicatesController(safeDelete: safeDelete);
     quarantineController = QuarantineController(quarantine: quarantine);
+    library = LibraryController(gateway: FakeStorageGateway());
+    apps = UnusedAppsController(gateway: FakeStorageGateway());
+    boost = BoostController(
+      plan: boostActionsFor(os: 'linux', isRoot: false),
+      executor: (_) async => const <String, BoostActionResult>{},
+    );
     metrics = SystemMetricsService(
       source: const _SilentMetricsSource(),
       interval: const Duration(hours: 1),
@@ -61,6 +75,9 @@ void main() {
   });
 
   tearDown(() async {
+    library.dispose();
+    apps.dispose();
+    boost.dispose();
     metrics.dispose();
     cleaner.dispose();
     duplicates.dispose();
@@ -97,6 +114,9 @@ void main() {
           cleaner: cleaner,
           duplicates: duplicates,
           quarantine: quarantineController,
+          library: library,
+          apps: apps,
+          boost: boost,
           privilegeProbe: () async => false,
         ),
       ),
@@ -115,7 +135,13 @@ void main() {
       await pumpShell(tester);
 
       expect(find.text('Dashboard'), findsOneWidget);
-      for (final label in ['Cleaner', 'Duplicates', 'Quarantine', 'Settings']) {
+      for (final label in [
+        'Cleaner',
+        'Duplicates',
+        'Quarantine',
+        'Library',
+        'Settings',
+      ]) {
         expect(find.text(label), findsWidgets);
       }
     });
@@ -128,6 +154,8 @@ void main() {
         'Cleaner': 'Cleaner',
         'Duplicates': 'Duplicate finder',
         'Quarantine': 'Quarantine',
+        'Library': 'Library',
+        'Boost': 'Boost',
         'Settings': 'Settings',
       }.entries) {
         await tester.tap(find.text(entry.key).first);

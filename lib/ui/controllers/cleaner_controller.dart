@@ -9,8 +9,10 @@ import '../../engine/cleaners/clean_target.dart';
 import '../../engine/cleaners/directory_sweeper.dart';
 import '../../engine/cleaners/linux_cleaner.dart';
 import '../../engine/cleaners/windows_cleaner.dart';
-import '../../engine/cleaners/android_cleaner.dart';
 import '../../engine/duplicates/duplicate_finder.dart' show CancelToken;
+import '../../engine/platform/method_channel_gateway.dart';
+import '../../engine/platform/storage_gateway.dart' show StorageGateway;
+import 'platform_cleaner.dart';
 
 /// Injection seam for the scan half of a module, so the controller can be
 /// driven by a real [DirectorySweeper] or by a stub in tests.
@@ -94,6 +96,7 @@ class CleanerController extends ChangeNotifier {
     required this.safeDelete,
     ModuleScanner? scanner,
     ModuleCleaner? cleaner,
+    this.storage,
   })  : _scan = scanner ?? _defaultScanner,
         _clean = cleaner ?? _defaultCleaner(safeDelete),
         _modules = targets.targets
@@ -105,15 +108,26 @@ class CleanerController extends ChangeNotifier {
   factory CleanerController.forPlatform({
     required SafeDelete safeDelete,
     CleanTargetSet? targets,
-  }) =>
-      CleanerController(
-        targets: targets ?? targetsForPlatform(),
-        safeDelete: safeDelete,
-      );
+    StorageGateway? gateway,
+  }) {
+    final onAndroid = Platform.isAndroid;
+    final set = targets ?? targetsForPlatform();
+    return CleanerController(
+      // Android cannot reach MediaStore, the recycle bin or `Android/data`
+      // through `dart:io` — scoped storage hides all of it. On every other
+      // platform the gateway is meaningless, so the directory sweeper stays in
+      // charge and the two paths can never be confused.
+      targets: onAndroid ? CleanTargetSet(androidStorageTargets()) : set,
+      safeDelete: safeDelete,
+      storage: onAndroid
+          ? StorageCleaner(gateway ?? MethodChannelStorageGateway())
+          : null,
+    );
+  }
 
   static CleanTargetSet targetsForPlatform() {
     if (Platform.isAndroid) {
-      return AndroidCleaner.targets;
+      return CleanTargetSet(androidStorageTargets());
     }
     if (Platform.isWindows) {
       return WindowsCleaner.targets;
@@ -123,6 +137,15 @@ class CleanerController extends ChangeNotifier {
 
   final CleanTargetSet targets;
   final SafeDelete safeDelete;
+
+  /// The platform storage backend, when one exists.
+  ///
+  /// When this is set it *replaces* the directory sweeper entirely: [scan] and
+  /// [cleanSelected] ask the platform what junk it really has instead of
+  /// guessing from directory listings. When it is null the classic sweep runs,
+  /// which is the correct behaviour on desktop and in tests.
+  final StorageCleaner? storage;
+
   final ModuleScanner _scan;
   final ModuleCleaner _clean;
 
@@ -198,14 +221,16 @@ class CleanerController extends ChangeNotifier {
 
     List<CleanFinding> findings;
     try {
-      findings = await _scan(
-        targets.targets,
-        cancel: token,
-        onTarget: (target, result) {
-          _applyFinding(target, result);
-          notifyListeners();
-        },
-      );
+      findings = storage != null
+          ? await storage!.scan()
+          : await _scan(
+              targets.targets,
+              cancel: token,
+              onTarget: (target, result) {
+                _applyFinding(target, result);
+                notifyListeners();
+              },
+            );
     } catch (error) {
       log.error('cleaner: scan failed — $error');
       _wasCancelled = token.isCancelled;
@@ -311,14 +336,23 @@ class CleanerController extends ChangeNotifier {
 
       CleanOutcome outcome;
       try {
-        outcome = await _clean(
-          status.target,
-          onProgress: (done, total) {
-            _progressDone = done;
-            if (total > 0) _progressTotal = total;
-            notifyListeners();
-          },
-        );
+        outcome = storage != null
+            ? await storage!.clean(
+                <CleanFinding>[status.finding!],
+                onProgress: (done, total) {
+                  _progressDone = done;
+                  if (total > 0) _progressTotal = total;
+                  notifyListeners();
+                },
+              )
+            : await _clean(
+                status.target,
+                onProgress: (done, total) {
+                  _progressDone = done;
+                  if (total > 0) _progressTotal = total;
+                  notifyListeners();
+                },
+              );
       } catch (error) {
         log.error('cleaner: ${status.target.id} failed — $error');
         _failedModules = <String>[..._failedModules, status.target.id];

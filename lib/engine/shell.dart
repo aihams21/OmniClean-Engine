@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:omni_clean_engine/core/util/logger.dart';
@@ -99,18 +100,36 @@ class Shell {
         workingDirectory: workingDirectory,
         environment: environment,
       );
-      final out =
-          process.stdout.transform(const SystemEncoding().decoder).join();
-      final err =
-          process.stderr.transform(const SystemEncoding().decoder).join();
+      // allowMalformed: a shell history or a binary-ish log is not guaranteed
+      // to be UTF-8, and one bad byte must not abort a scan of the user's own
+      // home directory.
+      final out = process.stdout
+          .transform(const Utf8Decoder(allowMalformed: true))
+          .join();
+      final err = process.stderr
+          .transform(const Utf8Decoder(allowMalformed: true))
+          .join();
 
-      final code = await process.exitCode.timeout(timeout, onTimeout: () {
+      // The deadline covers the *whole* run, not just the exit code. Draining
+      // the pipes first only completes when the process closes them, so
+      // guarding `exitCode` alone would let a command that never exits hang a
+      // whole scan forever — exactly what the timeout exists to prevent.
+      var timedOut = false;
+      int code;
+      try {
+        code = await process.exitCode.timeout(timeout);
+      } on TimeoutException {
+        timedOut = true;
         process.kill(ProcessSignal.sigkill);
-        return -1;
-      });
+        // Let the streams close so nothing is left dangling.
+        await Future.wait<void>(<Future<void>>[out, err]).timeout(
+          const Duration(seconds: 5),
+          onTimeout: () => const <void>[],
+        );
+        code = -1;
+      }
       sw.stop();
 
-      final timedOut = code == -1 && sw.elapsed >= timeout;
       log.fine('exec ${[executable, ...args].join(' ')} -> $code');
       return ShellResult(
         command: [executable, ...args].join(' '),

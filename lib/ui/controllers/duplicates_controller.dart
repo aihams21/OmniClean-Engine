@@ -2,9 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 
+import '../../core/safety/protected_paths.dart';
 import '../../core/safety/safe_delete.dart';
 import '../../core/util/logger.dart';
 import '../../engine/duplicates/duplicate_finder.dart';
+import '../../engine/platform/storage_gateway.dart';
 
 /// Runs a duplicate hunt. Injected so the controller can be tested without
 /// touching a real disk.
@@ -28,9 +30,41 @@ class DuplicatesController extends ChangeNotifier {
     required SafeDelete safeDelete,
     DuplicateScanner? scanner,
     List<String>? roots,
+    StorageGateway? gateway,
   })  : _safeDelete = safeDelete,
+        _gateway = gateway,
         _scanner = scanner ?? _defaultScanner,
         _roots = _normalize(roots ?? defaultRoots());
+
+  /// The whole-library scan, used when the platform can enumerate media for us.
+  ///
+  /// On Android the media lives in a content provider that `dart:io` cannot
+  /// read, so asking the user for a folder was the wrong question: the platform
+  /// already knows every file it holds. The three verification passes are the
+  /// same ones a disk walk runs, so the answer is exactly as trustworthy.
+  static DuplicateScanner mediaScanner(StorageGateway gateway) {
+    const finder = DuplicateFinder();
+    return (
+      List<String> roots, {
+      CancelToken? cancel,
+      void Function(int done, int total, HashPhase phase)? onProgress,
+    }) async {
+      final entries = await gateway.mediaFiles();
+      onProgress?.call(0, entries.length, HashPhase.walking);
+      return finder.scanFiles(
+        entries
+            .map((StorageEntry e) => DuplicateFile(
+                  path: e.path,
+                  sizeBytes: e.sizeBytes,
+                  modified: e.modified,
+                  sha256: '',
+                ))
+            .toList(growable: false),
+        cancel: cancel,
+        onProgress: onProgress,
+      );
+    };
+  }
 
   static DuplicateScanner get _defaultScanner {
     const finder = DuplicateFinder();
@@ -75,8 +109,39 @@ class DuplicatesController extends ChangeNotifier {
   }
 
   final SafeDelete _safeDelete;
+
+  /// The platform bridge, when one exists.
+  ///
+  /// Its presence is what makes the duplicate finder work with zero setup: the
+  /// user never picks a folder, because the platform can hand over the whole
+  /// library instead. Its absence is the normal desktop case, where walking the
+  /// user's own directories is both possible and the right thing to do.
+  final StorageGateway? _gateway;
+
   final DuplicateScanner _scanner;
   final List<String> _roots;
+
+  /// The directories deletions are allowed inside.
+  ///
+  /// Normally that is exactly what the user picked. When the platform supplied
+  /// the files instead, the roots the user never chose are the directories the
+  /// platform reported them from — deriving them keeps the containment gate
+  /// switched on rather than quietly switching it off.
+  List<String> get _effectiveRoots {
+    if (_roots.isNotEmpty) return List<String>.of(_roots);
+    if (_gateway == null) return const <String>[];
+    final derived = <String>{};
+    for (final DuplicateGroup group in _groups) {
+      for (final DuplicateFile file in group.files) {
+        final segments = ProtectedPaths.normalize(file.path).split('/');
+        if (segments.length < 2) continue;
+        segments.removeLast();
+        final parent = segments.join('/');
+        if (parent.isNotEmpty) derived.add(parent);
+      }
+    }
+    return derived.toList(growable: false);
+  }
 
   List<DuplicateGroup> _groups = const <DuplicateGroup>[];
   final Set<String> _selected = <String>{};
@@ -105,7 +170,9 @@ class DuplicatesController extends ChangeNotifier {
   int get wastedBytes =>
       _groups.fold<int>(0, (sum, group) => sum + group.wastedBytes);
 
-  bool get canScan => _roots.isNotEmpty && !isScanning;
+  /// A platform-backed controller can always scan: there is no folder to
+  /// choose first, which is the whole point of the media bridge.
+  bool get canScan => (_roots.isNotEmpty || _gateway != null) && !isScanning;
   bool get canDelete => _selected.isNotEmpty && !isScanning;
 
   void addRoot(String raw) {
@@ -245,7 +312,7 @@ class DuplicatesController extends ChangeNotifier {
 
     final outcome = await _safeDelete.quarantineAll(
       work,
-      allowedRoots: List<String>.of(_roots),
+      allowedRoots: _effectiveRoots,
       module: 'duplicates',
       onProgress: (done, total) {
         _progressDone = done;

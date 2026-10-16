@@ -235,7 +235,7 @@
   "quarantineRestoreOne": "تم استرجاع العنصر.",
   "quarantinePurgeOne": "تم حذف العنصر نهائيًا.",
   "quarantinePurgeTitle": "حذف نهائي؟",
-  "quarantinePurgeBody": "{count, plural, =1{عنصر واحد بالعزل} =2{عنصرين بالعزل} few{{count} عناصر بالعزل} many{{count} عنصرًا بالعزل} other{{count} عنصر بالعزل}} راح ينحذفوا للأبد. هالشي ما بين颠倒.",
+  "quarantinePurgeBody": "{count, plural, =1{عنصر واحد بالعزل} =2{عنصرين بالعزل} few{{count} عناصر بالعزل} many{{count} عنصرًا بالعزل} other{{count} عنصر بالعزل}} راح ينحذفوا للأبد. هالشي ما بيرجع.",
   "@quarantinePurgeBody": {
     "placeholders": {
       "count": {
@@ -704,5 +704,104 @@
   },
   "@target.mediaThumbnails.description": {
     "description": "target.mediaThumbnails.description"
-  }
+  },
+  "navLibrary": "المكتبة",
+  "libraryTitle": "المكتبة",
+  "librarySubtitle": "كل صورة وفيديو وملف على الجهاز — مرتّب من الأحدث للأقدم.",
+  "libraryLoad": "حمّل",
+  "libraryReloading": "عم يحمّل…",
+  "libraryKindPhotos": "الصور",
+  "libraryKindVideos": "الفيديوهات",
+  "libraryKindAudio": "الصوتيات",
+  "libraryKindDocuments": "المستندات",
+  "libraryKindDownloads": "التحميلات",
+  "libraryKindAllFiles": "كل الملفات",
+  "libraryEmpty": "ما في شي هون.",
+  "libraryBlind": "لازم صلاحية الوصول للتخزين",
+  "libraryBlindHint": "أومني كلين محتاج صلاحية يقرأ صورك وملفاتك. ما في شي بينرفع عالنت — الفحص كله على الجهاز.",
+  "libraryGrant": "اسمح بالوصول",
+  "libraryCount": "{count} عنصر · {size}",
+  "libraryResolution": "{width} x {height}",
+  "libraryFailed": "ما قدرنا نقرأ مكتبة الجهاز.",
+  "libraryUseDuplicates": "دور على المكررات",
+  "navApps": "التطبيقات",
+  "unusedAppsTitle": "تطبيقات ما بتستخدمها",
+  "unusedAppsSubtitle": "تطبيقات توقّف تفتحها، ومعها كل شي خلّفته ورا.",
+  "unusedAppsLoad": "افحص تطبيقاتي",
+  "unusedAppsRefreshing": "عم أقرا بيانات الاستخدام…",
+  "unusedAppsIdle": "لسّا ما فحصنا شي. اضغط الزر فوق و OmniClean رح يسأل النظام أي تطبيقات توقّفت تستخدمها.",
+  "unusedAppsEmpty": "ما في تطبيقات مهملة بهالحد. ارفع الحد عشان تبعد أكتر بالماضي.",
+  "unusedAppsCount": "{count} تطبيق · {size}",
+  "@unusedAppsCount": {
+    "placeholders": {
+      "count": {},
+      "size": {}
+    }
+  },
+  "unusedAppsNeverOpened": "ما انفتح أبداً",
+  "unusedAppsIdleDays": "{days} يوم بدون استخدام",
+  "@unusedAppsIdleDays": {
+    "placeholders": {
+      "days": {}
+    }
+  },
+  "unusedAppsUninstall": "إلغاء التثبيت",
+  "unusedAppsUninstalling": "عم فتح إلغاء التثبيت بتاع النظام…",
+  "unusedAppsUninstalled": "{name} انبعتت لإلغاء التثبيت بتاع النظام.",
+  "@unusedAppsUninstalled": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "unusedAppsBlind": "لازم صلاحية الوصول لبيانات الاستخدام. أندرويد ما بيعرف أي تطبيقات توقّفت تستخدمها إلا إذا سمحت له يراقب إحصائيات الاستخدام.",
+  "unusedAppsGrant": "اسمح بالوصول للاستخدام",
+  "unusedAppsSystemHidden": "تطبيقات النظام ما بنقترح حذفها أبداً.",
+  "unusedAppsCannotUninstall": "هذا الجهاز ما يسمح لأي تطبيق يمسح تطبيقات تانية.",
+  "unusedAppsThreshold": "بدون استخدام منذ",
+  "unusedAppsSelected": "{count} محدد · {size}",
+  "@unusedAppsSelected": {
+    "placeholders": {
+      "count": {},
+      "size": {}
+    }
+  },
+  "unusedAppsRemoveSelected": "ألغِ المحدد",
+  "unusedAppsConfirmTitle": "ألغِ تثبيت {count} تطبيق؟",
+  "@unusedAppsConfirmTitle": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "unusedAppsConfirmBody": "إلغاء التثبيت بيفتح تطبيق واحد كل مرة وأنت بتأكد. OmniClean ما بيحذف بيانات التطبيق أبداً.",
+  "unusedAppsFailed": "ما قدرنا نقرأ قائمة التطبيقات. جرّب كمان مرّة.",
+  "navBoost": "تسريع",
+  "boostTitle": "تسريع",
+  "boostSubtitle": "كبسة وحدة. تغييرات حقيقية على النظام، وكل خطوة بتقل لك شو عملت بالظبط.",
+  "boostRun": "سرّع الآن",
+  "boostRunning": "عم يسرّع…",
+  "boostRerun": "سرّع كمان مرّة",
+  "boostNothingAvailable": "التسريع بده صلاحيات مدير على هالمنصّة، فما في شي هون يقدر يوعدك فيه.",
+  "boostResultHeadline": "طبّقت {done} من {total} خطوة",
+  "boostNothingChanged": "ما تغيّر شي. كل خطوة تحت هي اللي النظام رفضها.",
+  "boostActionAndroidTitle": "تقليم وتنضيف النظام كله",
+  "boostActionAndroidDescription": "يطلب من أندرويد يحرّر كاشات التطبيقات، ويقلّم ذاكرة هالتطبيق، وبيشيل تقييد doze ليبقى المشغّل سريع.",
+  "boostActionPowerPlanTitle": "تبديل على خطة أداء عالي",
+  "boostActionPowerPlanDescription": "بيمنع ويندوز من نزول تردد المعالج والكرت للتوفير وأنا شغال.",
+  "boostActionWorkingSetsTitle": "تحرير الذاكرة الخاملة من كل تطبيق",
+  "boostActionWorkingSetsDescription": "يطلب من كل عملية ترجّع الصفحات اللي محتجزة وما عم تستعملها، وهي اللي بتربع اللعب.",
+  "boostActionIndexerTitle": "إيقاف مفهرس البحث",
+  "boostActionIndexerDescription": "مفهرس البحث بيعيد الفحص للخلفية وياكل نفس الديسك والمعالج اللي اللعبة بدها.",
+  "boostActionGovernorTitle": "تثبيت المعالج على وضع الأداء",
+  "boostActionGovernorDescription": "بيبدّلGovernor توفير الطاقة لتضل الأنوية على أقوى تردد بدل ما تنزل وتطلع طول اللعب.",
+  "boostActionSwappinessTitle": "منع النواة من التبديل",
+  "boostActionSwappinessDescription": "تخفيض swappiness بيخلي النواة تستعمل الرام الفاضي بدل الديسك البطيء، ومن هناك بييجي تقطيع الإطارات.",
+  "boostActionDropCachesTitle": "تحرير ذاكرة الكاش للنواة",
+  "boostActionDropCachesDescription": "بيحرّر صفحات الملفات المخزّنة، فتصير الكاش فاضية وكل قراءة بعدها قراءة حقيقية.",
+  "boostActionTrimTitle": "تنظيف القرص الصلب SSD",
+  "boostActionTrimDescription": "بيبلّغ القرص إنو بلوكات صارت محذوفة، فبيوقف ترتيب كتابات فوقها.",
+  "boostImpactFrames": "معدّل الإطارات",
+  "boostImpactMemory": "الذاكرة",
+  "boostImpactLatency": "استجابة القرص",
+  "boostImpactStorage": "التخزين",
+  "boostRequiresPrivilege": "صلاحيات مدير"
 }

@@ -742,4 +742,259 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get targetMediaThumbnailsDescription =>
       'Thumbnails for photos and videos';
+
+  @override
+  String get navLibrary => 'Library';
+
+  @override
+  String get libraryTitle => 'Library';
+
+  @override
+  String get librarySubtitle =>
+      'Every photo, video and file the device holds — sorted newest first.';
+
+  @override
+  String get libraryLoad => 'Load';
+
+  @override
+  String get libraryReloading => 'Reloading';
+
+  @override
+  String get libraryKindPhotos => 'Photos';
+
+  @override
+  String get libraryKindVideos => 'Videos';
+
+  @override
+  String get libraryKindAudio => 'Audio';
+
+  @override
+  String get libraryKindDocuments => 'Documents';
+
+  @override
+  String get libraryKindDownloads => 'Downloads';
+
+  @override
+  String get libraryKindAllFiles => 'All files';
+
+  @override
+  String get libraryEmpty => 'Nothing here yet.';
+
+  @override
+  String get libraryBlind => 'Storage access needed';
+
+  @override
+  String get libraryBlindHint =>
+      'OmniClean needs permission to read your photos and files. Nothing is uploaded — the scan runs entirely on this device.';
+
+  @override
+  String get libraryGrant => 'Grant access';
+
+  @override
+  String libraryCount(int count, String size) {
+    return '$count items · $size';
+  }
+
+  @override
+  String libraryResolution(int width, int height) {
+    return '$width x $height';
+  }
+
+  @override
+  String get libraryFailed => 'The device library could not be read.';
+
+  @override
+  String get libraryUseDuplicates => 'Find duplicates';
+
+  @override
+  String get navApps => 'Apps';
+
+  @override
+  String get unusedAppsTitle => 'Unused apps';
+
+  @override
+  String get unusedAppsSubtitle =>
+      'Apps you stopped opening, with everything they left behind.';
+
+  @override
+  String get unusedAppsLoad => 'Scan my apps';
+
+  @override
+  String get unusedAppsRefreshing => 'Reading usage data…';
+
+  @override
+  String get unusedAppsIdle =>
+      'Nothing is scanned yet. Press the button above and OmniClean will ask the system which apps you stopped opening.';
+
+  @override
+  String get unusedAppsEmpty =>
+      'No unused apps at this threshold. Raise the threshold to look further back.';
+
+  @override
+  String unusedAppsCount(Object count, Object size) {
+    return '$count apps · $size';
+  }
+
+  @override
+  String get unusedAppsNeverOpened => 'Never opened';
+
+  @override
+  String unusedAppsIdleDays(Object days) {
+    return '$days days idle';
+  }
+
+  @override
+  String get unusedAppsUninstall => 'Uninstall';
+
+  @override
+  String get unusedAppsUninstalling => 'Opening the system uninstaller…';
+
+  @override
+  String unusedAppsUninstalled(Object name) {
+    return '$name was handed to the system uninstaller.';
+  }
+
+  @override
+  String get unusedAppsBlind =>
+      'Usage access is required. Android only knows which apps you stopped opening if you let it observe usage stats.';
+
+  @override
+  String get unusedAppsGrant => 'Allow usage access';
+
+  @override
+  String get unusedAppsSystemHidden =>
+      'System apps are never suggested for removal.';
+
+  @override
+  String get unusedAppsCannotUninstall =>
+      'This device does not allow apps to uninstall other apps.';
+
+  @override
+  String get unusedAppsThreshold => 'Idle for';
+
+  @override
+  String unusedAppsSelected(Object count, Object size) {
+    return '$count selected · $size';
+  }
+
+  @override
+  String get unusedAppsRemoveSelected => 'Uninstall selected';
+
+  @override
+  String unusedAppsConfirmTitle(Object count) {
+    return 'Uninstall $count apps?';
+  }
+
+  @override
+  String get unusedAppsConfirmBody =>
+      'The system uninstaller opens one app at a time, and you confirm each removal. OmniClean never deletes app data itself.';
+
+  @override
+  String get unusedAppsFailed => 'Could not read the app list. Try again.';
+
+  @override
+  String get navBoost => 'Boost';
+
+  @override
+  String get boostTitle => 'Boost';
+
+  @override
+  String get boostSubtitle =>
+      'One tap. Real system changes, each one reported back with what the machine actually did.';
+
+  @override
+  String get boostRun => 'Boost now';
+
+  @override
+  String get boostRunning => 'Boosting…';
+
+  @override
+  String get boostRerun => 'Boost again';
+
+  @override
+  String get boostNothingAvailable =>
+      'Boost needs administrator rights on this platform, so there is nothing here it can honestly promise.';
+
+  @override
+  String boostResultHeadline(int done, int total) {
+    return '$done of $total steps applied';
+  }
+
+  @override
+  String get boostNothingChanged =>
+      'Nothing changed. Every step below is what the system refused.';
+
+  @override
+  String get boostActionAndroidTitle => 'Trim and trim the whole system';
+
+  @override
+  String get boostActionAndroidDescription =>
+      'Asks Android to release app caches, trims this app\'s memory, and lifts the doze restriction so the launcher stays fast.';
+
+  @override
+  String get boostActionPowerPlanTitle =>
+      'Switch to the high performance power plan';
+
+  @override
+  String get boostActionPowerPlanDescription =>
+      'Stops Windows from down-clocking the CPU and GPU to save power while you are working.';
+
+  @override
+  String get boostActionWorkingSetsTitle =>
+      'Release idle memory from every app';
+
+  @override
+  String get boostActionWorkingSetsDescription =>
+      'Asks each process to hand back the pages it is holding but not using, which is what stalls a game.';
+
+  @override
+  String get boostActionIndexerTitle => 'Pause the search indexer';
+
+  @override
+  String get boostActionIndexerDescription =>
+      'The indexer re-scans your files in the background and eats the same disk and CPU a game needs.';
+
+  @override
+  String get boostActionGovernorTitle => 'Pin the CPU to performance mode';
+
+  @override
+  String get boostActionGovernorDescription =>
+      'Replaces the power-saving governor so the cores stay at full clock instead of dropping and climbing all game long.';
+
+  @override
+  String get boostActionSwappinessTitle => 'Stop the kernel from swapping';
+
+  @override
+  String get boostActionSwappinessDescription =>
+      'Lower swappiness makes the kernel use your free RAM instead of the slow disk, which is where frame stutter comes from.';
+
+  @override
+  String get boostActionDropCachesTitle =>
+      'Release the page cache back to the kernel';
+
+  @override
+  String get boostActionDropCachesDescription =>
+      'Frees the cached file pages so the whole cache is cold and every read after this is a real read.';
+
+  @override
+  String get boostActionTrimTitle => 'Trim the SSD';
+
+  @override
+  String get boostActionTrimDescription =>
+      'Tells the drive which blocks are already deleted, so it stops queueing writes over them.';
+
+  @override
+  String get boostImpactFrames => 'Frame rate';
+
+  @override
+  String get boostImpactMemory => 'Memory';
+
+  @override
+  String get boostImpactLatency => 'Disk latency';
+
+  @override
+  String get boostImpactStorage => 'Storage';
+
+  @override
+  String get boostRequiresPrivilege => 'Administrator';
 }

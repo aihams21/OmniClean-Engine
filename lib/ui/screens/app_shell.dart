@@ -4,6 +4,9 @@ import '../../core/util/logger.dart';
 import '../../engine/shell.dart';
 import '../controllers/cleaner_controller.dart';
 import '../controllers/duplicates_controller.dart';
+import '../controllers/library_controller.dart';
+import '../controllers/unused_apps_controller.dart';
+import '../controllers/boost_controller.dart';
 import '../controllers/quarantine_controller.dart';
 import '../controllers/settings_controller.dart';
 import '../l10n/generated/app_localizations.dart';
@@ -11,10 +14,13 @@ import '../theme/app_theme.dart';
 import '../widgets/cyber_background.dart';
 import '../../engine/metrics/metrics_collector.dart';
 import 'cleaner_screen.dart';
+import 'library_screen.dart';
 import 'dashboard_screen.dart';
 import 'duplicates_screen.dart';
 import 'quarantine_screen.dart';
 import 'settings_screen.dart';
+import 'unused_apps_screen.dart';
+import 'boost_screen.dart';
 
 /// The frame around every screen: the accent-aware background, the navigation
 /// and the single source of truth for which page is on screen.
@@ -29,6 +35,9 @@ class AppShell extends StatefulWidget {
     required this.cleaner,
     required this.duplicates,
     required this.quarantine,
+    required this.library,
+    required this.apps,
+    required this.boost,
     this.version = '1.0.0',
     this.buildNumber = '1',
     this.privilegeProbe = Shell.isRoot,
@@ -40,6 +49,9 @@ class AppShell extends StatefulWidget {
   final CleanerController cleaner;
   final DuplicatesController duplicates;
   final QuarantineController quarantine;
+  final LibraryController library;
+  final UnusedAppsController apps;
+  final BoostController boost;
   final String version;
   final String buildNumber;
   final Future<bool> Function() privilegeProbe;
@@ -127,6 +139,21 @@ class _AppShellState extends State<AppShell> {
         label: l10n.navQuarantine,
       ),
       _Destination(
+        icon: Icons.photo_library_outlined,
+        selectedIcon: Icons.photo_library,
+        label: l10n.navLibrary,
+      ),
+      _Destination(
+        icon: Icons.apps_outlined,
+        selectedIcon: Icons.apps,
+        label: l10n.navApps,
+      ),
+      _Destination(
+        icon: Icons.bolt_outlined,
+        selectedIcon: Icons.bolt,
+        label: l10n.navBoost,
+      ),
+      _Destination(
         icon: Icons.settings_outlined,
         selectedIcon: Icons.settings,
         label: l10n.navSettings,
@@ -143,6 +170,16 @@ class _AppShellState extends State<AppShell> {
       CleanerScreen(controller: widget.cleaner),
       DuplicatesScreen(controller: widget.duplicates),
       QuarantineScreen(controller: widget.quarantine),
+      LibraryScreen(
+        controller: widget.library,
+        onGrantAccess: widget.library.requestAccess,
+        onOpenDuplicates: () => _select(2),
+      ),
+      UnusedAppsScreen(
+        controller: widget.apps,
+        onGrantUsageAccess: widget.apps.requestAccess,
+      ),
+      BoostScreen(controller: widget.boost),
       SettingsScreen(
         controller: widget.settings,
         quarantinePath: widget.quarantine.quarantine.root.path,

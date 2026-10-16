@@ -1,4 +1,46 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+        Storage.
+
+        Android 13 (API 33) replaced the single READ_EXTERNAL_STORAGE with
+        per-type media permissions, so both generations are declared: the new
+        ones are ignored below API 33 and the old one is ignored from 33 up.
+
+        MANAGE_EXTERNAL_STORAGE ("All files access") is the only way to reach
+        the trash, the Android/data residue of uninstalled apps and the folder
+        tree itself on Android 11+. Google Play restricts it to apps whose core
+        function is a file manager or a cleaner, which is exactly what this is.
+        It is requested at runtime, never at install time, and the app stays
+        fully usable - it just reports what it cannot act on - when refused.
+    -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="29" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+
+    <!--
+        Unused apps.
+
+        PACKAGE_USAGE_STATS is a special permission the user grants from
+        Settings > Special access, never from a dialog, so the app reports
+        canQueryUsageStats honestly instead of showing every app as "never
+        used". QUERY_ALL_PACKAGES is what lets PackageManager enumerate the
+        installed set on API 30+.
+    -->
+    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions"
+        xmlns:tools="http://schemas.android.com/tools" />
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+    <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES" />
+
+    <!-- Trimming caches and asking the system to reclaim memory. -->
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+
     <application
         android:label="OmniClean Engine"
         android:name="${applicationName}"

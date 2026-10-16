@@ -1225,6 +1225,438 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Thumbnails for photos and videos'**
   String get targetMediaThumbnailsDescription;
+
+  /// Tab in the navigation bar.
+  ///
+  /// In en, this message translates to:
+  /// **'Library'**
+  String get navLibrary;
+
+  /// Title of the photos and files screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Library'**
+  String get libraryTitle;
+
+  /// Subtitle of the library screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Every photo, video and file the device holds — sorted newest first.'**
+  String get librarySubtitle;
+
+  /// Button that reads the device library.
+  ///
+  /// In en, this message translates to:
+  /// **'Load'**
+  String get libraryLoad;
+
+  /// Button label while the library is loading.
+  ///
+  /// In en, this message translates to:
+  /// **'Reloading'**
+  String get libraryReloading;
+
+  /// Library tab.
+  ///
+  /// In en, this message translates to:
+  /// **'Photos'**
+  String get libraryKindPhotos;
+
+  /// Library tab.
+  ///
+  /// In en, this message translates to:
+  /// **'Videos'**
+  String get libraryKindVideos;
+
+  /// Library tab.
+  ///
+  /// In en, this message translates to:
+  /// **'Audio'**
+  String get libraryKindAudio;
+
+  /// Library tab.
+  ///
+  /// In en, this message translates to:
+  /// **'Documents'**
+  String get libraryKindDocuments;
+
+  /// Library tab.
+  ///
+  /// In en, this message translates to:
+  /// **'Downloads'**
+  String get libraryKindDownloads;
+
+  /// Library tab that merges documents and downloads.
+  ///
+  /// In en, this message translates to:
+  /// **'All files'**
+  String get libraryKindAllFiles;
+
+  /// Empty state for the library.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing here yet.'**
+  String get libraryEmpty;
+
+  /// Shown when the app cannot read the media library.
+  ///
+  /// In en, this message translates to:
+  /// **'Storage access needed'**
+  String get libraryBlind;
+
+  /// Explanation shown with the permission prompt.
+  ///
+  /// In en, this message translates to:
+  /// **'OmniClean needs permission to read your photos and files. Nothing is uploaded — the scan runs entirely on this device.'**
+  String get libraryBlindHint;
+
+  /// Button that opens the permission request.
+  ///
+  /// In en, this message translates to:
+  /// **'Grant access'**
+  String get libraryGrant;
+
+  /// Item count and total size of the library.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} items · {size}'**
+  String libraryCount(int count, String size);
+
+  /// Pixel dimensions of a photo or video.
+  ///
+  /// In en, this message translates to:
+  /// **'{width} x {height}'**
+  String libraryResolution(int width, int height);
+
+  /// Error state.
+  ///
+  /// In en, this message translates to:
+  /// **'The device library could not be read.'**
+  String get libraryFailed;
+
+  /// Shortcut from the library to the duplicate finder.
+  ///
+  /// In en, this message translates to:
+  /// **'Find duplicates'**
+  String get libraryUseDuplicates;
+
+  /// Simple name of the unused apps destination
+  ///
+  /// In en, this message translates to:
+  /// **'Apps'**
+  String get navApps;
+
+  /// Title of the unused apps screen
+  ///
+  /// In en, this message translates to:
+  /// **'Unused apps'**
+  String get unusedAppsTitle;
+
+  /// Subtitle of the unused apps screen
+  ///
+  /// In en, this message translates to:
+  /// **'Apps you stopped opening, with everything they left behind.'**
+  String get unusedAppsSubtitle;
+
+  /// Button that loads the unused apps list
+  ///
+  /// In en, this message translates to:
+  /// **'Scan my apps'**
+  String get unusedAppsLoad;
+
+  /// Button label while the scan runs
+  ///
+  /// In en, this message translates to:
+  /// **'Reading usage data…'**
+  String get unusedAppsRefreshing;
+
+  /// Placeholder before the first scan
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing is scanned yet. Press the button above and OmniClean will ask the system which apps you stopped opening.'**
+  String get unusedAppsIdle;
+
+  /// Empty state at the current threshold
+  ///
+  /// In en, this message translates to:
+  /// **'No unused apps at this threshold. Raise the threshold to look further back.'**
+  String get unusedAppsEmpty;
+
+  /// Headline count and total size of the unused apps list
+  ///
+  /// In en, this message translates to:
+  /// **'{count} apps · {size}'**
+  String unusedAppsCount(Object count, Object size);
+
+  /// Tag for an app with no usage data at all
+  ///
+  /// In en, this message translates to:
+  /// **'Never opened'**
+  String get unusedAppsNeverOpened;
+
+  /// How long an app has been idle
+  ///
+  /// In en, this message translates to:
+  /// **'{days} days idle'**
+  String unusedAppsIdleDays(Object days);
+
+  /// Button that asks the platform to uninstall the app
+  ///
+  /// In en, this message translates to:
+  /// **'Uninstall'**
+  String get unusedAppsUninstall;
+
+  /// Hint while the system uninstaller is launching
+  ///
+  /// In en, this message translates to:
+  /// **'Opening the system uninstaller…'**
+  String get unusedAppsUninstalling;
+
+  /// Confirmation that the platform accepted the uninstall
+  ///
+  /// In en, this message translates to:
+  /// **'{name} was handed to the system uninstaller.'**
+  String unusedAppsUninstalled(Object name);
+
+  /// State when usage stats access is missing
+  ///
+  /// In en, this message translates to:
+  /// **'Usage access is required. Android only knows which apps you stopped opening if you let it observe usage stats.'**
+  String get unusedAppsBlind;
+
+  /// Button that opens the usage access settings
+  ///
+  /// In en, this message translates to:
+  /// **'Allow usage access'**
+  String get unusedAppsGrant;
+
+  /// Footnote about system apps
+  ///
+  /// In en, this message translates to:
+  /// **'System apps are never suggested for removal.'**
+  String get unusedAppsSystemHidden;
+
+  /// State when REQUEST_DELETE_PACKAGES is missing
+  ///
+  /// In en, this message translates to:
+  /// **'This device does not allow apps to uninstall other apps.'**
+  String get unusedAppsCannotUninstall;
+
+  /// Label of the idle threshold selector
+  ///
+  /// In en, this message translates to:
+  /// **'Idle for'**
+  String get unusedAppsThreshold;
+
+  /// Selection counter of the unused apps screen
+  ///
+  /// In en, this message translates to:
+  /// **'{count} selected · {size}'**
+  String unusedAppsSelected(Object count, Object size);
+
+  /// Bulk uninstall button
+  ///
+  /// In en, this message translates to:
+  /// **'Uninstall selected'**
+  String get unusedAppsRemoveSelected;
+
+  /// Confirmation dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Uninstall {count} apps?'**
+  String unusedAppsConfirmTitle(Object count);
+
+  /// Confirmation dialog body
+  ///
+  /// In en, this message translates to:
+  /// **'The system uninstaller opens one app at a time, and you confirm each removal. OmniClean never deletes app data itself.'**
+  String get unusedAppsConfirmBody;
+
+  /// Failure state
+  ///
+  /// In en, this message translates to:
+  /// **'Could not read the app list. Try again.'**
+  String get unusedAppsFailed;
+
+  /// Boost
+  ///
+  /// In en, this message translates to:
+  /// **'Boost'**
+  String get navBoost;
+
+  /// Boost
+  ///
+  /// In en, this message translates to:
+  /// **'Boost'**
+  String get boostTitle;
+
+  /// One tap. Real system changes, each one reported back with what the machine actually did.
+  ///
+  /// In en, this message translates to:
+  /// **'One tap. Real system changes, each one reported back with what the machine actually did.'**
+  String get boostSubtitle;
+
+  /// Boost now
+  ///
+  /// In en, this message translates to:
+  /// **'Boost now'**
+  String get boostRun;
+
+  /// Boosting…
+  ///
+  /// In en, this message translates to:
+  /// **'Boosting…'**
+  String get boostRunning;
+
+  /// Boost again
+  ///
+  /// In en, this message translates to:
+  /// **'Boost again'**
+  String get boostRerun;
+
+  /// Boost needs administrator rights on this platform, so there is nothing here it can honestly promise.
+  ///
+  /// In en, this message translates to:
+  /// **'Boost needs administrator rights on this platform, so there is nothing here it can honestly promise.'**
+  String get boostNothingAvailable;
+
+  /// {done} of {total} steps applied
+  ///
+  /// In en, this message translates to:
+  /// **'{done} of {total} steps applied'**
+  String boostResultHeadline(int done, int total);
+
+  /// Nothing changed. Every step below is what the system refused.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing changed. Every step below is what the system refused.'**
+  String get boostNothingChanged;
+
+  /// Trim and trim the whole system
+  ///
+  /// In en, this message translates to:
+  /// **'Trim and trim the whole system'**
+  String get boostActionAndroidTitle;
+
+  /// Asks Android to release app caches, trims this app's memory, and lifts the doze restriction so the launcher stays fast.
+  ///
+  /// In en, this message translates to:
+  /// **'Asks Android to release app caches, trims this app\'s memory, and lifts the doze restriction so the launcher stays fast.'**
+  String get boostActionAndroidDescription;
+
+  /// Switch to the high performance power plan
+  ///
+  /// In en, this message translates to:
+  /// **'Switch to the high performance power plan'**
+  String get boostActionPowerPlanTitle;
+
+  /// Stops Windows from down-clocking the CPU and GPU to save power while you are working.
+  ///
+  /// In en, this message translates to:
+  /// **'Stops Windows from down-clocking the CPU and GPU to save power while you are working.'**
+  String get boostActionPowerPlanDescription;
+
+  /// Release idle memory from every app
+  ///
+  /// In en, this message translates to:
+  /// **'Release idle memory from every app'**
+  String get boostActionWorkingSetsTitle;
+
+  /// Asks each process to hand back the pages it is holding but not using, which is what stalls a game.
+  ///
+  /// In en, this message translates to:
+  /// **'Asks each process to hand back the pages it is holding but not using, which is what stalls a game.'**
+  String get boostActionWorkingSetsDescription;
+
+  /// Pause the search indexer
+  ///
+  /// In en, this message translates to:
+  /// **'Pause the search indexer'**
+  String get boostActionIndexerTitle;
+
+  /// The indexer re-scans your files in the background and eats the same disk and CPU a game needs.
+  ///
+  /// In en, this message translates to:
+  /// **'The indexer re-scans your files in the background and eats the same disk and CPU a game needs.'**
+  String get boostActionIndexerDescription;
+
+  /// Pin the CPU to performance mode
+  ///
+  /// In en, this message translates to:
+  /// **'Pin the CPU to performance mode'**
+  String get boostActionGovernorTitle;
+
+  /// Replaces the power-saving governor so the cores stay at full clock instead of dropping and climbing all game long.
+  ///
+  /// In en, this message translates to:
+  /// **'Replaces the power-saving governor so the cores stay at full clock instead of dropping and climbing all game long.'**
+  String get boostActionGovernorDescription;
+
+  /// Stop the kernel from swapping
+  ///
+  /// In en, this message translates to:
+  /// **'Stop the kernel from swapping'**
+  String get boostActionSwappinessTitle;
+
+  /// Lower swappiness makes the kernel use your free RAM instead of the slow disk, which is where frame stutter comes from.
+  ///
+  /// In en, this message translates to:
+  /// **'Lower swappiness makes the kernel use your free RAM instead of the slow disk, which is where frame stutter comes from.'**
+  String get boostActionSwappinessDescription;
+
+  /// Release the page cache back to the kernel
+  ///
+  /// In en, this message translates to:
+  /// **'Release the page cache back to the kernel'**
+  String get boostActionDropCachesTitle;
+
+  /// Frees the cached file pages so the whole cache is cold and every read after this is a real read.
+  ///
+  /// In en, this message translates to:
+  /// **'Frees the cached file pages so the whole cache is cold and every read after this is a real read.'**
+  String get boostActionDropCachesDescription;
+
+  /// Trim the SSD
+  ///
+  /// In en, this message translates to:
+  /// **'Trim the SSD'**
+  String get boostActionTrimTitle;
+
+  /// Tells the drive which blocks are already deleted, so it stops queueing writes over them.
+  ///
+  /// In en, this message translates to:
+  /// **'Tells the drive which blocks are already deleted, so it stops queueing writes over them.'**
+  String get boostActionTrimDescription;
+
+  /// Frame rate
+  ///
+  /// In en, this message translates to:
+  /// **'Frame rate'**
+  String get boostImpactFrames;
+
+  /// Memory
+  ///
+  /// In en, this message translates to:
+  /// **'Memory'**
+  String get boostImpactMemory;
+
+  /// Disk latency
+  ///
+  /// In en, this message translates to:
+  /// **'Disk latency'**
+  String get boostImpactLatency;
+
+  /// Storage
+  ///
+  /// In en, this message translates to:
+  /// **'Storage'**
+  String get boostImpactStorage;
+
+  /// Administrator
+  ///
+  /// In en, this message translates to:
+  /// **'Administrator'**
+  String get boostRequiresPrivilege;
 }
 
 class _AppLocalizationsDelegate
