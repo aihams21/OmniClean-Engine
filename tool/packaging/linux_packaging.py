@@ -271,6 +271,10 @@ def build_appimage(out: Path, tool: Path | None) -> Path:
         raise SystemExit(
             "appimagetool not found. Download AppImageKit or set APPIMAGETOOL."
         )
+    # An absolute path matters: `subprocess` resolves a bare name against PATH,
+    # never against the working directory, so `./appimagetool.AppImage` would
+    # work on a developer's shell and fail on a CI runner.
+    tool = tool.resolve()
     out.mkdir(parents=True, exist_ok=True)
     target = out / f"omniclean-engine_{version}_amd64.AppImage"
     with tempfile.TemporaryDirectory() as tmp:

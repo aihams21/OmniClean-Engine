@@ -66,7 +66,11 @@ jobs:
 
       - name: Zip the portable build
         shell: pwsh
-        run: Compress-Archive -Path build\windows\x64\runner\Release\* -DestinationPath dist\omniclean-engine-windows-x64.zip
+        run: |
+          # Compress-Archive does not create the destination directory, and a
+          # GitHub runner's fresh checkout never has a `dist\`.
+          New-Item -ItemType Directory -Force dist | Out-Null
+          Compress-Archive -Path build\windows\x64\runner\Release\* -DestinationPath dist\omniclean-engine-windows-x64.zip
 
       - name: Compile the Inno Setup installer
         shell: pwsh
@@ -83,6 +87,7 @@ jobs:
           files: |
             dist\omniclean-engine-windows-x64.zip
             build\windows\x64\runner\installer\Output\*.exe
+          fail_on_unmatched_files: false
 
   android:
     name: Android (signed APK)
@@ -100,7 +105,14 @@ jobs:
           channel: stable
           cache: true
 
+      # `packages:` must be given explicitly: the action's own default is
+      # "tools platform-tools", and the `tools` package was removed from the
+      # SDK long ago - sdkmanager answers "Failed to find package 'tools'" and
+      # exits 1, which fails the whole job. cmdline-tools is what Flutter's
+      # Gradle plugin actually uses, and the runner already ships it.
       - uses: android-actions/setup-android@v3
+        with:
+          packages: platform-tools
 
       - name: Decode the signing key from repository secrets
         env:
