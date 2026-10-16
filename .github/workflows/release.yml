@@ -135,7 +135,7 @@ jobs:
           } > android/key.properties
 
       - run: flutter pub get
-      - run: flutter build appbundle --release --split-per-abi
+      - run: flutter build appbundle --release
       - run: flutter build apk --release
       - run: flutter build apk --release --split-per-abi
 
