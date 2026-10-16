@@ -45,7 +45,8 @@ void main() {
       );
     });
 
-    test('partial hash differs for same-size but different-content files', () async {
+    test('partial hash differs for same-size but different-content files',
+        () async {
       final head = List<int>.filled(4096, 1);
       final p1 = write('p1.bin', [...head, ...List<int>.filled(4096, 9)]);
       final p2 = write('p2.bin', [...head, ...List<int>.filled(4096, 8)]);
@@ -75,7 +76,8 @@ void main() {
       expect(g.keepSuggestion, isNotNull);
     });
 
-    test('never reports a group of one and never wastes bytes on the keeper', () async {
+    test('never reports a group of one and never wastes bytes on the keeper',
+        () async {
       write('x/one.bin', List<int>.filled(5000, 1));
       write('x/two.bin', List<int>.filled(5000, 2));
 
@@ -88,7 +90,8 @@ void main() {
 
     test('groups by content across many size buckets at once', () async {
       for (var s = 0; s < 6; s++) {
-        final payload = List<int>.generate(2000 + s * 111, (i) => (i + s) % 256);
+        final payload =
+            List<int>.generate(2000 + s * 111, (i) => (i + s) % 256);
         write('g$s/a.bin', payload);
         write('g$s/b-renamed.bin', payload);
       }
@@ -163,17 +166,32 @@ void main() {
       );
 
       expect(progress, isNotEmpty);
-      expect(progress.last, progress.length == 0 ? 0 : progress.reduce((a, b) => a > b ? a : b));
+      expect(progress.last,
+          progress.length == 0 ? 0 : progress.reduce((a, b) => a > b ? a : b));
       expect(progress.every((v) => v >= 0), isTrue);
     });
   });
 
   group('DuplicateGroup.keepSuggestion', () {
-    test('prefers the oldest file and never suggests a survivor if only one exists', () async {
+    test(
+        'prefers the oldest file and never suggests a survivor if only one exists',
+        () async {
       final files = [
-        DuplicateFile(path: '/a/new.jpg', sizeBytes: 10, modified: DateTime.utc(2026, 1, 2), sha256: 'x'),
-        DuplicateFile(path: '/a/old.jpg', sizeBytes: 10, modified: DateTime.utc(2025, 1, 2), sha256: 'x'),
-        DuplicateFile(path: '/a/mid.jpg', sizeBytes: 10, modified: DateTime.utc(2025, 6, 2), sha256: 'x'),
+        DuplicateFile(
+            path: '/a/new.jpg',
+            sizeBytes: 10,
+            modified: DateTime.utc(2026, 1, 2),
+            sha256: 'x'),
+        DuplicateFile(
+            path: '/a/old.jpg',
+            sizeBytes: 10,
+            modified: DateTime.utc(2025, 1, 2),
+            sha256: 'x'),
+        DuplicateFile(
+            path: '/a/mid.jpg',
+            sizeBytes: 10,
+            modified: DateTime.utc(2025, 6, 2),
+            sha256: 'x'),
       ];
       final group = DuplicateGroup(sha256: 'x', sizeBytes: 10, files: files);
       expect(group.keepSuggestion!.path, '/a/old.jpg');
@@ -183,7 +201,13 @@ void main() {
       final group = DuplicateGroup(
         sha256: 'x',
         sizeBytes: 10,
-        files: [DuplicateFile(path: '/only.jpg', sizeBytes: 10, modified: DateTime.utc(2026), sha256: 'x')],
+        files: [
+          DuplicateFile(
+              path: '/only.jpg',
+              sizeBytes: 10,
+              modified: DateTime.utc(2026),
+              sha256: 'x')
+        ],
       );
       expect(group.keepSuggestion, isNull);
       expect(group.wastedBytes, 0);

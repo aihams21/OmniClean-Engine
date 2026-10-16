@@ -113,7 +113,8 @@ class DuplicateFinder {
       bySize.removeWhere((s, _) => !sizes.contains(s));
     }
 
-    var survivors = bySize.values.where((l) => l.length > 1).expand((l) => l).toList();
+    var survivors =
+        bySize.values.where((l) => l.length > 1).expand((l) => l).toList();
     if (survivors.length < 2) return const [];
     onProgress?.call(0, survivors.length, HashPhase.preFiltering);
 
@@ -128,7 +129,8 @@ class DuplicateFinder {
     for (var i = 0; i < survivors.length; i++) {
       byPartial.putIfAbsent(partials[i], () => []).add(survivors[i]);
     }
-    survivors = byPartial.values.where((l) => l.length > 1).expand((l) => l).toList();
+    survivors =
+        byPartial.values.where((l) => l.length > 1).expand((l) => l).toList();
     if (survivors.length < 2) {
       onProgress?.call(1, 1, HashPhase.done);
       return const [];
@@ -167,7 +169,8 @@ class DuplicateFinder {
 
     groups.sort((a, b) => b.wastedBytes.compareTo(a.wastedBytes));
     onProgress?.call(survivors.length, survivors.length, HashPhase.done);
-    log.info('duplicate scan: ${groups.length} groups from ${roots.length} roots');
+    log.info(
+        'duplicate scan: ${groups.length} groups from ${roots.length} roots');
     return groups;
   }
 
@@ -215,7 +218,8 @@ class DuplicateFinder {
   }
 
   /// Runs hashing in parallel across isolates.
-  Future<List<String>> _mapHashes(List<_HashJob> jobs, CancelToken? cancel) async {
+  Future<List<String>> _mapHashes(
+      List<_HashJob> jobs, CancelToken? cancel) async {
     final workers = _budget;
     final chunk = (jobs.length / workers).ceil().clamp(1, jobs.length);
     final batches = <List<_HashJob>>[];

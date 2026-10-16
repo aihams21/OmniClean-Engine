@@ -152,11 +152,11 @@ class SettingsController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> setAccent(AccentChoice accent) =>
-      _update(_settings.copyWith(accent: accent), {_kAccent: AppTheme.nameOf(accent)});
+  Future<void> setAccent(AccentChoice accent) => _update(
+      _settings.copyWith(accent: accent), {_kAccent: AppTheme.nameOf(accent)});
 
-  Future<void> setLanguage(LanguageChoice language) =>
-      _update(_settings.copyWith(language: language), {_kLanguage: language.name});
+  Future<void> setLanguage(LanguageChoice language) => _update(
+      _settings.copyWith(language: language), {_kLanguage: language.name});
 
   Future<void> setMinAgeHours(int hours) {
     final clamped = _clampNum(

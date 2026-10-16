@@ -4,7 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:omni_clean_engine/core/safety/safe_delete.dart';
 import 'package:omni_clean_engine/core/util/logger.dart';
 import 'package:omni_clean_engine/engine/cleaners/clean_target.dart';
-import 'package:omni_clean_engine/engine/duplicates/duplicate_finder.dart' show CancelToken;
+import 'package:omni_clean_engine/engine/duplicates/duplicate_finder.dart'
+    show CancelToken;
 
 /// Declarative filter for one directory sweep.
 ///
@@ -203,7 +204,8 @@ class DirectorySweeper {
     // the sweep only reports how much of what it found is old enough today, so
     // the UI can say "X reclaimable now, Y held back by a running app".
     final aged = selectable
-        .where((s) => options.minAge == Duration.zero ||
+        .where((s) =>
+            options.minAge == Duration.zero ||
             now.difference(s.modified.toUtc()) >= options.minAge)
         .toList();
 
@@ -236,8 +238,7 @@ class DirectorySweeper {
       symlinksSkipped: symlinksSkipped,
       skippedDirectories: skippedDirectories,
       selectedSamples: selected,
-      selectableBytes:
-          selectable.fold(0, (sum, s) => sum + s.bytes),
+      selectableBytes: selectable.fold(0, (sum, s) => sum + s.bytes),
       agedFiles: aged.length,
       agedBytes: aged.fold(0, (sum, s) => sum + s.bytes),
       samples: samples.take(options.maxSamples).toList(growable: false),
@@ -313,10 +314,7 @@ class DirectorySweeper {
         target: target,
         fileCount: fresh.length,
         totalBytes: fresh.fold(0, (sum, s) => sum + s.bytes),
-        samples: fresh
-            .take(3)
-            .map((s) => s.path)
-            .toList(growable: false),
+        samples: fresh.take(3).map((s) => s.path).toList(growable: false),
         capped: result.capped,
       ));
     }
@@ -349,7 +347,8 @@ class DirectorySweeper {
     try {
       children.addAll(dir.listSync(followLinks: false));
     } on FileSystemException catch (e) {
-      log.warn('sweep: cannot list ${dir.path} — ${e.osError?.message ?? e.message}');
+      log.warn(
+          'sweep: cannot list ${dir.path} — ${e.osError?.message ?? e.message}');
       return;
     }
 
@@ -407,7 +406,8 @@ class DirectorySweeper {
     List<String> skipped,
   ) {
     if (!options.includeHidden && name.startsWith('.')) return true;
-    if (options.excludeDirectories.any((d) => d.toLowerCase() == name.toLowerCase())) {
+    if (options.excludeDirectories
+        .any((d) => d.toLowerCase() == name.toLowerCase())) {
       skipped.add(path);
       return true;
     }

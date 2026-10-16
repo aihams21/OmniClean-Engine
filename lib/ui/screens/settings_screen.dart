@@ -266,9 +266,7 @@ class _Slider extends StatelessWidget {
             Text(
               valueLabel,
               style: TextStyle(
-                  fontFamily: 'monospace',
-                  fontSize: 12,
-                  color: palette.accent),
+                  fontFamily: 'monospace', fontSize: 12, color: palette.accent),
             ),
           ],
         ),

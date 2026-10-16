@@ -23,8 +23,7 @@ void main() {
 
     test('danger stays crimson even when crimson is the accent', () {
       for (final choice in AccentChoice.values) {
-        expect(CyberPalette.forAccent(choice).danger,
-            const Color(0xFFFF1E1E));
+        expect(CyberPalette.forAccent(choice).danger, const Color(0xFFFF1E1E));
       }
     });
 

@@ -35,7 +35,8 @@ void main() {
     });
 
     test('an empty simulate means nothing to remove', () {
-      const clean = '0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.';
+      const clean =
+          '0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.';
       final plan = parseAptSimulate(clean);
       expect(plan.packages, isEmpty);
       expect(plan.toRemove, 0);
@@ -43,7 +44,8 @@ void main() {
     });
 
     test('survives an error banner instead of throwing', () {
-      expect(parseAptSimulate('E: Unable to acquire the dpkg lock').isEmpty, isTrue);
+      expect(parseAptSimulate('E: Unable to acquire the dpkg lock').isEmpty,
+          isTrue);
       expect(parseAptSimulate('').isEmpty, isTrue);
     });
 
@@ -95,17 +97,19 @@ The following packages will be REMOVED:
 
     test('covers the four areas the brief asks for', () {
       final categories = targets.map((t) => t.category).toSet();
-      expect(categories, containsAll(<CleanCategory>[
-        CleanCategory.packageCache,
-        CleanCategory.temp,
-        CleanCategory.logs,
-        CleanCategory.appCache,
-      ]));
+      expect(
+          categories,
+          containsAll(<CleanCategory>[
+            CleanCategory.packageCache,
+            CleanCategory.temp,
+            CleanCategory.logs,
+            CleanCategory.appCache,
+          ]));
     });
 
     test('apt and the system journal are marked as needing root', () {
-      final privileged = targets
-          .where((t) => t.id.startsWith('linux_apt') || t.id == 'linux_journal');
+      final privileged = targets.where(
+          (t) => t.id.startsWith('linux_apt') || t.id == 'linux_journal');
       expect(privileged, isNotEmpty);
       for (final target in privileged) {
         expect(target.requiresPrivilege, isTrue, reason: target.id);
@@ -160,13 +164,15 @@ The following packages will be REMOVED:
 
     test('covers temp, browser caches, logs and windows update leftovers', () {
       final categories = targets.map((t) => t.category).toSet();
-      expect(categories, containsAll(<CleanCategory>[
-        CleanCategory.temp,
-        CleanCategory.browser,
-        CleanCategory.logs,
-        CleanCategory.updates,
-        CleanCategory.dumps,
-      ]));
+      expect(
+          categories,
+          containsAll(<CleanCategory>[
+            CleanCategory.temp,
+            CleanCategory.browser,
+            CleanCategory.logs,
+            CleanCategory.updates,
+            CleanCategory.dumps,
+          ]));
     });
   });
 

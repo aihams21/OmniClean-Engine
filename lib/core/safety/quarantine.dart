@@ -94,7 +94,8 @@ class Quarantine {
   /// Refuses protected paths outright. Cross-device moves fall back to
   /// copy-then-verify-then-remove, and the source is only removed once the
   /// byte totals match.
-  Future<QuarantineReceipt> store(String rawPath, {required String module}) async {
+  Future<QuarantineReceipt> store(String rawPath,
+      {required String module}) async {
     final normalized = ProtectedPaths.normalize(rawPath);
     if (ProtectedPaths.isProtected(normalized)) {
       throw FileSystemException(
@@ -172,9 +173,8 @@ class Quarantine {
     final item = (await list()).where((i) => i.id == id).firstOrNull;
     if (item == null) throw StateError('no quarantine entry $id');
 
-    final source = item.isDirectory
-        ? Directory(item.storedPath)
-        : File(item.storedPath);
+    final source =
+        item.isDirectory ? Directory(item.storedPath) : File(item.storedPath);
     if (!source.existsSync()) {
       await _deleteManifest(id);
       throw StateError('quarantine payload missing for $id');
@@ -209,7 +209,8 @@ class Quarantine {
       purged.add(item);
     }
     if (purged.isNotEmpty) {
-      log.info('purged ${purged.length} quarantine entries older than $retention');
+      log.info(
+          'purged ${purged.length} quarantine entries older than $retention');
     }
     return purged;
   }
@@ -294,7 +295,8 @@ class Quarantine {
       log.warn('cross-device move, falling back to copy: ${e.message}');
     }
 
-    final src = source is Directory ? Directory(source.path) : File(source.path);
+    final src =
+        source is Directory ? Directory(source.path) : File(source.path);
     if (src is Directory) {
       await _copyTree(src, Directory(destination));
       final copied = _treeSize(Directory(destination));

@@ -99,13 +99,16 @@ void main() {
 
     test('protected check is case-insensitive on Windows paths', () {
       expect(ProtectedPaths.isProtected('C:/Windows/System32/config'), isTrue);
-      expect(ProtectedPaths.isProtected('c:\\program files\\x\\app.db'), isTrue);
-      expect(ProtectedPaths.isProtected(r'C:\Users\me\AppData\Roaming\Mozilla'), isTrue);
+      expect(
+          ProtectedPaths.isProtected('c:\\program files\\x\\app.db'), isTrue);
+      expect(ProtectedPaths.isProtected(r'C:\Users\me\AppData\Roaming\Mozilla'),
+          isTrue);
     });
   });
 
   group('Quarantine — nothing is ever unlinked directly', () {
-    test('moves a file into the quarantine and keeps its bytes readable', () async {
+    test('moves a file into the quarantine and keeps its bytes readable',
+        () async {
       final victim = File('${sandbox.path}/thumb.jpg');
       await victim.writeAsBytes(List<int>.filled(2048, 7));
 
@@ -140,9 +143,11 @@ void main() {
     });
 
     test('quarantines a whole directory tree preserving structure', () async {
-      final dir = Directory('${sandbox.path}/cache-root')..createSync(recursive: true);
+      final dir = Directory('${sandbox.path}/cache-root')
+        ..createSync(recursive: true);
       for (var i = 0; i < 5; i++) {
-        File('${dir.path}/f$i.bin').writeAsBytesSync(List<int>.filled(100 + i, i));
+        File('${dir.path}/f$i.bin')
+            .writeAsBytesSync(List<int>.filled(100 + i, i));
       }
       File('${dir.path}/sub/g.bin').parent.createSync(recursive: true);
       File('${dir.path}/sub/g.bin').writeAsBytesSync(List<int>.filled(9, 9));
@@ -195,8 +200,8 @@ void main() {
       // Must not throw; the unreadable manifest is reported as skipped.
       final items = await quarantine.list();
       expect(items, isEmpty);
-      expect(File(receipt.storedPath).existsSync(),
-          isTrue, reason: 'the payload itself must survive');
+      expect(File(receipt.storedPath).existsSync(), isTrue,
+          reason: 'the payload itself must survive');
     });
   });
 
@@ -266,7 +271,8 @@ void main() {
     test('never follows symlinks out of the sandbox', () async {
       final target = File('${sandbox.path}/precious.txt');
       await target.writeAsString('do not touch');
-      final linkDir = Directory('${sandbox.path}/cache-root')..createSync(recursive: true);
+      final linkDir = Directory('${sandbox.path}/cache-root')
+        ..createSync(recursive: true);
       final link = Link('${linkDir.path}/escape');
       await link.create(target.path);
 
@@ -281,7 +287,8 @@ void main() {
       expect(target.readAsStringSync(), 'do not touch');
     });
 
-    test('quarantineAll skips unsafe entries but still cleans the safe ones', () async {
+    test('quarantineAll skips unsafe entries but still cleans the safe ones',
+        () async {
       final good = aged('cache-root/good.tmp');
       final young = aged('cache-root/young.tmp', days: 0);
       final db = aged('cache-root/keep.db');

@@ -37,13 +37,16 @@ class QuarantineController extends ChangeNotifier {
 
   int get totalBytes => _items.fold<int>(0, (sum, item) => sum + item.bytes);
 
-  bool get isBusy => _phase == QuarantinePhase.loading || _phase == QuarantinePhase.working;
+  bool get isBusy =>
+      _phase == QuarantinePhase.loading || _phase == QuarantinePhase.working;
 
   bool get hasExpired => expiredCount > 0;
 
   int get expiredCount {
     final cutoff = _clock().toUtc().subtract(_retention);
-    return _items.where((item) => item.quarantinedAt.toUtc().isBefore(cutoff)).length;
+    return _items
+        .where((item) => item.quarantinedAt.toUtc().isBefore(cutoff))
+        .length;
   }
 
   /// Reads the manifest back. A broken manifest is a failed phase, not a crash:

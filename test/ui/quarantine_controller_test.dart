@@ -25,7 +25,8 @@ void main() {
     }
   });
 
-  File write(String name, {int bytes = 512, Duration age = const Duration(days: 1)}) {
+  File write(String name,
+      {int bytes = 512, Duration age = const Duration(days: 1)}) {
     final file = File('${sandbox.path}/$name');
     file.parent.createSync(recursive: true);
     file.writeAsBytesSync(List<int>.filled(bytes, 7));
@@ -187,8 +188,10 @@ void main() {
       // quarantine clock does not have to move.
       await quarantine.store('${sandbox.path}/stale.bin', module: 'm');
       final items = await quarantine.list();
-      final stale = items.firstWhere((i) => i.originalPath.endsWith('stale.bin'));
-      final manifest = File('${quarantine.root.path}/manifest/${stale.id}.json');
+      final stale =
+          items.firstWhere((i) => i.originalPath.endsWith('stale.bin'));
+      final manifest =
+          File('${quarantine.root.path}/manifest/${stale.id}.json');
       final json = await manifest.readAsString();
       await manifest.writeAsString(
         json.replaceAll(
@@ -210,12 +213,13 @@ void main() {
       write('stale.bin');
       await quarantine.store('${sandbox.path}/stale.bin', module: 'm');
       final items = await quarantine.list();
-      final manifest = File('${quarantine.root.path}/manifest/${items.single.id}.json');
+      final manifest =
+          File('${quarantine.root.path}/manifest/${items.single.id}.json');
       await manifest.writeAsString(
         (await manifest.readAsString()).replaceAll(
-              items.single.quarantinedAt.toUtc().toIso8601String(),
-              now.subtract(const Duration(days: 90)).toUtc().toIso8601String(),
-            ),
+          items.single.quarantinedAt.toUtc().toIso8601String(),
+          now.subtract(const Duration(days: 90)).toUtc().toIso8601String(),
+        ),
       );
 
       final controller = build(retention: const Duration(days: 7));
@@ -296,7 +300,8 @@ class _BrokenQuarantine implements Quarantine {
   Future<void> init() async {}
 
   @override
-  Future<QuarantineReceipt> store(String rawPath, {required String module}) async =>
+  Future<QuarantineReceipt> store(String rawPath,
+          {required String module}) async =>
       throw StateError('read-only');
 
   @override

@@ -84,7 +84,9 @@ class _AppShellState extends State<AppShell> {
                       for (final line in lines)
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 1),
-                          child: Text(line, style: const TextStyle(fontFamily: 'monospace', fontSize: 12)),
+                          child: Text(line,
+                              style: const TextStyle(
+                                  fontFamily: 'monospace', fontSize: 12)),
                         ),
                     ],
                   ),

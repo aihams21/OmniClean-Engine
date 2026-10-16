@@ -20,7 +20,8 @@ class LinuxCleaner {
   static List<CleanTarget> _build() {
     final home = Platform.environment['HOME'] ?? '/root';
     final xdgCache = Platform.environment['XDG_CACHE_HOME'] ?? '$home/.cache';
-    final xdgData = Platform.environment['XDG_DATA_HOME'] ?? '$home/.local/share';
+    final xdgData =
+        Platform.environment['XDG_DATA_HOME'] ?? '$home/.local/share';
 
     return <CleanTarget>[
       CleanTarget(
@@ -143,11 +144,15 @@ class LinuxCleaner {
   }
 
   /// Asks apt what `autoremove` *would* remove. Never mutates the system.
-  static Future<AptSimulatePlan> simulateAutoremove({int timeoutSeconds = 45}) async {
-    final result = await Shell.run('apt-get', <String>[
-      '-s',
-      'autoremove',
-    ], timeout: Duration(seconds: timeoutSeconds));
+  static Future<AptSimulatePlan> simulateAutoremove(
+      {int timeoutSeconds = 45}) async {
+    final result = await Shell.run(
+        'apt-get',
+        <String>[
+          '-s',
+          'autoremove',
+        ],
+        timeout: Duration(seconds: timeoutSeconds));
     if (!result.ok) {
       log.warn('apt simulate failed: ${result.stderr}');
     }

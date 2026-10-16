@@ -79,7 +79,8 @@ void main() {
       expect(controller.settings.accent, AccentChoice.cyber);
       expect(controller.settings.language, LanguageChoice.system);
       expect(controller.settings.minAgeHours, AppSettings.defaults.minAgeHours);
-      expect(controller.settings.retentionDays, AppSettings.defaults.retentionDays);
+      expect(controller.settings.retentionDays,
+          AppSettings.defaults.retentionDays);
     });
 
     test('it clamps hostile numeric values instead of trusting them', () async {
@@ -90,14 +91,17 @@ void main() {
       final controller = SettingsController(store: store);
       await controller.load();
 
-      expect(controller.settings.minAgeHours, SettingsController.maxMinAgeHours);
-      expect(controller.settings.retentionDays, SettingsController.minRetentionDays);
+      expect(
+          controller.settings.minAgeHours, SettingsController.maxMinAgeHours);
+      expect(controller.settings.retentionDays,
+          SettingsController.minRetentionDays);
 
       await controller.setMinAgeHours(-5);
       expect(controller.settings.minAgeHours, 0);
 
       await controller.setRetentionDays(9999);
-      expect(controller.settings.retentionDays, SettingsController.maxRetentionDays);
+      expect(controller.settings.retentionDays,
+          SettingsController.maxRetentionDays);
     });
 
     test('every change notifies its listeners', () async {
@@ -115,7 +119,8 @@ void main() {
       expect(notifications, 4);
     });
 
-    test('setting the same value again is not a change worth announcing', () async {
+    test('setting the same value again is not a change worth announcing',
+        () async {
       final controller = SettingsController(store: MemoryStore());
       await controller.load();
 
@@ -129,7 +134,8 @@ void main() {
       expect(notifications, 1);
     });
 
-    test('reset returns every field to its default and persists that', () async {
+    test('reset returns every field to its default and persists that',
+        () async {
       final store = MemoryStore();
       final controller = SettingsController(store: store);
       await controller.load();
@@ -145,7 +151,8 @@ void main() {
       expect(restored.settings, AppSettings.defaults);
     });
 
-    test('minAge and retention are exposed as durations for the engine', () async {
+    test('minAge and retention are exposed as durations for the engine',
+        () async {
       final controller = SettingsController(store: MemoryStore());
       await controller.load();
 

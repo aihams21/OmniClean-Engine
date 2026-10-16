@@ -151,8 +151,7 @@ class WindowsMetricsSource implements MetricsSource {
   @override
   Future<SystemSnapshot> capture() async {
     try {
-      final result =
-          await _runCommand('powershell', windowsMetricsArgs);
+      final result = await _runCommand('powershell', windowsMetricsArgs);
       if (!result.ok) {
         log.warn('metrics: powershell failed (${result.exitCode})');
         return SystemSnapshot.empty(platform);
@@ -196,8 +195,7 @@ class UnsupportedMetricsSource implements MetricsSource {
   MetricsPlatform get platform => MetricsPlatform.unsupported;
 
   @override
-  Future<SystemSnapshot> capture() async =>
-      SystemSnapshot.empty(platform);
+  Future<SystemSnapshot> capture() async => SystemSnapshot.empty(platform);
 }
 
 /// Picks the right source for the machine the app is running on.

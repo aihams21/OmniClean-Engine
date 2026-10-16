@@ -73,9 +73,8 @@ List<String> obsoleteApks(
   String? currentPackageName,
 }) {
   if (currentPackageName == null) return const <String>[];
-  final current = byName.containsKey(currentPackageName)
-      ? currentPackageName
-      : null;
+  final current =
+      byName.containsKey(currentPackageName) ? currentPackageName : null;
   if (current == null) return const <String>[];
 
   final base = _apkBase(current);

@@ -78,7 +78,8 @@ class ModuleStatus {
       other.failed == failed;
 
   @override
-  int get hashCode => Object.hash(target.id, finding, selected, cleaned, failed);
+  int get hashCode =>
+      Object.hash(target.id, finding, selected, cleaned, failed);
 }
 
 /// Drives the whole cleaner screen: listing targets, scanning them, holding the
@@ -144,7 +145,8 @@ class CleanerController extends ChangeNotifier {
   CleanPhase get phase => _phase;
   bool get hasScanned => _hasScanned;
   bool get wasCancelled => _wasCancelled;
-  bool get isBusy => _phase == CleanPhase.scanning || _phase == CleanPhase.cleaning;
+  bool get isBusy =>
+      _phase == CleanPhase.scanning || _phase == CleanPhase.cleaning;
   String? get activeModuleId => _activeModuleId;
   int get progressDone => _progressDone;
   int get progressTotal => _progressTotal;
@@ -153,8 +155,7 @@ class CleanerController extends ChangeNotifier {
   int get filesSkipped => _filesSkipped;
   List<String> get failedModules => _failedModules;
 
-  Iterable<ModuleStatus> get _selected =>
-      _modules.where((m) => m.selected);
+  Iterable<ModuleStatus> get _selected => _modules.where((m) => m.selected);
 
   int get totalBytes => _modules.fold<int>(0, (sum, m) => sum + m.bytes);
   int get totalFiles => _modules.fold<int>(0, (sum, m) => sum + m.files);
@@ -228,8 +229,8 @@ class CleanerController extends ChangeNotifier {
       _modules = <ModuleStatus>[
         for (final status in _modules)
           if (findings.any((f) => f.target.id == status.target.id))
-            _replaceFinding(
-                status, findings.firstWhere((f) => f.target.id == status.target.id))
+            _replaceFinding(status,
+                findings.firstWhere((f) => f.target.id == status.target.id))
           else
             status,
       ];

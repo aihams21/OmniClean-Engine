@@ -116,8 +116,7 @@ class CleanFinding {
 }
 
 extension CleanFindingListX on List<CleanFinding> {
-  int get totalBytes =>
-      fold<int>(0, (sum, f) => sum + f.totalBytes);
+  int get totalBytes => fold<int>(0, (sum, f) => sum + f.totalBytes);
   int get totalFiles => fold<int>(0, (sum, f) => sum + f.fileCount);
 }
 

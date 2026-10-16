@@ -30,7 +30,8 @@ CpuTimes? parseCpuLine(String line) {
   for (int i = 1; i < parts.length; i++) {
     total += int.tryParse(parts[i]) ?? 0;
   }
-  final int idle = (int.tryParse(parts[4]) ?? 0) + (parts.length > 5 ? int.tryParse(parts[5]) ?? 0 : 0);
+  final int idle = (int.tryParse(parts[4]) ?? 0) +
+      (parts.length > 5 ? int.tryParse(parts[5]) ?? 0 : 0);
   return CpuTimes(total: total, idle: idle);
 }
 
@@ -67,10 +68,14 @@ class MemorySample {
   final int swapFreeBytes;
 
   int get usedBytes => math.max(0, totalBytes - availableBytes);
-  int get freeAndCacheBytes => math.max(0, freeBytes + buffersBytes + cachedBytes);
+  int get freeAndCacheBytes =>
+      math.max(0, freeBytes + buffersBytes + cachedBytes);
   int get swapUsedBytes => math.max(0, swapTotalBytes - swapFreeBytes);
-  double get usedFraction => totalBytes <= 0 ? 0 : (usedBytes / totalBytes).clamp(0.0, 1.0).toDouble();
-  double get swapUsedFraction => swapTotalBytes <= 0 ? 0 : (swapUsedBytes / swapTotalBytes).clamp(0.0, 1.0).toDouble();
+  double get usedFraction =>
+      totalBytes <= 0 ? 0 : (usedBytes / totalBytes).clamp(0.0, 1.0).toDouble();
+  double get swapUsedFraction => swapTotalBytes <= 0
+      ? 0
+      : (swapUsedBytes / swapTotalBytes).clamp(0.0, 1.0).toDouble();
 
   /// Memory the kernel can hand back on demand without swapping. This is what
   /// a "clean RAM" action can honestly promise, and nothing more.
@@ -100,7 +105,9 @@ class MemorySample {
 /// degrade to zero instead of throwing, so an unexpected kernel stays usable.
 MemorySample parseMemInfo(String text) {
   int kb(String key) {
-    final RegExpMatch? m = RegExp('^${RegExp.escape(key)}:\\s+(\\d+)', multiLine: true).firstMatch(text);
+    final RegExpMatch? m =
+        RegExp('^${RegExp.escape(key)}:\\s+(\\d+)', multiLine: true)
+            .firstMatch(text);
     return int.tryParse(m?.group(1) ?? '') ?? 0;
   }
 
@@ -134,7 +141,8 @@ class DiskSample {
   final int usedBytes;
   final int freeBytes;
 
-  double get usedFraction => totalBytes <= 0 ? 0 : (usedBytes / totalBytes).clamp(0.0, 1.0).toDouble();
+  double get usedFraction =>
+      totalBytes <= 0 ? 0 : (usedBytes / totalBytes).clamp(0.0, 1.0).toDouble();
   int get usedPercent => (usedFraction * 100).round();
 
   bool get hasReading => totalBytes > 0;
@@ -193,7 +201,9 @@ bool _isPseudo(String device) {
 /// `1K-blocks`, `1M-blocks`, ...). A missing or unrecognised header means the
 /// caller asked for bytes, so the multiplier is 1.
 int _dfBlockSize(String text) {
-  final RegExpMatch? m = RegExp(r'(\d+)([BKMGTPE]?)-blocks', caseSensitive: false).firstMatch(text);
+  final RegExpMatch? m =
+      RegExp(r'(\d+)([BKMGTPE]?)-blocks', caseSensitive: false)
+          .firstMatch(text);
   if (m == null) return 1;
   final int n = int.tryParse(m.group(1)!) ?? 1;
   const Map<String, int> power = {
@@ -245,7 +255,8 @@ DiskSample parseDfOutput(String text) {
 List<double> parseLoadAvg(String text) {
   final List<String> parts = text.trim().split(RegExp(r'\s+'));
   if (parts.length < 3) return const [0, 0, 0];
-  return List<double>.generate(3, (int i) => double.tryParse(parts[i]) ?? 0, growable: false);
+  return List<double>.generate(3, (int i) => double.tryParse(parts[i]) ?? 0,
+      growable: false);
 }
 
 /// Seconds of uptime from `/proc/uptime`.

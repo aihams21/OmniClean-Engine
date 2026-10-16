@@ -61,7 +61,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
     final l10n = AppLocalizations.of(context);
     final palette = CyberTheme.of(Theme.of(context));
     final arabic = Localizations.localeOf(context).languageCode == 'ar';
-    String bytes(int value) => formatBytes(value, unitSystem: arabic ? 'ar' : 'en');
+    String bytes(int value) =>
+        formatBytes(value, unitSystem: arabic ? 'ar' : 'en');
 
     return AnimatedBuilder(
       animation: Listenable.merge([widget.cleaner, widget.quarantine]),
@@ -230,9 +231,9 @@ class _Card extends StatelessWidget {
             Text(
               value!,
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    color: palette.accent,
-                    fontFeatures: const [FontFeature.tabularFigures()],
-                  ),
+                color: palette.accent,
+                fontFeatures: const [FontFeature.tabularFigures()],
+              ),
             ),
           ],
           if (subtitle != null) ...[

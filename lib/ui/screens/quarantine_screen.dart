@@ -149,9 +149,8 @@ class QuarantineScreen extends StatelessWidget {
                         return _Row(
                           key: ValueKey(item.id),
                           title: item.originalPath,
-                          subtitle:
-                                '${l10n.quarantineFrom(item.module)} · '
-                                '${l10n.quarantineWhen(_when(item.quarantinedAt))}',
+                          subtitle: '${l10n.quarantineFrom(item.module)} · '
+                              '${l10n.quarantineWhen(_when(item.quarantinedAt))}',
                           sizeText: bytes(item.bytes),
                           busy: controller.isBusy,
                           onRestore: () => controller.restore(item.id),
@@ -203,7 +202,8 @@ class _Row extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         child: Row(
           children: [
-            Icon(Icons.description_outlined, size: 18, color: palette.textMuted),
+            Icon(Icons.description_outlined,
+                size: 18, color: palette.textMuted),
             const SizedBox(width: 10),
             Expanded(
               child: Column(
@@ -212,8 +212,8 @@ class _Row extends StatelessWidget {
                   Text(
                     title,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                        fontFamily: 'monospace', fontSize: 12),
+                    style:
+                        const TextStyle(fontFamily: 'monospace', fontSize: 12),
                   ),
                   Text(
                     subtitle,
@@ -241,8 +241,7 @@ class _Row extends StatelessWidget {
             IconButton(
               tooltip: l10n.quarantinePurgeOne,
               onPressed: busy ? null : onPurge,
-              icon: Icon(Icons.delete_outline,
-                  size: 18, color: palette.danger),
+              icon: Icon(Icons.delete_outline, size: 18, color: palette.danger),
             ),
           ],
         ),

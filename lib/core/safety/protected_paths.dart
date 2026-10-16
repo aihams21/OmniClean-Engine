@@ -14,14 +14,28 @@ class ProtectedPaths {
 
   /// Top-level POSIX trees that must never be modified, at any depth.
   static const Set<String> _protectedRoots = {
-    'bin', 'boot', 'dev', 'etc', 'lib', 'lib32', 'lib64', 'libx32',
-    'proc', 'run', 'sbin', 'sys', 'usr',
+    'bin',
+    'boot',
+    'dev',
+    'etc',
+    'lib',
+    'lib32',
+    'lib64',
+    'libx32',
+    'proc',
+    'run',
+    'sbin',
+    'sys',
+    'usr',
   };
 
   /// `/var` is largely a cleaner target (`/var/cache/apt/archives`), so only
   /// the state-bearing parts are locked.
   static const Set<String> _protectedVarDirs = {
-    'lib', 'spool', 'backups', 'mail',
+    'lib',
+    'spool',
+    'backups',
+    'mail',
   };
 
   /// Directory *names* that hold credentials, configuration or history.
@@ -42,22 +56,55 @@ class ProtectedPaths {
   /// extensions) and must survive, while `~/.cache/mozilla/.../diskCache` is
   /// exactly the junk we are after.
   static const Set<String> _sensitiveDirsOutsideCache = {
-    '.mozilla', '.thunderbird', 'mozilla', 'thunderbird', 'keychains',
+    '.mozilla',
+    '.thunderbird',
+    'mozilla',
+    'thunderbird',
+    'keychains',
   };
 
   /// Segment names that start a disposable cache subtree.
   static const Set<String> _cacheSegments = {
-    '.cache', 'cache', 'caches', 'code cache', 'gpucache', 'cache2',
+    '.cache',
+    'cache',
+    'caches',
+    'code cache',
+    'gpucache',
+    'cache2',
   };
 
   /// File names that hold credentials, configuration or shell history.
   static const Set<String> _sensitiveFiles = {
-    '.bashrc', '.bash_profile', '.bash_login', '.bash_logout', '.bash_history',
-    '.zshrc', '.zprofile', '.zshenv', '.zlogin', '.profile',
-    '.gitconfig', '.netrc', '_netrc', '.npmrc', '.pypirc',
-    '.clinerules', '.agentrc', '.env', '.envrc',
-    'authorized_keys', 'known_hosts', 'id_rsa', 'id_dsa', 'id_ecdsa',
-    'id_ed25519', 'crontab', 'master.passwd', 'shadow', 'passwd', 'group',
+    '.bashrc',
+    '.bash_profile',
+    '.bash_login',
+    '.bash_logout',
+    '.bash_history',
+    '.zshrc',
+    '.zprofile',
+    '.zshenv',
+    '.zlogin',
+    '.profile',
+    '.gitconfig',
+    '.netrc',
+    '_netrc',
+    '.npmrc',
+    '.pypirc',
+    '.clinerules',
+    '.agentrc',
+    '.env',
+    '.envrc',
+    'authorized_keys',
+    'known_hosts',
+    'id_rsa',
+    'id_dsa',
+    'id_ecdsa',
+    'id_ed25519',
+    'crontab',
+    'master.passwd',
+    'shadow',
+    'passwd',
+    'group',
   };
 
   /// Extensions carrying databases, dumps or key material.
@@ -66,18 +113,50 @@ class ProtectedPaths {
   /// thing a naive "cache cleaner" destroys, and the mission of this app is
   /// to never be that app.
   static const List<String> _protectedExtensions = [
-    '.db', '.db3', '.db-wal', '.db-shm', '.sqlite', '.sqlite-wal',
-    '.sqlite-shm', '.sqlite2', '.sqlite3', '.sql', '.dump', '.rdb',
-    '.aof', '.ibd', '.frm', '.myd', '.mdb',
-    '.key', '.keys', '.pem', '.p12', '.pfx', '.jks', '.keystore',
-    '.asc', '.gpg', '.pgp', '.kdbx', '.kdb', '.ppk', '.keypair',
-    '.wallet', '.ovpn', '.crt',
+    '.db',
+    '.db3',
+    '.db-wal',
+    '.db-shm',
+    '.sqlite',
+    '.sqlite-wal',
+    '.sqlite-shm',
+    '.sqlite2',
+    '.sqlite3',
+    '.sql',
+    '.dump',
+    '.rdb',
+    '.aof',
+    '.ibd',
+    '.frm',
+    '.myd',
+    '.mdb',
+    '.key',
+    '.keys',
+    '.pem',
+    '.p12',
+    '.pfx',
+    '.jks',
+    '.keystore',
+    '.asc',
+    '.gpg',
+    '.pgp',
+    '.kdbx',
+    '.kdb',
+    '.ppk',
+    '.keypair',
+    '.wallet',
+    '.ovpn',
+    '.crt',
   ];
 
   /// Windows trees that are locked outright.
   static const Set<String> _protectedWindowsRoots = {
-    'windows.old', 'program files', 'program files (x86)',
-    'recovery', r'$recycle.bin', 'system volume information',
+    'windows.old',
+    'program files',
+    'program files (x86)',
+    'recovery',
+    r'$recycle.bin',
+    'system volume information',
     'perfmon logs',
   };
 
@@ -159,9 +238,8 @@ class ProtectedPaths {
     // (Firefox on Windows keeps its profile in `AppData\Local\Mozilla` while
     // its actual cache lives in `...\Profiles\<id>\cache2`).
     final start = isWindows ? 1 : 0;
-    final hasCacheSegment = segs
-        .skip(start)
-        .any((s) => _cacheSegments.contains(s.toLowerCase()));
+    final hasCacheSegment =
+        segs.skip(start).any((s) => _cacheSegments.contains(s.toLowerCase()));
     for (var i = start; i < segs.length; i++) {
       final low = segs[i].toLowerCase();
       if (_sensitiveDirs.contains(low)) return true;
@@ -200,10 +278,12 @@ class ProtectedPaths {
     for (final ext in _protectedExtensions) {
       if (last.endsWith(ext)) return 'protected data file (*$ext)';
     }
-    if (_sensitiveFiles.contains(last)) return 'configuration or credential file';
+    if (_sensitiveFiles.contains(last))
+      return 'configuration or credential file';
     for (final s in segs) {
       final low = s.toLowerCase();
-      if (_sensitiveDirs.contains(low)) return 'credentials / configuration directory';
+      if (_sensitiveDirs.contains(low))
+        return 'credentials / configuration directory';
     }
     return 'system path';
   }

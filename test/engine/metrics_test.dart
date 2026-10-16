@@ -110,7 +110,8 @@ void main() {
         MetricsPlatform.linux,
       );
       expect(
-        metricsPlatformFor(os: 'windows', environment: const <String, String>{}),
+        metricsPlatformFor(
+            os: 'windows', environment: const <String, String>{}),
         MetricsPlatform.windows,
       );
       expect(
@@ -128,8 +129,10 @@ void main() {
   });
 
   group('LinuxMetricsSource', () {
-    const procStatA = 'cpu  100 0 100 800 0 0 0 0 0 0\ncpu0 50 0 50 400 0 0 0 0 0 0';
-    const procStatB = 'cpu  200 0 100 900 0 0 0 0 0 0\ncpu0 100 0 50 450 0 0 0 0 0 0';
+    const procStatA =
+        'cpu  100 0 100 800 0 0 0 0 0 0\ncpu0 50 0 50 400 0 0 0 0 0 0';
+    const procStatB =
+        'cpu  200 0 100 900 0 0 0 0 0 0\ncpu0 100 0 50 450 0 0 0 0 0 0';
     const memInfo = '''
 MemTotal:       16000000 kB
 MemFree:         2000000 kB
@@ -147,7 +150,8 @@ tmpfs              8192     0     8192   0% /run
 /dev/loop1        20480  1024     8192   8% /snap/core/1
 ''';
 
-    test('first capture has no CPU delta yet but fills everything else', () async {
+    test('first capture has no CPU delta yet but fills everything else',
+        () async {
       final reader = FakeReader(<String, String>{
         '/proc/stat': procStatA,
         '/proc/meminfo': memInfo,
@@ -166,7 +170,8 @@ tmpfs              8192     0     8192   0% /run
       final snapshot = await source.capture();
 
       expect(snapshot.platform, MetricsPlatform.linux);
-      expect(snapshot.cpuUsage, 0, reason: 'no previous sample to diff against');
+      expect(snapshot.cpuUsage, 0,
+          reason: 'no previous sample to diff against');
       expect(snapshot.memory.hasReading, isTrue);
       expect(snapshot.memory.totalBytes, 16000000 * 1024);
       expect(snapshot.disks, hasLength(1), reason: 'loop device skipped');
@@ -238,7 +243,7 @@ tmpfs              8192     0     8192   0% /run
     test('parses the PowerShell payload into a snapshot', () async {
       final runner = FakeRunner(<String, ShellResult>{
         'powershell -NoProfile -NonInteractive -Command '
-            'Get-CimInstance OmniCleanMetrics | ConvertTo-Json -Compress':
+                'Get-CimInstance OmniCleanMetrics | ConvertTo-Json -Compress':
             ok('ps', psJson),
       });
       final source = WindowsMetricsSource(runCommand: runner.call);
@@ -257,14 +262,14 @@ tmpfs              8192     0     8192   0% /run
         () async {
       final runner = FakeRunner(<String, ShellResult>{
         'powershell -NoProfile -NonInteractive -Command '
-            'Get-CimInstance OmniCleanMetrics | ConvertTo-Json -Compress':
+                'Get-CimInstance OmniCleanMetrics | ConvertTo-Json -Compress':
             ShellResult(
-              command: 'ps',
-              exitCode: 1,
-              stdout: '',
-              stderr: 'boom',
-              duration: Duration.zero,
-            ),
+          command: 'ps',
+          exitCode: 1,
+          stdout: '',
+          stderr: 'boom',
+          duration: Duration.zero,
+        ),
       });
       final snapshot =
           await WindowsMetricsSource(runCommand: runner.call).capture();

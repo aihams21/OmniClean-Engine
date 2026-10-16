@@ -99,8 +99,10 @@ class Shell {
         workingDirectory: workingDirectory,
         environment: environment,
       );
-      final out = process.stdout.transform(const SystemEncoding().decoder).join();
-      final err = process.stderr.transform(const SystemEncoding().decoder).join();
+      final out =
+          process.stdout.transform(const SystemEncoding().decoder).join();
+      final err =
+          process.stderr.transform(const SystemEncoding().decoder).join();
 
       final code = await process.exitCode.timeout(timeout, onTimeout: () {
         process.kill(ProcessSignal.sigkill);
@@ -194,13 +196,13 @@ class Shell {
   static Future<int> directoryBytes(String path) async {
     const bytesFlag = 'du -sb -- %s 2>/dev/null | cut -f1';
     const kibFlag = 'du -sk -- %s 2>/dev/null | cut -f1';
-    var result =
-        await runScript(bytesFlag.replaceAll('%s', quote(path)), timeout: _duTimeout);
+    var result = await runScript(bytesFlag.replaceAll('%s', quote(path)),
+        timeout: _duTimeout);
     // `du -sb` is GNU-only; `du -sk` is the portable fallback.
     var bytes = int.tryParse(result.stdout.trim());
     if (bytes == null) {
-      result =
-          await runScript(kibFlag.replaceAll('%s', quote(path)), timeout: _duTimeout);
+      result = await runScript(kibFlag.replaceAll('%s', quote(path)),
+          timeout: _duTimeout);
       final kilobytes = int.tryParse(result.stdout.trim());
       bytes = kilobytes == null ? null : kilobytes * 1024;
     }

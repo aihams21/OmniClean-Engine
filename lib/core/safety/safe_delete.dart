@@ -101,7 +101,8 @@ class SafeDelete {
 
     final type = FileSystemEntity.typeSync(path, followLinks: false);
     if (type == FileSystemEntityType.notFound) {
-      return const DeleteVerdict.refused(VerdictCode.missing, 'no longer exists');
+      return const DeleteVerdict.refused(
+          VerdictCode.missing, 'no longer exists');
     }
     if (type == FileSystemEntityType.link && !followLinks) {
       return const DeleteVerdict.refused(
@@ -174,8 +175,7 @@ class SafeDelete {
       }
 
       try {
-        final receipt =
-            await quarantine.store(path, module: module);
+        final receipt = await quarantine.store(path, module: module);
         cleaned.add(receipt.originalPath);
         freed += receipt.bytes;
       } on FileSystemException catch (e) {
@@ -199,7 +199,8 @@ class SafeDelete {
 
   static int _dirSize(String path) {
     var sum = 0;
-    for (final entity in Directory(path).listSync(recursive: true, followLinks: false)) {
+    for (final entity
+        in Directory(path).listSync(recursive: true, followLinks: false)) {
       if (entity is File) {
         try {
           sum += entity.lengthSync();

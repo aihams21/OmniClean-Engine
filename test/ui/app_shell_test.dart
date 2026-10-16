@@ -49,8 +49,7 @@ void main() {
     cleaner = CleanerController(
       targets: CleanTargetSet([target]),
       safeDelete: safeDelete,
-      scanner: (targets, {cancel, onTarget}) async =>
-          const <CleanFinding>[],
+      scanner: (targets, {cancel, onTarget}) async => const <CleanFinding>[],
       cleaner: (t, {onProgress}) async => _emptyOutcome,
     );
     duplicates = DuplicatesController(safeDelete: safeDelete);

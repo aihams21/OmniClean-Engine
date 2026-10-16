@@ -247,8 +247,7 @@ class AppTheme {
   ];
 
   static TextTheme _textTheme(CyberPalette palette) {
-    TextStyle style(double size, FontWeight weight, Color color) =>
-        TextStyle(
+    TextStyle style(double size, FontWeight weight, Color color) => TextStyle(
           fontSize: size,
           fontWeight: weight,
           color: color,

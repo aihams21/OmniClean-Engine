@@ -5,7 +5,8 @@ import 'package:omni_clean_engine/core/safety/quarantine.dart';
 import 'package:omni_clean_engine/core/safety/safe_delete.dart';
 import 'package:omni_clean_engine/engine/cleaners/clean_target.dart';
 import 'package:omni_clean_engine/engine/cleaners/directory_sweeper.dart';
-import 'package:omni_clean_engine/engine/duplicates/duplicate_finder.dart' show CancelToken;
+import 'package:omni_clean_engine/engine/duplicates/duplicate_finder.dart'
+    show CancelToken;
 
 late Directory sandbox;
 late DateTime now;
@@ -31,7 +32,8 @@ void main() {
   setUp(() async {
     sandbox = await Directory.systemTemp.createTemp('oc_sweep_');
     now = DateTime.utc(2026, 3, 1, 12);
-    quarantine = Quarantine(root: Directory('${sandbox.path}/quarantine'), clock: () => now);
+    quarantine = Quarantine(
+        root: Directory('${sandbox.path}/quarantine'), clock: () => now);
     await quarantine.init();
     safeDelete = SafeDelete(quarantine: quarantine, clock: () => now);
   });
@@ -86,8 +88,18 @@ void main() {
     });
 
     test('ids must be unique within a module', () {
-      const a = CleanTarget(id: 'dup', titleKey: 'a', descriptionKey: 'b', category: CleanCategory.temp, roots: ['/tmp']);
-      const b = CleanTarget(id: 'dup', titleKey: 'a', descriptionKey: 'b', category: CleanCategory.temp, roots: ['/tmp']);
+      const a = CleanTarget(
+          id: 'dup',
+          titleKey: 'a',
+          descriptionKey: 'b',
+          category: CleanCategory.temp,
+          roots: ['/tmp']);
+      const b = CleanTarget(
+          id: 'dup',
+          titleKey: 'a',
+          descriptionKey: 'b',
+          category: CleanCategory.temp,
+          roots: ['/tmp']);
       expect(() => CleanTargetSet([a, b]), throwsArgumentError);
     });
   });
@@ -96,13 +108,23 @@ void main() {
     test('totals aggregate across findings', () {
       final list = <CleanFinding>[
         CleanFinding(
-          target: const CleanTarget(id: 'a', titleKey: 'a', descriptionKey: 'b', category: CleanCategory.temp, roots: ['/tmp']),
+          target: const CleanTarget(
+              id: 'a',
+              titleKey: 'a',
+              descriptionKey: 'b',
+              category: CleanCategory.temp,
+              roots: ['/tmp']),
           fileCount: 3,
           totalBytes: 300,
           samples: const ['/tmp/a'],
         ),
         CleanFinding(
-          target: const CleanTarget(id: 'b', titleKey: 'a', descriptionKey: 'b', category: CleanCategory.logs, roots: ['/var/log']),
+          target: const CleanTarget(
+              id: 'b',
+              titleKey: 'a',
+              descriptionKey: 'b',
+              category: CleanCategory.logs,
+              roots: ['/var/log']),
           fileCount: 1,
           totalBytes: 100,
         ),
@@ -142,7 +164,8 @@ void main() {
       expect(result.bytes, 100);
     });
 
-    test('minAge separates reclaimable bytes from what a live app still holds', () async {
+    test('minAge separates reclaimable bytes from what a live app still holds',
+        () async {
       write('old.txt', 100, age: const Duration(days: 40));
       write('fresh.txt', 999, age: const Duration(minutes: 5));
 
@@ -170,7 +193,8 @@ void main() {
 
       write('inside.txt', 10);
       Link('${sandbox.path}/escape').createSync(outside.path);
-      Link('${sandbox.path}/escape.txt').createSync('${outside.path}/secret.txt');
+      Link('${sandbox.path}/escape.txt')
+          .createSync('${outside.path}/secret.txt');
 
       final result = await DirectorySweeper().measure(
         [sandbox.path],
@@ -183,7 +207,8 @@ void main() {
       expect(result.symlinksSkipped, 2);
     });
 
-    test('excludes hidden files unless asked, and honours name filters', () async {
+    test('excludes hidden files unless asked, and honours name filters',
+        () async {
       write('visible.txt', 100);
       write('.hidden', 200);
       write('keep/index.dat', 300);
@@ -303,7 +328,8 @@ void main() {
   });
 
   group('DirectorySweeper.clean', () {
-    test('moves selected files into quarantine and frees their bytes', () async {
+    test('moves selected files into quarantine and frees their bytes',
+        () async {
       write('old.bin', 2000, age: const Duration(days: 40));
       write('fresh.bin', 3000, age: const Duration(minutes: 2));
 
@@ -418,7 +444,8 @@ void main() {
   });
 
   group('scanAll', () {
-    test('produces one finding per target that has anything to reclaim', () async {
+    test('produces one finding per target that has anything to reclaim',
+        () async {
       final populated = CleanTarget(
         id: 'populated',
         titleKey: 't',

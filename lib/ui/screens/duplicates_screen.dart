@@ -448,8 +448,7 @@ class _ActionBar extends StatelessWidget {
           ),
           const SizedBox(width: 8),
           FilledButton.icon(
-            onPressed:
-                controller.canDelete ? () => _confirm(context) : null,
+            onPressed: controller.canDelete ? () => _confirm(context) : null,
             icon: const Icon(Icons.delete_sweep),
             label: Text(l10n.duplicatesDeleteDuplicates),
           ),

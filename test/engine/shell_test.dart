@@ -49,8 +49,7 @@ void main() {
       );
     });
 
-    test('uses non-interactive sudo so a CLI can never hang on a prompt',
-        () {
+    test('uses non-interactive sudo so a CLI can never hang on a prompt', () {
       expect(
         buildPrivilegedCommand('apt-get clean', Escalation.sudo),
         ['sudo', '-n', 'sh', '-c', 'apt-get clean'],
@@ -132,7 +131,8 @@ void main() {
     });
 
     test('kills a process that overruns its timeout', () async {
-      final result = await Shell.run('sleep', ['5'], timeout: const Duration(milliseconds: 300));
+      final result = await Shell.run('sleep', ['5'],
+          timeout: const Duration(milliseconds: 300));
       expect(result.ok, isFalse);
       expect(result.timedOut, isTrue);
       expect(result.duration, lessThan(const Duration(seconds: 4)));

@@ -103,7 +103,8 @@ void _seedJunk(Directory sandbox) {
 }
 
 void _seedDuplicates(Directory sandbox) {
-  final Directory dir = Directory('${sandbox.path}/photos')..createSync(recursive: true);
+  final Directory dir = Directory('${sandbox.path}/photos')
+    ..createSync(recursive: true);
   Uint8List chunk(int seed) => Uint8List.fromList(
         List<int>.generate(20000, (int i) => (i * 7 + seed * 31) % 251),
       );
@@ -138,7 +139,8 @@ Future<void> _scene(
 }
 
 Future<void> _shoot(WidgetTester tester, String name) async {
-  final RenderRepaintBoundary boundary = tester.renderObject<RenderRepaintBoundary>(
+  final RenderRepaintBoundary boundary =
+      tester.renderObject<RenderRepaintBoundary>(
     find.byKey(const ValueKey<String>(_canvasKey)),
   );
   final ui.Image image = await boundary.toImage(pixelRatio: 1);

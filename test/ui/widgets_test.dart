@@ -56,8 +56,7 @@ void main() {
   });
 
   group('ArcGauge', () {
-    testWidgets('renders the label and the rounded percentage',
-        (tester) async {
+    testWidgets('renders the label and the rounded percentage', (tester) async {
       await tester.pumpWidget(
         _wrap(const ArcGauge(label: 'CPU', value: 0.421)),
       );
@@ -96,8 +95,7 @@ void main() {
       expect(find.text('unavailable'), findsNothing);
       expect(find.text('غير متاح'), findsOneWidget);
     });
-    testWidgets('clamps hostile values instead of overflowing',
-        (tester) async {
+    testWidgets('clamps hostile values instead of overflowing', (tester) async {
       await tester.pumpWidget(
         _wrap(const ArcGauge(label: 'RAM', value: 12.5)),
       );
@@ -120,10 +118,12 @@ void main() {
 
     test('the sweep angle maps 0..1 onto a three-quarter dial', () {
       expect(ArcGaugePainter.sweepFor(0), 0);
-      expect(ArcGaugePainter.sweepFor(1), closeTo(1.5 * 3.141592653589793, 1e-9));
+      expect(
+          ArcGaugePainter.sweepFor(1), closeTo(1.5 * 3.141592653589793, 1e-9));
       expect(ArcGaugePainter.sweepFor(0.5),
           closeTo(0.75 * 3.141592653589793, 1e-9));
-      expect(ArcGaugePainter.sweepFor(9), closeTo(1.5 * 3.141592653589793, 1e-9));
+      expect(
+          ArcGaugePainter.sweepFor(9), closeTo(1.5 * 3.141592653589793, 1e-9));
       expect(ArcGaugePainter.sweepFor(-1), 0);
     });
   });
@@ -142,7 +142,8 @@ void main() {
       expect(tester.takeException(), isNull);
     });
 
-    testWidgets('a zero-capacity disk still renders instead of dividing by zero',
+    testWidgets(
+        'a zero-capacity disk still renders instead of dividing by zero',
         (tester) async {
       await tester.pumpWidget(
         _wrap(const StorageBar(usedBytes: 0, freeBytes: 0)),

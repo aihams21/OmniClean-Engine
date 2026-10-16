@@ -90,9 +90,8 @@ class ModuleTile extends StatelessWidget {
       selected: selected,
       label: '$title, $sizeText',
       child: Material(
-        color: selected
-            ? palette.accent.withValues(alpha: 0.08)
-            : palette.surface,
+        color:
+            selected ? palette.accent.withValues(alpha: 0.08) : palette.surface,
         borderRadius: BorderRadius.circular(12),
         child: InkWell(
           onTap: onChanged == null ? null : () => onChanged!(!selected),
@@ -150,7 +149,8 @@ class ModuleTile extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(6),
                                   border: Border.all(
-                                    color: palette.danger.withValues(alpha: 0.7),
+                                    color:
+                                        palette.danger.withValues(alpha: 0.7),
                                   ),
                                   color: palette.danger.withValues(alpha: 0.12),
                                 ),

@@ -57,8 +57,8 @@ class CleanerScreen extends StatelessWidget {
                                     .textTheme
                                     .labelMedium
                                     ?.copyWith(
-                                        color:
-                                            CyberTheme.of(Theme.of(context)).textMuted),
+                                        color: CyberTheme.of(Theme.of(context))
+                                            .textMuted),
                               ),
                           ],
                         ),
@@ -137,9 +137,8 @@ class _Header extends StatelessWidget {
               FilledButton.tonalIcon(
                 onPressed: controller.canClean ? () => _confirm(context) : null,
                 style: FilledButton.styleFrom(
-                  backgroundColor: controller.canClean
-                      ? palette.accent
-                      : palette.elevated,
+                  backgroundColor:
+                      controller.canClean ? palette.accent : palette.elevated,
                 ),
                 icon: const Icon(Icons.auto_fix_high),
                 label: Text(
@@ -165,8 +164,10 @@ class _Header extends StatelessWidget {
             Text(
               l10n.cleanerProgress(
                   controller.progressDone, controller.progressTotal),
-              style:
-                  Theme.of(context).textTheme.labelSmall?.copyWith(color: palette.textMuted),
+              style: Theme.of(context)
+                  .textTheme
+                  .labelSmall
+                  ?.copyWith(color: palette.textMuted),
             ),
           ],
           if (controller.bytesFreed > 0) ...[

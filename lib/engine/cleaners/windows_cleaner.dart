@@ -9,7 +9,8 @@ import 'clean_target.dart';
 /// target definitions stay readable (`%LOCALAPPDATA%\Temp`) and the real path
 /// is only computed once, where the environment is actually known. Windows
 /// environment names are case-insensitive, and so is this lookup.
-String resolveWindowsRoot(String root, {required Map<String, String?> environment}) {
+String resolveWindowsRoot(String root,
+    {required Map<String, String?> environment}) {
   final lookup = <String, String>{};
   environment.forEach((key, value) {
     if (value != null) lookup[key.toUpperCase()] = value;
@@ -108,7 +109,11 @@ class WindowsCleaner {
         requiresPrivilege: false,
         roots: const <String>['%LOCALAPPDATA%\Mozilla\Firefox\Profiles'],
         minAge: const Duration(days: 1),
-        excludeDirectories: const <String>{'storage', 'datareporting', 'crashes'},
+        excludeDirectories: const <String>{
+          'storage',
+          'datareporting',
+          'crashes'
+        },
       ),
       CleanTarget(
         id: 'windows_event_logs',
@@ -145,7 +150,10 @@ class WindowsCleaner {
         category: CleanCategory.dumps,
         risk: RiskLevel.moderate,
         requiresPrivilege: true,
-        roots: const <String>['%WINDIR%\Minidump', '%WINDIR%\LiveKernelReports'],
+        roots: const <String>[
+          '%WINDIR%\Minidump',
+          '%WINDIR%\LiveKernelReports'
+        ],
         minAge: const Duration(days: 7),
       ),
       CleanTarget(
@@ -198,25 +206,25 @@ class WindowsCleaner {
     final env = environment ?? _liveEnvironment();
     final resolved = targets.targets
         .map(
-      (target) => CleanTarget(
-        id: target.id,
-        titleKey: target.titleKey,
-        descriptionKey: target.descriptionKey,
-        category: target.category,
-        risk: target.risk,
-        requiresPrivilege: target.requiresPrivilege,
-        roots: target.roots
-            .map((r) => resolveWindowsRoot(r, environment: env))
-            .toList(growable: false),
-        minAge: target.minAge,
-        includeHidden: target.includeHidden,
-        excludeDirectories: target.excludeDirectories,
-        extensions: target.extensions,
-        excludeExtensions: target.excludeExtensions,
-        maxDepth: target.maxDepth,
-        capBytes: target.capBytes,
-      ),
-    )
+          (target) => CleanTarget(
+            id: target.id,
+            titleKey: target.titleKey,
+            descriptionKey: target.descriptionKey,
+            category: target.category,
+            risk: target.risk,
+            requiresPrivilege: target.requiresPrivilege,
+            roots: target.roots
+                .map((r) => resolveWindowsRoot(r, environment: env))
+                .toList(growable: false),
+            minAge: target.minAge,
+            includeHidden: target.includeHidden,
+            excludeDirectories: target.excludeDirectories,
+            extensions: target.extensions,
+            excludeExtensions: target.excludeExtensions,
+            maxDepth: target.maxDepth,
+            capBytes: target.capBytes,
+          ),
+        )
         .toList(growable: false);
     return CleanTargetSet(resolved);
   }

@@ -68,7 +68,9 @@ String formatDuration(Duration d, {String unitSystem = 'en'}) {
         : '${d.inHours}h ${d.inMinutes % 60}m';
   }
   if (d.inMinutes > 0) {
-    return arabic ? '${d.inMinutes} د ${d.inSeconds % 60} ث' : '${d.inMinutes}m ${d.inSeconds % 60}s';
+    return arabic
+        ? '${d.inMinutes} د ${d.inSeconds % 60} ث'
+        : '${d.inMinutes}m ${d.inSeconds % 60}s';
   }
   return arabic ? '${d.inSeconds} ث' : '${d.inSeconds}s';
 }

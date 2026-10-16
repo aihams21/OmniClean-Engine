@@ -53,7 +53,9 @@ class DuplicatesController extends ChangeNotifier {
     }
     if (Platform.isWindows) {
       final profile = env['USERPROFILE'];
-      return profile == null || profile.isEmpty ? const <String>[] : <String>[profile];
+      return profile == null || profile.isEmpty
+          ? const <String>[]
+          : <String>[profile];
     }
     final home = env['HOME'];
     return home == null || home.isEmpty ? const <String>[] : <String>[home];

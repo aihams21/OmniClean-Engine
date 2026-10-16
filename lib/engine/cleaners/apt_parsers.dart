@@ -42,7 +42,8 @@ final _summary = RegExp(
 /// exception, because the caller is a UI that must keep working.
 AptSimulatePlan parseAptSimulate(String output) {
   if (output.trim().isEmpty) {
-    return AptSimulatePlan(packages: const <String>[], toRemove: 0, notUpgraded: 0);
+    return AptSimulatePlan(
+        packages: const <String>[], toRemove: 0, notUpgraded: 0);
   }
 
   final packages = <String>[];
@@ -79,7 +80,8 @@ AptSimulatePlan parseAptSimulate(String output) {
   );
 }
 
-final _journalTakeUp = RegExp(r'take\s+up\s+([0-9]+(?:\.[0-9]+)?)\s*([BKMGTPE])?');
+final _journalTakeUp =
+    RegExp(r'take\s+up\s+([0-9]+(?:\.[0-9]+)?)\s*([BKMGTPE])?');
 
 const _journalUnits = <String, int>{
   '': 1,

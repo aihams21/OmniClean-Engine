@@ -118,9 +118,9 @@ void main() {
       final controller = build(
         targets: const <CleanTarget>[_junk, _safeCache],
         scanner: (targets, {cancel, onTarget}) async => <CleanFinding>[
-              _finding(_junk, files: 3, bytes: 300),
-              _finding(_safeCache, files: 1, bytes: 50),
-            ],
+          _finding(_junk, files: 3, bytes: 300),
+          _finding(_safeCache, files: 1, bytes: 50),
+        ],
       );
 
       await controller.scan();
@@ -137,10 +137,10 @@ void main() {
       final controller = build(
         targets: const <CleanTarget>[_safeCache, _moderate, _risky],
         scanner: (targets, {cancel, onTarget}) async => <CleanFinding>[
-              _finding(_safeCache, files: 2, bytes: 200),
-              _finding(_moderate, files: 4, bytes: 400),
-              _finding(_risky, files: 9, bytes: 900),
-            ],
+          _finding(_safeCache, files: 2, bytes: 200),
+          _finding(_moderate, files: 4, bytes: 400),
+          _finding(_risky, files: 9, bytes: 900),
+        ],
       );
 
       await controller.scan();
@@ -184,7 +184,8 @@ void main() {
       expect(controller.modules.length, 2);
     });
 
-    test('an empty scan leaves nothing selected and nothing to clean', () async {
+    test('an empty scan leaves nothing selected and nothing to clean',
+        () async {
       final controller = build(
         scanner: (targets, {cancel, onTarget}) async => <CleanFinding>[],
       );
@@ -203,9 +204,9 @@ void main() {
       final controller = build(
         targets: const <CleanTarget>[_junk, _safeCache],
         scanner: (targets, {cancel, onTarget}) async => <CleanFinding>[
-              _finding(_junk, files: 2, bytes: 200),
-              _finding(_safeCache, files: 5, bytes: 500),
-            ],
+          _finding(_junk, files: 2, bytes: 200),
+          _finding(_safeCache, files: 5, bytes: 500),
+        ],
       );
       await controller.scan();
       controller.selectNone();
@@ -257,9 +258,9 @@ void main() {
       final controller = build(
         targets: const <CleanTarget>[_junk, _safeCache],
         scanner: (targets, {cancel, onTarget}) async => <CleanFinding>[
-              _finding(_junk, files: 3, bytes: 300),
-              _finding(_safeCache, files: 1, bytes: 50),
-            ],
+          _finding(_junk, files: 3, bytes: 300),
+          _finding(_safeCache, files: 1, bytes: 50),
+        ],
         cleaner: (target, {onProgress}) async {
           called.add(target.id);
           return _outcome(
@@ -305,9 +306,9 @@ void main() {
       final controller = build(
         targets: const <CleanTarget>[_junk, _safeCache],
         scanner: (targets, {cancel, onTarget}) async => <CleanFinding>[
-              _finding(_junk, bytes: 100),
-              _finding(_safeCache, bytes: 200),
-            ],
+          _finding(_junk, bytes: 100),
+          _finding(_safeCache, bytes: 200),
+        ],
         cleaner: (target, {onProgress}) async {
           if (target.id == 'test_junk') throw StateError('permission denied');
           return _outcome(cleaned: <String>['ok'], bytesFreed: 200);
@@ -328,10 +329,10 @@ void main() {
         scanner: (targets, {cancel, onTarget}) async =>
             <CleanFinding>[_finding(_junk, files: 5, bytes: 500)],
         cleaner: (target, {onProgress}) async => _outcome(
-              cleaned: <String>['a', 'b'],
-              skipped: <String>['c', 'd', 'e'],
-              bytesFreed: 220,
-            ),
+          cleaned: <String>['a', 'b'],
+          skipped: <String>['c', 'd', 'e'],
+          bytesFreed: 220,
+        ),
       );
 
       await controller.scan();

@@ -61,14 +61,16 @@ SwapFree:        1048574 kB
     });
 
     test('never reports negative usage on odd input', () {
-      final MemorySample m = parseMemInfo('MemTotal: 1000 kB\nMemAvailable: 4000 kB');
+      final MemorySample m =
+          parseMemInfo('MemTotal: 1000 kB\nMemAvailable: 4000 kB');
       expect(m.usedBytes, 0);
       expect(m.swapUsedFraction, 0.0);
       expect(m.usedFraction, inInclusiveRange(0.0, 1.0));
     });
 
     test('missing swap section means no swap', () {
-      final MemorySample m = parseMemInfo('MemTotal: 100 kB\nMemAvailable: 50 kB');
+      final MemorySample m =
+          parseMemInfo('MemTotal: 100 kB\nMemAvailable: 50 kB');
       expect(m.swapTotalBytes, 0);
       expect(m.swapUsedFraction, 0.0);
     });

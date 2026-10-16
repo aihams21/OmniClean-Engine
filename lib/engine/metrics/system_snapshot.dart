@@ -76,17 +76,14 @@ class SystemSnapshot {
 
   int get cpuPercent => _clampPercent(cpuUsage);
 
-  int get memoryPercent => memory.hasReading
-      ? _clampPercent(memory.usedFraction)
-      : 0;
+  int get memoryPercent =>
+      memory.hasReading ? _clampPercent(memory.usedFraction) : 0;
 
-  int get swapPercent => memory.swapTotalBytes > 0
-      ? _clampPercent(memory.swapUsedFraction)
-      : 0;
+  int get swapPercent =>
+      memory.swapTotalBytes > 0 ? _clampPercent(memory.swapUsedFraction) : 0;
 
   /// What a cache-and-RAM action could honestly hand back right now.
-  int get reclaimableBytes =>
-      memory.hasReading ? memory.reclaimableBytes : 0;
+  int get reclaimableBytes => memory.hasReading ? memory.reclaimableBytes : 0;
 
   bool get hasMemory => memory.hasReading;
   bool get hasDisks => disks.isNotEmpty;
