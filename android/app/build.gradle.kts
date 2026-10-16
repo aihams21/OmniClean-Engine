@@ -69,6 +69,16 @@ android {
                     storePassword = storePasswordValue
                     keyAlias = keyAliasValue
                     keyPassword = keyPasswordValue
+                    // Every scheme, not just the modern default. The Android
+                    // Gradle Plugin only turns v1 on when minSdk < 24, but a
+                    // meaningful share of sideloading paths — OEM file-manager
+                    // installers in particular — still look for the JAR
+                    // signature in META-INF before they will accept a package.
+                    // Signing with all three costs a few kilobytes and removes
+                    // the whole class of "the package appears invalid" reports.
+                    enableV1Signing = true
+                    enableV2Signing = true
+                    enableV3Signing = true
                 }
             } else {
                 logger.info(

@@ -128,7 +128,10 @@ jobs:
           fi
           printf '%s' "$KEYSTORE_B64" | base64 --decode > android/app/omniclean-release.jks
           {
-            echo "OMNICLEAN_KEYSTORE_PATH=app/omniclean-release.jks"
+            # Paths in this file are resolved by Gradle against the :app
+            # project directory (android/app), not against android/, so this
+            # has to stay a bare file name.
+            echo "OMNICLEAN_KEYSTORE_PATH=omniclean-release.jks"
             echo "OMNICLEAN_KEYSTORE_PASSWORD=$KEYSTORE_PASSWORD"
             echo "OMNICLEAN_KEY_ALIAS=$KEY_ALIAS"
             echo "OMNICLEAN_KEY_PASSWORD=$KEY_PASSWORD"
