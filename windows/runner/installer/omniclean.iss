@@ -41,7 +41,10 @@ Name: "desktopicon"; Description: "Create a desktop shortcut"; GroupDescription:
 [Files]
 ; The whole Release folder: the runner executable plus data\ (Flutter assets) and
 ; lib\ (the GTK/GL loader DLLs that Flutter ships for Windows).
-Source: "..\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+; Inno Setup resolves this relative to the .iss file, which lives in
+; windows\runner\installer\, so the build output three levels up is
+; windows\x64\runner\Release — not windows\runner\Release.
+Source: "..\..\x64\runner\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
 Name: "{group}\{#AppName}"; Filename: "{app}\{#AppExeName}"
