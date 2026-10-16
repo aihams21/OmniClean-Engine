@@ -48,6 +48,12 @@ final Map<String, Object?> _manifest = <String, Object?>{
 
 const String _flutterRoot = '/home/aiham/flutter';
 
+/// The single font the capture cannot do without: without it every glyph
+/// renders as a box and the frames are worthless.
+final bool _fontsAvailable =
+    File('$_flutterRoot/bin/cache/artifacts/material_fonts/Roboto-Regular.ttf')
+        .existsSync();
+
 Future<void> _loadFonts() async {
   Future<void> register(String family, List<String> paths) async {
     final FontLoader loader = FontLoader(family);
@@ -164,6 +170,16 @@ void main() {
   setUpAll(_loadFonts);
 
   testWidgets('the documented walkthrough is reproducible', (tester) async {
+    // The capture needs the real Roboto/MaterialIcons faces, which live in the
+    // Flutter SDK cache. A runner or contributor without that exact checkout
+    // would otherwise see tofu boxes and a hard failure for a documentation
+    // asset, so the test reports itself as skipped instead of breaking a
+    // build that has nothing to do with the walkthrough.
+    if (!_fontsAvailable) {
+      markTestSkipped('Flutter SDK fonts not found under $_flutterRoot');
+      return;
+    }
+
     tester.view.physicalSize = const Size(1280, 820);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.reset);
