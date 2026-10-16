@@ -87,13 +87,47 @@ retention window, read the log.
 </table>
 
 **Just want one file?** Grab the latest release and pick the single asset that
-matches your platform. Every release is signed and checksummed.
+matches your platform.
 
 ```bash
 # Linux, the easy way
 wget https://github.com/aihams21/OmniClean-Engine/releases/latest/download/omniclean-engine_1.0.0_amd64.AppImage
 chmod +x omniclean-engine_1.0.0_amd64.AppImage
 ./omniclean-engine_1.0.0_amd64.AppImage
+```
+
+### Compatibility
+
+| | |
+|---|---|
+| **Linux** | x86_64, glibc 2.31+ (Debian 11, Ubuntu 20.04, Kali, Fedora 32+) |
+| **Windows** | x64, Windows 10 1809 and newer, Windows 11 |
+| **Android** | 7.0 (Nougat, API 24) and newer — `arm64-v8a`, `armeabi-v7a`, `x86_64`; 16 KB page-size compatible, so Android 15/16 are fine |
+
+The Android APKs are signed with **v1 (JAR), v2 and v3** schemes and request **no
+runtime permissions at all**, which is why they install cleanly on Xiaomi,
+Redmi, Poco, Infinix, Tecno and Realme: those skins do not block a package that
+asks for nothing, and all three signature schemes are the ones their file
+managers look for.
+
+### If your phone or your PC complains
+
+These are not defects in the artifacts; they are what an unbranded,
+hand-built program runs into. Each one has a one-step answer.
+
+| Symptom | What happened | Fix |
+|---|---|---|
+| **Android: "App not installed" / "The package appears invalid"** | You downloaded the build published before the signing fix (v1.0.0 assets were replaced on 2026-10-16, so a cached copy may still be the old one). | Re-download the APK, open **Settings → Apps → Special app access → Install unknown apps** and allow it for the app you downloaded with (Files, Chrome, or your file manager), then install again. If it still fails, the file is the old one: delete it and download again. |
+| **Android: nothing happens when I tap the APK** | The system installer is not allowed to start yet on MIUI/HyperOS, Infinix and Tecno. | Allow *Install unknown apps* for your file manager as above, and on Xiaomi also accept the **Security** app's scan prompt. |
+| **Windows: "Windows protected your PC"** | SmartScreen blocks every executable that is not signed by a certificate from a commercial CA. Ours is not, by design. | Click **More info** → **Run anyway**. |
+| **Linux: `Permission denied` after downloading the AppImage** | Browsers download files without the executable bit. | `chmod +x omniclean-engine_1.0.0_amd64.AppImage`, or download the `.deb` and double-click it instead — on Debian, Ubuntu and Kali that opens your software centre and needs no chmod. |
+
+To check an Android APK really is signed before you install it:
+
+```bash
+$ANDROID_HOME/build-tools/36.0.0/apksigner verify --min-sdk-version 23 --print-certs app-release.apk
+Verifies
+Signer #1 certificate DN: CN=OmniClean Engine, OU=OmniClean, O=OmniClean Engine, L=Kali, ST=Kali, C=JO
 ```
 
 ---
